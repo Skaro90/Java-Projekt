@@ -4,13 +4,13 @@ import java.util.Date;
 
 public abstract class Person {
     private String nachname;
-    private String vornahme;
+    private String vorname;
     private String email;
     private Date geburtstag;
 
-    public Person(String nachname, String vornahme, String email, Date geburtstag) {
+    public Person(String nachname, String vorname, String email, Date geburtstag) {
         this.nachname = nachname;
-        this.vornahme = vornahme;
+        this.vorname = vorname;
         this.email = email;
         this.geburtstag = geburtstag;
     }
