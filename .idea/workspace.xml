@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d68e16d1-09b1-48c9-8a68-0b7210c7cb85" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/gui/HelloApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/gui/HelloController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/studentenverwaltung/Betreuer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/studentenverwaltung/Firma.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/studentenverwaltung/Kurs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/studentenverwaltung/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/studentenverwaltung/Raum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/studentenverwaltung/Student.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/studentenverwaltung/StudentenVerwaltung.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Java-Projekt.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Java-Projekt.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/studentenverwaltung/gui/HelloApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/studentenverwaltung/gui/HelloController.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="29nXXRqALVARGIIhX9AOu1TD5aG" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d68e16d1-09b1-48c9-8a68-0b7210c7cb85" name="Changes" comment="" />
+      <created>1653749862819</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1653749862819</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
