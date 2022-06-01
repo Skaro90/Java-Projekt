@@ -1,4 +1,4 @@
-package de.studentenverwaltung.gui;
+package de.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

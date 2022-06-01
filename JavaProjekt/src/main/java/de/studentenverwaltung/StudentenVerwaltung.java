@@ -1,4 +1,4 @@
-package JavaProjekt.src.main.java.de.studentenverwaltung;
+package de.studentenverwaltung;
 
 import java.util.List;
 import java.util.Optional;
