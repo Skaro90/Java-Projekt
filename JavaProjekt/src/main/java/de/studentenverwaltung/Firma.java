@@ -27,6 +27,7 @@ public class Firma {
         this.betreuer = betreuer;
     }
 
+
     public boolean neuerStudent(Student student){
         for (Student stu: studentenListe) {
             if (stu.equals(student)){
@@ -41,5 +42,17 @@ public class Firma {
     public boolean betreuerWechsel(Betreuer neuerBetreuer){
         this.betreuer = neuerBetreuer;
         return true;
+    }
+
+    public Boolean studentLoeschen(Student student){
+        boolean change = false;
+        for (int i = 0; i < studentenListe.size(); i++){
+            if (student == studentenListe.get(i)){
+                studentenListe.remove(i);
+                change = true;
+            }
+        }
+        return change;
+
     }
 }

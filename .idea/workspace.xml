@@ -5,6 +5,9 @@
       <change afterPath="$PROJECT_DIR$/JavaProjekt/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/studentenverwaltung/Firma.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/studentenverwaltung/Firma.java" afterDir="false" />
+
+      <change beforePath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/studentenverwaltung/Kurs.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/studentenverwaltung/Kurs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/studentenverwaltung/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaProjekt/src/main/java/de/studentenverwaltung/Student.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
