@@ -1,12 +1,12 @@
-package JavaProjekt.src.main.java.de.studentenverwaltung;
+package de.studentenverwaltung;
+
+import de.studentenverwaltung.exceptions.UserInputException;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 
 public class StudentenVerwaltung{
-//    Foreign Keys
+    //    Foreign Keys
     private ArrayList<Betreuer> betreuerListe;
     private ArrayList<Firma> firmaListe;
     private ArrayList<Student> studentenListe;
@@ -90,24 +90,25 @@ public class StudentenVerwaltung{
         return null;
     }
 
-    public void exmatrikulieren(Student student){
-        //firma/kurs löschen (neue func in student)
+    public void exmatrikulieren(Student student) throws UserInputException {
+        //firma/kurs löschen (neue func in student) -- DONE?
+        student.exmatrikulieren();
         studentenListe.remove(student);
         //dbfunc
     }
 
-    public void raumZuweisen(Kurs kurs, Raum raum){
-        //kurs.raumWechseln(raum);
+    public void raumZuweisen(Kurs kurs, Raum raum) throws UserInputException {
+        kurs.raumWechseln(raum);
         //dbfunc
     }
 
-    public void studentVersetzten(Student student, Kurs kurs){
-        //student.versetzten(kurs);
+    public void studentVersetzen(Student student, Kurs kurs) throws UserInputException {
+        student.versetzen(kurs);
         //dbfunc
     }
 
     public void betreuerWechseln(Firma firma, Betreuer betreuer){
-        //firma.betreuerWechsel(betreuer);
+        firma.betreuerWechsel(betreuer);
         //dbfunc
     }
 }

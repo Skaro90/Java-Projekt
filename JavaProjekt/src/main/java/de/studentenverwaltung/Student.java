@@ -1,4 +1,7 @@
-package JavaProjekt.src.main.java.de.studentenverwaltung;
+package de.studentenverwaltung;
+
+import de.studentenverwaltung.exceptions.UserInputException;
+import de.studentenverwaltung.gui.TempErrorMessageWindow;
 
 import java.util.Date;
 
@@ -41,9 +44,9 @@ public class Student extends Person{
     public String getMatrikelnummer() {
         return matrikelnummer;
     }
-  
-    public Throwable versetzen(Kurs kurs){
-        try {
+
+    public void versetzen(Kurs kurs) throws UserInputException {
+        /*try {
             this.kurs.studentLoeschen(this);
             this.kurs = kurs;
             this.kurs.studentHinzufuegen(this);
@@ -52,16 +55,36 @@ public class Student extends Person{
             e.printStackTrace();
             return e.getCause();
         }
-        return null;
+        return null;*/
+
+        if(!(kurs.getRaum().getKapazitaet() > kurs.getKursGroesse())){
+            TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+            throw new UserInputException("Der Kurs-Raum besitzt nicht die Kapazität für einen weiteren Studenten. Bitte ordnen Sie dem Kurs einen neuen Raum zu, bevor Sie den Studenten dem Kurs hinzufügen.", errorMessageWindow);
+        }
+
+        //try{
+            this.kurs.studentLoeschen(this);
+            this.kurs = kurs;
+            this.kurs.studentHinzufuegen(this);
+        /*} catch (Exception e){
+            e.printStackTrace();
+        }*/
+
+
     }
 
-    public Throwable exmatrikulieren(){
-        try {
+    public void exmatrikulieren() throws UserInputException {
+        /*try {
             this.firma.studentLoeschen(this);
             this.kurs.studentLoeschen(this);
         } catch (Exception e){
             return e.getCause();
         }
-        return null;
+        return null;*/
+
+        this.firma.studentLoeschen(this);
+        this.kurs.studentLoeschen(this);
+
+
     }
 }

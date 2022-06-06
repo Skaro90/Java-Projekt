@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="298.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="29.0" layoutY="54.0" prefHeight="22.0" prefWidth="91.0" text="Vorname" />
+      <Label layoutX="29.0" layoutY="84.0" prefHeight="22.0" prefWidth="91.0" text="Nachname" />
+      <Label layoutX="29.0" layoutY="115.0" prefHeight="22.0" prefWidth="91.0" text="E-Mail" />
+      <Label layoutX="29.0" layoutY="146.0" prefHeight="22.0" prefWidth="91.0" text="Geburtstag" />
+      <Label layoutX="29.0" layoutY="177.0" prefHeight="22.0" prefWidth="91.0" text="Matrikelnummer" />
+      <Label layoutX="29.0" layoutY="208.0" prefHeight="22.0" prefWidth="109.0" text="Java-Vorkenntnisse" />
+      <Label layoutX="29.0" layoutY="240.0" prefHeight="22.0" prefWidth="91.0" text="Kurs" />
+      <TextField layoutX="151.0" layoutY="52.0" />
+      <TextField layoutX="151.0" layoutY="82.0" />
+      <TextField layoutX="151.0" layoutY="113.0" />
+      <MenuButton layoutX="151.0" layoutY="206.0" mnemonicParsing="false" text="Anfänger">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Anfänger" />
+          <MenuItem mnemonicParsing="false" text="Fortgeschritten" />
+        </items>
+      </MenuButton>
+      <DatePicker layoutX="151.0" layoutY="144.0" />
+      <TextField layoutX="151.0" layoutY="175.0" />
+      <MenuButton layoutX="151.0" layoutY="238.0" mnemonicParsing="false" text="TINF_AI1">
+         <items>
+            <MenuItem mnemonicParsing="false" text="TINF_AI1" />
+            <MenuItem mnemonicParsing="false" text="TINF_AI2" />
+         </items>
+      </MenuButton>
+   </children>
+</Pane>

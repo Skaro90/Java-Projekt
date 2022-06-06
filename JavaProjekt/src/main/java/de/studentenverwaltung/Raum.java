@@ -1,4 +1,4 @@
-package JavaProjekt.src.main.java.de.studentenverwaltung;
+package de.studentenverwaltung;
 
 public class Raum {
     private int raumId;
@@ -6,7 +6,7 @@ public class Raum {
     private int kapazitaet;
     private static int zaehler=0;
 
-//    Foreign Keys
+    //    Foreign Keys
     private Kurs kurs;
 
     public Raum(int raumId, String raumNummer, int kapazitaet, Kurs kurs) {
@@ -27,5 +27,13 @@ public class Raum {
 
     public String getRaumNummer() {
         return raumNummer;
+    }
+
+    Kurs getKurs(){
+        return kurs;
+    }
+
+    int getKapazitaet(){
+        return kapazitaet;
     }
 }
