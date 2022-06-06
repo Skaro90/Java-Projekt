@@ -27,7 +27,7 @@ public class Firma {
         this.studentenListe = studentenListe;
         this.betreuer = betreuer;
     }
-    public Firma(String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, Betreuer betreuer){
+    public Firma(String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, Betreuer betreuer) {
         this.firmenname = firmenname;
         this.strasse = strasse;
         this.hausnummer = hausnummer;
@@ -36,7 +36,7 @@ public class Firma {
         this.betreuer = betreuer;
         this.firmenId = zaehler;
         zaehler++;
-
+    }
 
     public boolean neuerStudent(Student student){
         for (Student stu: studentenListe) {
