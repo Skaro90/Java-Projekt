@@ -41,12 +41,27 @@ public class Student extends Person{
     public String getMatrikelnummer() {
         return matrikelnummer;
     }
+  
+    public Throwable versetzen(Kurs kurs){
+        try {
+            this.kurs.studentLoeschen(this);
+            this.kurs = kurs;
+            this.kurs.studentHinzufuegen(this);
 
-    public Firma getFirma() {
-        return firma;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e.getCause();
+        }
+        return null;
     }
 
-    public Kurs getKurs() {
-        return kurs;
+    public Throwable exmatrikulieren(){
+        try {
+            this.firma.studentLoeschen(this);
+            this.kurs.studentLoeschen(this);
+        } catch (Exception e){
+            return e.getCause();
+        }
+        return null;
     }
 }

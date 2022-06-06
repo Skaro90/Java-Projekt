@@ -31,4 +31,40 @@ public class Kurs {
     public String getKursName() {
         return kursName;
     }
+
+    public Boolean studentLoeschen(Student student){
+        boolean change = false;
+        for (int i = 0; i < studentenListe.size(); i++){
+            if (student == studentenListe.get(i)){
+                studentenListe.remove(i);
+                change = true;
+            }
+        }
+        return change;
+    }
+
+    public Throwable studentHinzufuegen(Student student){
+        try {
+            studentenListe.add(student);
+        }catch (Exception e){
+            return e.getCause();
+        }
+        return null;
+    }
+
+    public Throwable raumWechseln(Raum raum){
+        try {
+//            this.raum.kursLoeschen();
+            this.raum = raum;
+//            this.raum.kursHinzufuegen(this);
+        }
+        catch (Exception e){
+            return e;
+        }
+        return null;
+    }
+
+    public int kursGroeße(){
+        return this.studentenListe.size();
+    }
 }
