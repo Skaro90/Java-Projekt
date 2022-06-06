@@ -1,10 +1,11 @@
-package JavaProjekt.src.main.java.de.studentenverwaltung;
+package de.studentenverwaltung;
 
 import java.util.Date;
 
 public class Betreuer extends Person{
     private int betreuerId;
     private String telefonnummer;
+  
     private static int zaehler=0;
 
     //  Foreign Keys
