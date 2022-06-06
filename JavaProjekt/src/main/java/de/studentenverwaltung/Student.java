@@ -27,4 +27,27 @@ public class Student extends Person{
         this.firma = firma;
         this.kurs = kurs;
     }
+
+    public Throwable versetzen(Kurs kurs){
+        try {
+            this.kurs.studentLoeschen(this);
+            this.kurs = kurs;
+            this.kurs.studentHinzufuegen(this);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e.getCause();
+        }
+        return null;
+    }
+
+    public Throwable exmatrikulieren(){
+        try {
+            this.firma.studentLoeschen(this);
+            this.kurs.studentLoeschen(this);
+        } catch (Exception e){
+            return e.getCause();
+        }
+        return null;
+    }
 }
