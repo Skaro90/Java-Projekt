@@ -13,10 +13,10 @@ public class Firma {
     private String stadt;
 
 //    Foreign Keys
-    private List<Optional<Student>> studentenListe;
+    private List<Student> studentenListe;
     private Betreuer betreuer;
 
-    public Firma(Integer firmenId, String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, List<Optional<Student>> studentenListe, Betreuer betreuer) {
+    public Firma(Integer firmenId, String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, List<Student> studentenListe, Betreuer betreuer) {
         this.firmenId = firmenId;
         this.firmenname = firmenname;
         this.strasse = strasse;
@@ -25,5 +25,21 @@ public class Firma {
         this.stadt = stadt;
         this.studentenListe = studentenListe;
         this.betreuer = betreuer;
+    }
+
+    public boolean neuerStudent(Student student){
+        for (Student stu: studentenListe) {
+            if (stu.equals(student)){
+                System.out.println("Student ist schon vorhanden");
+                return true;
+            }
+        }
+        studentenListe.add(student);
+        return true;
+    }
+
+    public boolean betreuerWechsel(Betreuer neuerBetreuer){
+        this.betreuer = neuerBetreuer;
+        return true;
     }
 }
