@@ -1,17 +1,31 @@
 package JavaProjekt.src.main.java.de.studentenverwaltung;
 
 public class Raum {
-    private Integer raumId;
+    private int raumId;
     private String raumNummer;
-    private Integer kapazitaet;
+    private int kapazitaet;
+    private static int zaehler=0;
 
 //    Foreign Keys
     private Kurs kurs;
 
-    public Raum(Integer raumId, String raumNummer, Integer kapazitaet, Kurs kurs) {
+    public Raum(int raumId, String raumNummer, int kapazitaet, Kurs kurs) {
         this.raumId = raumId;
         this.raumNummer = raumNummer;
         this.kapazitaet = kapazitaet;
         this.kurs = kurs;
+    }
+
+    public Raum(String raumNummer, int kapazitaet, Kurs kurs){
+        this.raumNummer = raumNummer;
+        this.kapazitaet = kapazitaet;
+        this.kurs = kurs;
+        this.raumId = zaehler;
+        zaehler++;
+    }
+
+
+    public String getRaumNummer() {
+        return raumNummer;
     }
 }

@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class Firma {
-    private Integer firmenId;
+    private int firmenId;
     private String firmenname;
+    private static int zaehler = 0; //max setzten in datenLaden()
 //    Adresse
     private String strasse;
     private String hausnummer;
@@ -16,7 +17,7 @@ public class Firma {
     private List<Student> studentenListe;
     private Betreuer betreuer;
 
-    public Firma(Integer firmenId, String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, List<Student> studentenListe, Betreuer betreuer) {
+    public Firma(int firmenId, String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, List<Student> studentenListe, Betreuer betreuer) {
         this.firmenId = firmenId;
         this.firmenname = firmenname;
         this.strasse = strasse;
@@ -26,6 +27,15 @@ public class Firma {
         this.studentenListe = studentenListe;
         this.betreuer = betreuer;
     }
+    public Firma(String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, Betreuer betreuer){
+        this.firmenname = firmenname;
+        this.strasse = strasse;
+        this.hausnummer = hausnummer;
+        this.postleitzahl = postleitzahl;
+        this.stadt = stadt;
+        this.betreuer = betreuer;
+        this.firmenId = zaehler;
+        zaehler++;
 
 
     public boolean neuerStudent(Student student){

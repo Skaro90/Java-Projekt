@@ -14,4 +14,20 @@ public abstract class Person {
         this.email = email;
         this.geburtstag = geburtstag;
     }
+
+    public String getNachname() {
+        return nachname;
+    }
+
+    public String getVorname() {
+        return vorname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Date getGeburtstag() {
+        return geburtstag;
+    }
 }
