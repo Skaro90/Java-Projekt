@@ -1,9 +1,8 @@
 package de.studentenverwaltung;
 
-import de.gui.TempErrorMessageWindow;
+import de.studentenverwaltung.gui.TempErrorMessageWindow;
 import de.studentenverwaltung.exceptions.UserInputException;
 
-import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Optional;
 

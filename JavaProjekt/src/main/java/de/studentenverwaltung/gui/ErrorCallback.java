@@ -1,4 +1,4 @@
-package de.gui;
+package de.studentenverwaltung.gui;
 
 
 public interface ErrorCallback {

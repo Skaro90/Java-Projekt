@@ -1,4 +1,4 @@
-package de.gui;
+package de.studentenverwaltung.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

@@ -1,6 +1,6 @@
 package de.studentenverwaltung.exceptions;
 
-import de.gui.ErrorCallback;
+import de.studentenverwaltung.gui.ErrorCallback;
 
 public class UserInputException extends Exception{
     public UserInputException(String message, ErrorCallback errorCallback) {
