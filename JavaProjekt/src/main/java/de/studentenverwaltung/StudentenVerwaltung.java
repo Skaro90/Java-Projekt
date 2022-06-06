@@ -1,6 +1,7 @@
 package de.studentenverwaltung;
 
 import de.studentenverwaltung.exceptions.UserInputException;
+import de.studentenverwaltung.gui.TempErrorMessageWindow;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,7 +48,11 @@ public class StudentenVerwaltung{
         return k;
     }
 
-    public Raum raumAnlegen(String raumNummer, int kapazitaet, Kurs kurs){
+    public Raum raumAnlegen(String raumNummer, int kapazitaet, Kurs kurs) throws UserInputException{
+        if(kurs.getKursGroesse() > kapazitaet){
+            TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+            throw new UserInputException("Der Raum besitzt nicht genügend Kapazität für den Kurs.", errorMessageWindow);
+        }
         Raum r = new Raum(raumNummer,kapazitaet,kurs);
         this.raumListe.add(r);
         //dbfunc
@@ -110,5 +115,10 @@ public class StudentenVerwaltung{
     public void betreuerWechseln(Firma firma, Betreuer betreuer){
         firma.betreuerWechsel(betreuer);
         //dbfunc
+    }
+
+    public void test() throws UserInputException{
+        TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+        throw new UserInputException("Krasser Fehler, Achtung!", errorMessageWindow);
     }
 }
