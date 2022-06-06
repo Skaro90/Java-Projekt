@@ -1,17 +1,13 @@
 package de.studentenverwaltung;
 
-import de.studentenverwaltung.gui.TempErrorMessageWindow;
-import de.studentenverwaltung.exceptions.UserInputException;
-
 public class Raum {
     private int raumId;
     private String raumNummer;
     private int kapazitaet;
     private static int zaehler=0;
 
-//    Foreign Keys
+    //    Foreign Keys
     private Kurs kurs;
-
 
     public Raum(int raumId, String raumNummer, int kapazitaet, Kurs kurs) {
         this.raumId = raumId;
@@ -31,5 +27,13 @@ public class Raum {
 
     public String getRaumNummer() {
         return raumNummer;
+    }
+
+    Kurs getKurs(){
+        return kurs;
+    }
+
+    int getKapazitaet(){
+        return kapazitaet;
     }
 }

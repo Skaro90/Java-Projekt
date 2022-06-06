@@ -1,28 +1,22 @@
 package de.studentenverwaltung;
 
-import de.studentenverwaltung.gui.TempErrorMessageWindow;
+// TODOS: Kommentare
+
 import de.studentenverwaltung.exceptions.UserInputException;
+import de.studentenverwaltung.gui.TempErrorMessageWindow;
 
-
-import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 public class Kurs {
-
     private int kursId;
     private String kursName;
     private static int zaehler = 0;
 
-//    Foreign Keys
+    //    Foreign Keys
     private Raum raum;
     private ArrayList<Student> studentenListe;
 
-
     public Kurs(int kursId, String kursName, Raum raum) {
-
         this.kursId = kursId;
         this.kursName = kursName;
         this.raum = raum;
@@ -39,28 +33,37 @@ public class Kurs {
         return kursName;
     }
 
-    public Boolean studentLoeschen(Student student){
+    Raum getRaum(){
+        return raum;
+    }
+
+    public Boolean studentLoeschen(Student student) throws UserInputException { //void?
         boolean change = false;
-        for (int i = 0; i < studentenListe.size(); i++){
+        /*for (int i = 0; i < studentenListe.size(); i++){
             if (student == studentenListe.get(i)){
                 studentenListe.remove(i);
                 change = true;
             }
+        }*/
+        if(!studentenListe.remove(student)){
+            TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+            throw new UserInputException("Der zu löschende Student ist nicht in der Kursliste vorhanden.", errorMessageWindow);
         }
-        return change;
+        //return change;
+        return true;
     }
 
-    public Throwable studentHinzufuegen(Student student){
-        try {
-            studentenListe.add(student);
-        }catch (Exception e){
-            return e.getCause();
+    public void studentHinzufuegen(Student student) throws UserInputException{
+        if(studentenListe.contains(student)){
+            TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+            throw new UserInputException("Der Student ist bereits in dem Kurs vorhanden.", errorMessageWindow);
         }
-        return null;
+
+        studentenListe.add(student);
     }
 
-    public Throwable raumWechseln(Raum raum){
-        try {
+    public void raumWechseln(Raum raum) throws UserInputException{
+       /* try {
 //            this.raum.kursLoeschen();
             this.raum = raum;
 //            this.raum.kursHinzufuegen(this);
@@ -68,10 +71,19 @@ public class Kurs {
         catch (Exception e){
             return e;
         }
-        return null;
+        return null;*/
+
+        if(raum.getKurs() != null){
+            TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+            throw new UserInputException("Dem Raum ist bereits ein Kurs zugeordnet. Bitte wählen Sie einen anderen Raum.", errorMessageWindow);
+        }
+
+        //raum.raumBelegen(null);
+        this.raum = raum;
+        //raum.raumBelegen(this);
     }
 
-    public int kursGroeße(){
+    public int getKursGroesse(){
         return this.studentenListe.size();
     }
 }
