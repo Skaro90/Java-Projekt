@@ -1,4 +1,8 @@
-package JavaProjekt.src.main.java.de.studentenverwaltung;
+package de.studentenverwaltung;
+
+import de.studentenverwaltung.gui.TempErrorMessageWindow;
+import de.studentenverwaltung.exceptions.UserInputException;
+
 
 import java.awt.*;
 import java.lang.reflect.Array;
@@ -7,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class Kurs {
+
     private int kursId;
     private String kursName;
     private static int zaehler = 0;
@@ -15,7 +20,9 @@ public class Kurs {
     private Raum raum;
     private ArrayList<Student> studentenListe;
 
+
     public Kurs(int kursId, String kursName, Raum raum) {
+
         this.kursId = kursId;
         this.kursName = kursName;
         this.raum = raum;

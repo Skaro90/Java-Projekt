@@ -1,4 +1,7 @@
-package JavaProjekt.src.main.java.de.studentenverwaltung;
+package de.studentenverwaltung;
+
+import de.studentenverwaltung.gui.TempErrorMessageWindow;
+import de.studentenverwaltung.exceptions.UserInputException;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,24 +11,21 @@ public class Firma {
     private String firmenname;
     private static int zaehler = 0; //max setzten in datenLaden()
 //    Adresse
-    private String strasse;
-    private String hausnummer;
-    private String postleitzahl;
-    private String stadt;
+    private Adresse adresse;
 
 //    Foreign Keys
     private List<Student> studentenListe;
     private Betreuer betreuer;
 
+
     public Firma(int firmenId, String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, List<Student> studentenListe, Betreuer betreuer) {
+
         this.firmenId = firmenId;
         this.firmenname = firmenname;
-        this.strasse = strasse;
-        this.hausnummer = hausnummer;
-        this.postleitzahl = postleitzahl;
-        this.stadt = stadt;
         this.studentenListe = studentenListe;
         this.betreuer = betreuer;
+
+        this.adresse = new Adresse(strasse, hausnummer, postleitzahl, stadt);
     }
     public Firma(String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, Betreuer betreuer) {
         this.firmenname = firmenname;

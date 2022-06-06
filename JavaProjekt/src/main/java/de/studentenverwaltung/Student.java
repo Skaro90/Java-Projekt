@@ -1,4 +1,7 @@
-package JavaProjekt.src.main.java.de.studentenverwaltung;
+package de.studentenverwaltung;
+
+import de.studentenverwaltung.gui.TempErrorMessageWindow;
+import de.studentenverwaltung.exceptions.UserInputException;
 
 import java.util.Date;
 
@@ -18,6 +21,7 @@ public class Student extends Person{
         Fortgeschrittener,
         Experte
     }
+
 
     public Student(String nachname, String vorname, String email, Date geburtstag, int studentId, String matrikelnummer, Vorkenntnisse vorkenntnisse, Firma firma, Kurs kurs) {
         super(nachname, vorname, email, geburtstag);

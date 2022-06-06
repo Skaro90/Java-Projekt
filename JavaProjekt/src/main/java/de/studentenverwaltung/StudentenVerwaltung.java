@@ -1,4 +1,4 @@
-package JavaProjekt.src.main.java.de.studentenverwaltung;
+package de.studentenverwaltung;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public class StudentenVerwaltung{
 //    Foreign Keys
+
     private ArrayList<Betreuer> betreuerListe;
     private ArrayList<Firma> firmaListe;
     private ArrayList<Student> studentenListe;
@@ -109,5 +110,6 @@ public class StudentenVerwaltung{
     public void betreuerWechseln(Firma firma, Betreuer betreuer){
         //firma.betreuerWechsel(betreuer);
         //dbfunc
+
     }
 }

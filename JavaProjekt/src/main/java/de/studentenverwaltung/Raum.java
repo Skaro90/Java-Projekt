@@ -1,4 +1,7 @@
-package JavaProjekt.src.main.java.de.studentenverwaltung;
+package de.studentenverwaltung;
+
+import de.studentenverwaltung.gui.TempErrorMessageWindow;
+import de.studentenverwaltung.exceptions.UserInputException;
 
 public class Raum {
     private int raumId;
@@ -8,6 +11,7 @@ public class Raum {
 
 //    Foreign Keys
     private Kurs kurs;
+
 
     public Raum(int raumId, String raumNummer, int kapazitaet, Kurs kurs) {
         this.raumId = raumId;
