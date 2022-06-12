@@ -3,7 +3,7 @@ package de.studentenverwaltung;
 // TODOS: Kommentare
 
 import de.studentenverwaltung.exceptions.UserInputException;
-import de.studentenverwaltung.gui.TempErrorMessageWindow;
+import de.studentenverwaltung.gui.ErrorMessageWindow;
 
 import java.util.ArrayList;
 
@@ -46,7 +46,7 @@ public class Kurs {
             }
         }*/
         if(!studentenListe.remove(student)){
-            TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Der zu löschende Student ist nicht in der Kursliste vorhanden.", errorMessageWindow);
         }
         //return change;
@@ -55,7 +55,7 @@ public class Kurs {
 
     public void studentHinzufuegen(Student student) throws UserInputException{
         if(studentenListe.contains(student)){
-            TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Der Student ist bereits in dem Kurs vorhanden.", errorMessageWindow);
         }
 
@@ -74,7 +74,7 @@ public class Kurs {
         return null;*/
 
         if(raum.getKurs() != null){
-            TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Dem Raum ist bereits ein Kurs zugeordnet. Bitte wählen Sie einen anderen Raum.", errorMessageWindow);
         }
 

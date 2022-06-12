@@ -1,7 +1,7 @@
 package de.studentenverwaltung;
 
 import de.studentenverwaltung.exceptions.UserInputException;
-import de.studentenverwaltung.gui.TempErrorMessageWindow;
+import de.studentenverwaltung.gui.ErrorMessageWindow;
 
 import java.util.Date;
 
@@ -58,7 +58,7 @@ public class Student extends Person{
         return null;*/
 
         if(!(kurs.getRaum().getKapazitaet() > kurs.getKursGroesse())){
-            TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Der Kurs-Raum besitzt nicht die Kapazität für einen weiteren Studenten. Bitte ordnen Sie dem Kurs einen neuen Raum zu, bevor Sie den Studenten dem Kurs hinzufügen.", errorMessageWindow);
         }
 
