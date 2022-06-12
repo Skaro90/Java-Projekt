@@ -1,7 +1,5 @@
 package de.studentenverwaltung;
 
-import java.sql.SQLOutput;
-
 public class Raum {
     private int raumId;
     private String raumNummer;
@@ -31,6 +29,10 @@ public class Raum {
         return raumNummer;
     }
 
+    public int getRaumId() {
+        return raumId;
+    }
+
     Kurs getKurs(){
         return kurs;
     }
@@ -47,6 +49,14 @@ public class Raum {
         } else {
             System.out.println("Kurs passt nicht in den Raum.");
         }
+    }
+
+    public void changeRNm(String RNm){
+        this.raumNummer = RNm;
+    }
+
+    public void changeKapa(int kapa){
+        this.kapazitaet = kapa;
     }
 
     public boolean raumHinzufuegen(Kurs kurs){
