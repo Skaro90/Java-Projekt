@@ -15,7 +15,21 @@ import java.io.IOException;
 
 public class MainViewController {
 
-
+    @FXML
+    void buttonRaumeAnzeigenClicked(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/raume-anzeigen-dialog.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            //stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setTitle("Räume anzeigen");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @FXML
     void kursAnlegenButton(ActionEvent event) {

@@ -45,7 +45,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="735.0" prefWidth="1090.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.studentenverwaltung.gui.controllers.MainViewController">
+<VBox minWidth="400.0" prefHeight="735.0" prefWidth="1090.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.studentenverwaltung.gui.controllers.MainViewController">
   <children>
     <MenuBar prefWidth="718.0" VBox.vgrow="NEVER">
       <menus>
@@ -65,16 +65,14 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Räume">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Raum anlegen" />
-                  <MenuItem mnemonicParsing="false" text="Raum bearbeiten" />
-                  <MenuItem mnemonicParsing="false" text="Raum löschen" />
+                  <MenuItem mnemonicParsing="false" onAction="#buttonRaumeAnzeigenClicked" text="Räume anzeigen" />
                </items>
             </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefWidth="1090.0" VBox.vgrow="ALWAYS">
       <children>
-            <SplitPane dividerPositions="0.50165319617928" prefHeight="374.4" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <SplitPane dividerPositions="0.50165319617928" prefHeight="374.4" prefWidth="1160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="200.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
