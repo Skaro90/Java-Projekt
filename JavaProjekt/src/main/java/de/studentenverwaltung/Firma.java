@@ -20,15 +20,18 @@ public class Firma {
     private List<Student> studentenListe;
     private Betreuer betreuer;
 
-    public Firma(int firmenId, String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, List<Student> studentenListe, Betreuer betreuer) {
+    public Firma(int firmenId, String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, Betreuer betreuer) {
         this.firmenId = firmenId;
         this.firmenname = firmenname;
         this.strasse = strasse;
         this.hausnummer = hausnummer;
         this.postleitzahl = postleitzahl;
         this.stadt = stadt;
-        this.studentenListe = studentenListe;
         this.betreuer = betreuer;
+    }
+    //denk dran die zu löschen
+    public Firma(int firmenId){
+        this.firmenId = firmenId;
     }
     public Firma(String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, Betreuer betreuer) {
         this.firmenname = firmenname;
@@ -70,5 +73,41 @@ public class Firma {
 
         return change;
 
+    }
+
+    public int getFirmenId() {
+        return firmenId;
+    }
+
+    public String getFirmenname() {
+        return firmenname;
+    }
+
+    public static int getZaehler() {
+        return zaehler;
+    }
+
+    public String getStrasse() {
+        return strasse;
+    }
+
+    public String getHausnummer() {
+        return hausnummer;
+    }
+
+    public String getPostleitzahl() {
+        return postleitzahl;
+    }
+
+    public String getStadt() {
+        return stadt;
+    }
+
+    public List<Student> getStudentenListe() {
+        return studentenListe;
+    }
+
+    public Betreuer getBetreuer() {
+        return betreuer;
     }
 }

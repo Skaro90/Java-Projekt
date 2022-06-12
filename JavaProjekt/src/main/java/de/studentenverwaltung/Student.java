@@ -87,4 +87,24 @@ public class Student extends Person{
 
 
     }
+
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public Vorkenntnisse getVorkenntnisse() {
+        return vorkenntnisse;
+    }
+
+    public static int getZaehler() {
+        return zaehler;
+    }
+
+    public Firma getFirma() {
+        return firma;
+    }
+
+    public Kurs getKurs() {
+        return kurs;
+    }
 }

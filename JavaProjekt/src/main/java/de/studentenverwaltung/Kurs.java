@@ -22,6 +22,11 @@ public class Kurs {
         this.raum = raum;
     }
 
+    //denk dran die zu löschen
+    public Kurs(int kursid){
+        this.kursId = kursid;
+    }
+
     public Kurs(String kursName, Raum raum){
         this.kursName = kursName;
         this.raum = raum;
@@ -85,5 +90,9 @@ public class Kurs {
 
     public int getKursGroesse(){
         return this.studentenListe.size();
+    }
+
+    public int getKursId() {
+        return kursId;
     }
 }

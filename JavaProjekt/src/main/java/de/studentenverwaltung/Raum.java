@@ -58,5 +58,8 @@ public class Raum {
         this.kurs = null;
     }
 
+    public int getRaumId() {
+        return raumId;
+    }
 }
 
