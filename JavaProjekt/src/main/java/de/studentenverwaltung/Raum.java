@@ -1,6 +1,5 @@
 package de.studentenverwaltung;
 
-//import java.sql.SQLOutput;
 
 public class Raum {
     private int raumId;
@@ -31,6 +30,10 @@ public class Raum {
         return raumNummer;
     }
 
+    public int getRaumId() {
+        return raumId;
+    }
+
     Kurs getKurs(){
         return kurs;
     }
@@ -49,13 +52,13 @@ public class Raum {
         }
     }
 
-    public void kapazitaetAendern(int kapazitaet){
-        this.kapazitaet = kapazitaet;
+    public void changeRNm(String RNm){
+        this.raumNummer = RNm;
     }
 
-    public void nummerAendern(String raumNummer){
-        this.raumNummer = raumNummer;
-    }
+    public void changeKapa(int kapa){
+        this.kapazitaet = kapa;
+
 
     public boolean raumHinzufuegen(Kurs kurs){
         this.kurs = kurs;
