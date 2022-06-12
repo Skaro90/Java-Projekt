@@ -1,7 +1,8 @@
 package de.studentenverwaltung;
 
 import de.studentenverwaltung.exceptions.UserInputException;
-import de.studentenverwaltung.gui.TempErrorMessageWindow;
+import de.studentenverwaltung.gui.ErrorMessageWindow;
+import javafx.css.StyleableProperty;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +14,7 @@ public class StudentenVerwaltung{
     private ArrayList<Firma> firmaListe;
     private ArrayList<Student> studentenListe;
     private ArrayList<Kurs> kursListe;
-    private ArrayList<Raum> raumListe;
+    private ArrayList<Raum> raumListe = new ArrayList<Raum>();
 
     public StudentenVerwaltung() {
         //this.datenLaden();
@@ -50,14 +51,32 @@ public class StudentenVerwaltung{
     }
 
     public Raum raumAnlegen(String raumNummer, int kapazitaet, Kurs kurs) throws UserInputException{
-        if(kurs.getKursGroesse() > kapazitaet){
-            TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
-            throw new UserInputException("Der Raum besitzt nicht genügend Kapazität für den Kurs.", errorMessageWindow);
+        if(kurs != null){
+            if(findeRaum(raumNummer) != null){
+                ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
+                throw new UserInputException("Es existiert bereits ein Raum mit diesem Namen.", errorMessageWindow);
+            }
+            if(kurs.getKursGroesse() > kapazitaet){
+                ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
+                throw new UserInputException("Der Raum besitzt nicht genügend Kapazität für den Kurs.", errorMessageWindow);
+            }
         }
+
         Raum r = new Raum(raumNummer,kapazitaet,kurs);
         this.raumListe.add(r);
         //dbfunc
         return r;
+    }
+
+    public void raumLöschen(Raum raum) throws UserInputException{
+        if(raum.getKurs() != null){
+            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
+            throw new UserInputException("Dieser Raum ist bereits einem Kurs zugeordnet. Bitte ordne dem Kurs " + raum.getKurs().getKursName() + " einen anderen Raum zu.", errorMessageWindow);
+        }
+
+        this.raumListe.remove(raum);
+        //dbfunc
+        raum = null;
     }
 
     public Betreuer findeBetreuer(String email){
@@ -118,9 +137,8 @@ public class StudentenVerwaltung{
         //dbfunc
     }
 
-    public void test() throws UserInputException{
-        TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
-        throw new UserInputException("Krasser Fehler, Achtung!", errorMessageWindow);
+    public ArrayList<Raum> getRaumListe(){
+        return raumListe;
     }
 
     public void raumUpdate(int rId, String rnm, int kapa) throws UserInputException {

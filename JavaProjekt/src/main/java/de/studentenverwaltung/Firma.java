@@ -1,10 +1,9 @@
 package de.studentenverwaltung;
 
 import de.studentenverwaltung.exceptions.UserInputException;
-import de.studentenverwaltung.gui.TempErrorMessageWindow;
+import de.studentenverwaltung.gui.ErrorMessageWindow;
 
 import java.util.List;
-import java.util.Optional;
 
 public class Firma {
     private int firmenId;
@@ -43,7 +42,7 @@ public class Firma {
 
     public void neuerStudent(Student student) throws UserInputException {
             if (studentenListe.contains(student)){
-                TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+                ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
                 throw new UserInputException("Der Student ist bereits in der Firma.", errorMessageWindow);
             }
         studentenListe.add(student);
@@ -63,7 +62,7 @@ public class Firma {
             }
         }*/
         if(!studentenListe.remove(student)){
-            TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Der zu löschende Nutzer ist nicht in der Liste vorhanden.", errorMessageWindow);
         }
 

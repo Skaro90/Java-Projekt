@@ -33,11 +33,7 @@ public class KursAnlegenController {
 
     @FXML
     void confirmInput(ActionEvent event) {
-        try {
-            Application.studentenVerwaltung.test();
-        } catch (UserInputException e) {
-            throw new RuntimeException(e);
-        }
+
         ((Stage)raumNameMenuButton.getScene().getWindow()).close();
     }
 

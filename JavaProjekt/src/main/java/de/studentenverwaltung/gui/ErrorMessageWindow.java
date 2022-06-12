@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class TempErrorMessageWindow implements ErrorCallback {
+public class ErrorMessageWindow implements ErrorCallback {
     @Override
     public void showErrorMessage(String errorMessage) {
         try {

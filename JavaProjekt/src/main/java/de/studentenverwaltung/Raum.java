@@ -1,5 +1,6 @@
 package de.studentenverwaltung;
 
+
 public class Raum {
     private int raumId;
     private String raumNummer;
@@ -37,7 +38,7 @@ public class Raum {
         return kurs;
     }
 
-    int getKapazitaet(){
+    public int getKapazitaet(){
         return kapazitaet;
     }
 
@@ -57,7 +58,7 @@ public class Raum {
 
     public void changeKapa(int kapa){
         this.kapazitaet = kapa;
-    }
+
 
     public boolean raumHinzufuegen(Kurs kurs){
         this.kurs = kurs;
