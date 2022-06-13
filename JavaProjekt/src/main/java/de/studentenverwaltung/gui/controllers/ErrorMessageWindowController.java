@@ -35,9 +35,6 @@ public class ErrorMessageWindowController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println(errorExceptionMessage);
         errorMessage.setText(errorExceptionMessage);
-        System.out.println(errorExceptionMessage);
-        System.out.println("AAA"+errorMessage.getText());
     }
 }

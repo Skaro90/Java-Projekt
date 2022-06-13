@@ -1,6 +1,9 @@
 package de.studentenverwaltung.gui;
 
+import de.studentenverwaltung.Kurs;
+import de.studentenverwaltung.Raum;
 import de.studentenverwaltung.StudentenVerwaltung;
+import de.studentenverwaltung.exceptions.UserInputException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -23,5 +26,6 @@ public class Application extends javafx.application.Application {
 
     public static void main(String[] args) {
         launch();
+
     }
 }

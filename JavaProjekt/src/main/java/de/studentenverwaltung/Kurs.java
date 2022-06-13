@@ -14,7 +14,7 @@ public class Kurs {
 
     //    Foreign Keys
     private Raum raum;
-    private ArrayList<Student> studentenListe;
+    private ArrayList<Student> studentenListe = new ArrayList<Student>();
 
     public Kurs(int kursId, String kursName, Raum raum) {
         this.kursId = kursId;
@@ -33,8 +33,12 @@ public class Kurs {
         return kursName;
     }
 
-    Raum getRaum(){
+    public Raum getRaum(){
         return raum;
+    }
+
+    public ArrayList<Student> getStudentenListe(){
+        return studentenListe;
     }
 
     public Boolean studentLoeschen(Student student) throws UserInputException { //void?
@@ -80,7 +84,13 @@ public class Kurs {
 
         //raum.raumBelegen(null);
         this.raum = raum;
+        raum.kursHinzufuegen(this);
+
         //raum.raumBelegen(this);
+    }
+
+    public void kursNameAendern(String newName){
+        this.kursName = newName;
     }
 
     public int getKursGroesse(){

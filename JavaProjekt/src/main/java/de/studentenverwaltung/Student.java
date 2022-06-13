@@ -1,6 +1,7 @@
 package de.studentenverwaltung;
 
 import de.studentenverwaltung.exceptions.UserInputException;
+import de.studentenverwaltung.gui.Application;
 import de.studentenverwaltung.gui.ErrorMessageWindow;
 
 import java.util.Date;
@@ -84,6 +85,7 @@ public class Student extends Person{
 
         this.firma.studentLoeschen(this);
         this.kurs.studentLoeschen(this);
+        Application.studentenVerwaltung.studentenListe.remove(this);
 
 
     }
