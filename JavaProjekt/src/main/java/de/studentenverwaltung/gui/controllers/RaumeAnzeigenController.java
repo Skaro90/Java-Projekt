@@ -60,24 +60,28 @@ public class RaumeAnzeigenController implements Initializable {
     }
     @FXML
     void onKapazitaetMouseClicked(MouseEvent event) {
-        if(raumKapazitaetList.getSelectionModel().getSelectedItems().isEmpty() || raumNameList.getSelectionModel().getSelectedItems().isEmpty()){
+        if(raumKapazitaetList.getSelectionModel().getSelectedItems().isEmpty() && raumNameList.getSelectionModel().getSelectedItems().isEmpty()){
             editButton.setDisable(true);
             deleteButton.setDisable(true);
         } else {
             editButton.setDisable(false);
             deleteButton.setDisable(false);
         }
+
+        raumNameList.getSelectionModel().clearSelection();
     }
 
     @FXML
     void onRaumnameMouseClicked(MouseEvent event) {
-        if(raumKapazitaetList.getSelectionModel().getSelectedItems().isEmpty() || raumNameList.getSelectionModel().getSelectedItems().isEmpty()){
+        if(raumKapazitaetList.getSelectionModel().getSelectedItems().isEmpty() && raumNameList.getSelectionModel().getSelectedItems().isEmpty()){
             editButton.setDisable(true);
             deleteButton.setDisable(true);
         } else {
             editButton.setDisable(false);
             deleteButton.setDisable(false);
         }
+
+        raumKapazitaetList.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -165,8 +169,8 @@ public class RaumeAnzeigenController implements Initializable {
                 if(raumKapazitaetList.getSelectionModel().getSelectedIndices().size() > 0) {
                     int selectedIndex = raumKapazitaetList.getSelectionModel().getSelectedIndices().get(0);
 
-                    removeItemFromList(raumNameItems.get(selectedIndex));
                     Application.studentenVerwaltung.raumLöschen(Application.studentenVerwaltung.findeRaum(raumNameItems.get(selectedIndex)));
+                    removeItemFromList(raumNameItems.get(selectedIndex));
                 }
             } catch (UserInputException e) {
                 throw new RuntimeException(e);

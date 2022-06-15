@@ -12,12 +12,26 @@ public class StudentenVerwaltung{
     //    Foreign Keys
     private ArrayList<Betreuer> betreuerListe;
     private ArrayList<Firma> firmaListe;
-    private ArrayList<Student> studentenListe;
-    private ArrayList<Kurs> kursListe;
+    public ArrayList<Student> studentenListe = new ArrayList<Student>();
+    private ArrayList<Kurs> kursListe = new ArrayList<Kurs>();
     private ArrayList<Raum> raumListe = new ArrayList<Raum>();
 
     public StudentenVerwaltung() {
         //this.datenLaden();
+        try {
+            Raum a = raumAnlegen("Raum 1", 5, null);
+            Raum b = raumAnlegen("Raum 2", 10, null);
+            Raum c = raumAnlegen("Raum 3", 12, null);
+            Raum d = raumAnlegen("Raum 4", 19, null);
+
+
+            a.kursHinzufuegen(kursAnlegen("Kurs 1", a));
+            b.kursHinzufuegen(kursAnlegen("Kurs 2", b));
+            c.kursHinzufuegen(kursAnlegen("Kurs 3", c));
+            d.kursHinzufuegen(kursAnlegen("Kurs 4", d));
+        } catch (UserInputException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     //private datenLaden(){ }
@@ -43,23 +57,70 @@ public class StudentenVerwaltung{
         return b;
     }
 
-    public Kurs kursAnlegen(String kursName, Raum raum){
+    public Kurs kursAnlegen(String kursName, Raum raum) throws UserInputException {
+        if(findeKurs(kursName) != null){
+            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
+            throw new UserInputException("Es existiert bereits ein Kurs mit diesem Namen.", errorMessageWindow);
+        }
+
         Kurs k = new Kurs(kursName,raum);
+        raum.kursHinzufuegen(k);
         this.kursListe.add(k);
         //dbfunc
         return k;
     }
 
+    public void updateKurs(Kurs kurs, String kursName, Raum raum) throws UserInputException {
+        if(findeKurs(kursName) != null && findeKurs(kursName) != kurs){
+            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
+            throw new UserInputException("Es existiert bereits ein Kurs mit diesem Namen.", errorMessageWindow);
+        }
+
+        /*if(raum.getKurs() != null){
+            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
+            throw new UserInputException("Dem Raum ist bereits ein Kurs zugeordnet.", errorMessageWindow);
+        }*/
+
+        //DIE ABFRAGE IST BEREITS IN KURS.JAVA VORHANDEN
+
+        kurs.getRaum().kursLoeschen();
+
+        kurs.kursNameAendern(kursName);
+        kurs.raumWechseln(raum);
+
+    }
+
+    public void kursLöschen(Kurs kurs) throws UserInputException {
+        System.out.println("A");
+        if(kurs.getStudentenListe().isEmpty()){
+            kurs.getRaum().kursHinzufuegen(null);
+            kurs.raumWechseln(null);
+            this.kursListe.remove(kurs);
+        } else {
+            kurs.getStudentenListe().forEach(x -> {
+                try {
+                    x.exmatrikulieren();
+                    kurs.raumWechseln(null);
+                    kurs.getRaum().kursHinzufuegen(null);
+                    this.kursListe.remove(kurs);
+                } catch (UserInputException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+
+    }
+
     public Raum raumAnlegen(String raumNummer, int kapazitaet, Kurs kurs) throws UserInputException{
         if(kurs != null){
-            if(findeRaum(raumNummer) != null){
-                ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
-                throw new UserInputException("Es existiert bereits ein Raum mit diesem Namen.", errorMessageWindow);
-            }
             if(kurs.getKursGroesse() > kapazitaet){
                 ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
                 throw new UserInputException("Der Raum besitzt nicht genügend Kapazität für den Kurs.", errorMessageWindow);
             }
+        }
+        if(findeRaum(raumNummer) != null){
+            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
+            throw new UserInputException("Es existiert bereits ein Raum mit diesem Namen.", errorMessageWindow);
         }
 
         Raum r = new Raum(raumNummer,kapazitaet,kurs);
@@ -141,6 +202,11 @@ public class StudentenVerwaltung{
         return raumListe;
     }
 
+
+    public ArrayList<Kurs> getKursListe() {
+        return kursListe;
+    }
+
     public void raumUpdate(int rId, String rnm, int kapa) throws UserInputException {
         Raum uraum = getRaumById(rId);
         if (rnm!="")
@@ -158,5 +224,6 @@ public class StudentenVerwaltung{
         TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
         throw new UserInputException("Raum wurde nicht gefunden, RaumId inkorrekt", errorMessageWindow);
     }
+
 
 }

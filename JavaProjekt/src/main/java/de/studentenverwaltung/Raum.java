@@ -30,11 +30,12 @@ public class Raum {
         return raumNummer;
     }
 
+
     public int getRaumId() {
         return raumId;
     }
 
-    Kurs getKurs(){
+    public Kurs getKurs(){
         return kurs;
     }
 
@@ -60,12 +61,12 @@ public class Raum {
         this.kapazitaet = kapa;
 
 
-    public boolean raumHinzufuegen(Kurs kurs){
+    public boolean kursHinzufuegen(Kurs kurs){
         this.kurs = kurs;
         return true;
     }
 
-    public void raumLoeschen() {
+    public void kursLoeschen() {
         this.kurs = null;
     }
 

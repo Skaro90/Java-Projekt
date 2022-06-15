@@ -14,7 +14,7 @@ public class Kurs {
 
     //    Foreign Keys
     private Raum raum;
-    private ArrayList<Student> studentenListe;
+    private ArrayList<Student> studentenListe = new ArrayList<Student>();
 
     public Kurs(int kursId, String kursName, Raum raum) {
         this.kursId = kursId;
@@ -33,8 +33,12 @@ public class Kurs {
         return kursName;
     }
 
-    Raum getRaum(){
+    public Raum getRaum(){
         return raum;
+    }
+
+    public ArrayList<Student> getStudentenListe(){
+        return studentenListe;
     }
 
     public Boolean studentLoeschen(Student student) throws UserInputException { //void?
@@ -73,14 +77,26 @@ public class Kurs {
         }
         return null;*/
 
-        if(raum.getKurs() != null){
-            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
-            throw new UserInputException("Dem Raum ist bereits ein Kurs zugeordnet. Bitte wählen Sie einen anderen Raum.", errorMessageWindow);
+        if(raum != null){
+            if(raum.getKurs() != null){
+                ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
+                throw new UserInputException("Dem Raum ist bereits ein Kurs zugeordnet. Bitte wählen Sie einen anderen Raum.", errorMessageWindow);
+            }
+
+
+            //raum.raumBelegen(null);
+            this.raum = raum;
+            raum.kursHinzufuegen(this);
+        } else {
+            this.raum = null;
         }
 
-        //raum.raumBelegen(null);
-        this.raum = raum;
+
         //raum.raumBelegen(this);
+    }
+
+    public void kursNameAendern(String newName){
+        this.kursName = newName;
     }
 
     public int getKursGroesse(){
