@@ -33,16 +33,6 @@ public class Firma {
     public Firma(int firmenId){
         this.firmenId = firmenId;
     }
-    public Firma(String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, Betreuer betreuer) {
-        this.firmenname = firmenname;
-        this.strasse = strasse;
-        this.hausnummer = hausnummer;
-        this.postleitzahl = postleitzahl;
-        this.stadt = stadt;
-        this.betreuer = betreuer;
-        this.firmenId = zaehler;
-        zaehler++;
-    }
 
     public void neuerStudent(Student student) throws UserInputException {
             if (studentenListe.contains(student)){

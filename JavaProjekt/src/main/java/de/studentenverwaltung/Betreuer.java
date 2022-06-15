@@ -14,11 +14,10 @@ public class Betreuer extends Person{
         this.telefonnummer = telefonnummer;
     }
 
-    public Betreuer(String nachname, String vorname, String email, Date geburtstag, String telefonnummer){
-        super(nachname, vorname, email, geburtstag);
-        this.telefonnummer = telefonnummer;
-        this.betreuerId = zaehler;
-        zaehler++;
+    //noch löschen
+    public Betreuer(int id){
+        super();
+        this.betreuerId = id;
     }
 
     public int getBetreuerId() {

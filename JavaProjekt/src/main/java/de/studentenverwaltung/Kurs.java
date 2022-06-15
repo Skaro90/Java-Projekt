@@ -21,19 +21,6 @@ public class Kurs {
         this.kursName = kursName;
         this.raum = raum;
     }
-
-    //denk dran die zu löschen
-    public Kurs(int kursid){
-        this.kursId = kursid;
-    }
-
-    public Kurs(String kursName, Raum raum){
-        this.kursName = kursName;
-        this.raum = raum;
-        this.kursId = zaehler;
-        zaehler++;
-    }
-
     public String getKursName() {
         return kursName;
     }
