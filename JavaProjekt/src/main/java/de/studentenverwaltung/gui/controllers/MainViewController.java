@@ -122,7 +122,13 @@ public class MainViewController implements Initializable {
 
     @FXML
     void onStudentenListClicked(MouseEvent event) {
-
+        if(studentenList.getSelectionModel().getSelectedItems().isEmpty()){
+            kursBearbeitenButton.setDisable(true);
+            kursEntfernenButton.setDisable(true);
+        } else {
+            kursBearbeitenButton.setDisable(false);
+            kursEntfernenButton.setDisable(false);
+        }
     }
     @FXML
     void buttonRaumeAnzeigenClicked(ActionEvent event) {

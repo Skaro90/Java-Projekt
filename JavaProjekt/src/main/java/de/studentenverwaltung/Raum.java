@@ -53,15 +53,16 @@ public class Raum {
         }
     }
 
-    public void changeRNm(String RNm){
+    public void nummerAendern(String RNm){
         this.raumNummer = RNm;
     }
 
-    public void changeKapa(int kapa){
+    public void kapazitaetAendern(int kapa){
         this.kapazitaet = kapa;
 
+    }
 
-    public boolean kursHinzufuegen(Kurs kurs){
+    public boolean kursHinzufuegen(Kurs kurs) {
         this.kurs = kurs;
         return true;
     }

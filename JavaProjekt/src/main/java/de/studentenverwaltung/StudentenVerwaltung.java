@@ -210,9 +210,9 @@ public class StudentenVerwaltung{
     public void raumUpdate(int rId, String rnm, int kapa) throws UserInputException {
         Raum uraum = getRaumById(rId);
         if (rnm!="")
-            uraum.changeRNm(rnm);
+            uraum.nummerAendern(rnm);
         if (kapa<0)
-            uraum.changeKapa(kapa);
+            uraum.kapazitaetAendern(kapa);
     }
 
     public Raum getRaumById(int rId) throws UserInputException{
@@ -221,7 +221,7 @@ public class StudentenVerwaltung{
                 return raumListe.get(i);
             }
         }
-        TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+        ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
         throw new UserInputException("Raum wurde nicht gefunden, RaumId inkorrekt", errorMessageWindow);
     }
 
