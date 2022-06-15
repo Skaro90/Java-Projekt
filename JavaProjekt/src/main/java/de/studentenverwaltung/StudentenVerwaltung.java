@@ -10,8 +10,8 @@ import java.util.Optional;
 
 public class StudentenVerwaltung{
     //    Foreign Keys
-    private ArrayList<Betreuer> betreuerListe;
-    private ArrayList<Firma> firmaListe;
+    private ArrayList<Betreuer> betreuerListe = new ArrayList<Betreuer>();
+    private ArrayList<Firma> firmaListe = new ArrayList<Firma>();
     public ArrayList<Student> studentenListe = new ArrayList<Student>();
     private ArrayList<Kurs> kursListe = new ArrayList<Kurs>();
     private ArrayList<Raum> raumListe = new ArrayList<Raum>();
@@ -29,6 +29,9 @@ public class StudentenVerwaltung{
             b.kursHinzufuegen(kursAnlegen("Kurs 2", b));
             c.kursHinzufuegen(kursAnlegen("Kurs 3", c));
             d.kursHinzufuegen(kursAnlegen("Kurs 4", d));
+
+            Firma f = firmaAnlegen("DB", "Strasse", "1", "30165", "Hannover", betreuerAnlegen("Hartmann", "Fixi", "fixi.hartmann@in.de", new Date(System.currentTimeMillis()), "123456489"));
+            Firma g = firmaAnlegen("DB Cargo", "Strasse", "1", "68309", "Mannheim", betreuerAnlegen("Rainer", "Zufall", "a@b.d", new Date(System.currentTimeMillis()), "123456489"));
         } catch (UserInputException e) {
             throw new RuntimeException(e);
         }
@@ -50,8 +53,37 @@ public class StudentenVerwaltung{
         return f;
     }
 
-    public Betreuer betreuerAnlegen(String nachname, String vorname, String email, Date geburtstag, String telefonnummer, Firma firma){
-        Betreuer b = new Betreuer(nachname,vorname,email,geburtstag,telefonnummer,firma);
+    public void updateFirma(Firma firma, String firmenname,String strasse, String hausnummer, String postleitzahl, String stadt, String betreuerNachname, String betreuerVorname, String betreuerEmail, Date betreuerGeburtstag, String betreuerTelefonnummer) throws UserInputException {
+        if(findeFirma(firmenname) != null){
+            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
+            throw new UserInputException("Es existiert bereits eine Firma mit diesem Namen.", errorMessageWindow);
+        }
+        firma.firmennameAendern(firmenname);
+        firma.adresseAendern(strasse, hausnummer, postleitzahl, stadt);
+        firma.betreuerAendern(betreuerNachname, betreuerVorname, betreuerEmail, betreuerGeburtstag, betreuerTelefonnummer);
+
+
+
+    }
+
+    public void firmaLoeschen(Firma firma){
+        if(firma.getStudentenListe().isEmpty()){
+            this.firmaListe.remove(firma);
+        } else {
+            firma.getStudentenListe().forEach(x -> {
+                try {
+                    x.exmatrikulieren();
+                    this.firmaListe.remove(firma);
+                } catch (UserInputException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+
+    }
+
+    public Betreuer betreuerAnlegen(String nachname, String vorname, String email, Date geburtstag, String telefonnummer){
+        Betreuer b = new Betreuer(nachname,vorname,email,geburtstag,telefonnummer);
         this.betreuerListe.add(b);
         //dbfunc
         return b;
@@ -91,7 +123,6 @@ public class StudentenVerwaltung{
     }
 
     public void kursLöschen(Kurs kurs) throws UserInputException {
-        System.out.println("A");
         if(kurs.getStudentenListe().isEmpty()){
             kurs.getRaum().kursHinzufuegen(null);
             kurs.raumWechseln(null);
@@ -176,6 +207,15 @@ public class StudentenVerwaltung{
         return null;
     }
 
+    public Firma findeFirma(String firmenName){
+        for (Firma tmp: firmaListe) {
+            if(tmp.getFirmenname().equals(firmenName)){
+                return tmp;
+            }
+        }
+        return null;
+    }
+
     public void exmatrikulieren(Student student) throws UserInputException {
         //firma/kurs löschen (neue func in student) -- DONE?
         student.exmatrikulieren();
@@ -205,6 +245,14 @@ public class StudentenVerwaltung{
 
     public ArrayList<Kurs> getKursListe() {
         return kursListe;
+    }
+
+    public ArrayList<Firma> getFirmaListe() {
+        return firmaListe;
+    }
+
+    public ArrayList<Student> getStudentenListe() {
+        return studentenListe;
     }
 
     public void raumUpdate(int rId, String rnm, int kapa) throws UserInputException {

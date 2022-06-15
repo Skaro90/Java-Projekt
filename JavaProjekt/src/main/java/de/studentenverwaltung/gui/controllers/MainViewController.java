@@ -121,6 +121,21 @@ public class MainViewController implements Initializable {
     }
 
     @FXML
+    void onStudentAnlegenButton(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onStudentBearbeitenButton(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onStudentEntfernenButton(ActionEvent event) {
+
+    }
+
+    @FXML
     void onStudentenListClicked(MouseEvent event) {
         if(studentenList.getSelectionModel().getSelectedItems().isEmpty()){
             kursBearbeitenButton.setDisable(true);
@@ -139,6 +154,22 @@ public class MainViewController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             //stage.initStyle(StageStyle.TRANSPARENT);
             stage.setTitle("Räume anzeigen");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void buttonFirmenAnzeigenClicked(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/firmen-anzeigen-dialog.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            //stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setTitle("Firmen anzeigen");
             stage.setScene(new Scene(root1));
             stage.show();
         } catch (IOException e) {

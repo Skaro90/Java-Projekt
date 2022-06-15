@@ -1,8 +1,11 @@
 package de.studentenverwaltung;
 
 import de.studentenverwaltung.exceptions.UserInputException;
+import de.studentenverwaltung.gui.Application;
 import de.studentenverwaltung.gui.ErrorMessageWindow;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Firma {
@@ -16,7 +19,7 @@ public class Firma {
     private String stadt;
 
     //    Foreign Keys
-    private List<Student> studentenListe;
+    private List<Student> studentenListe = new ArrayList<Student>();
     private Betreuer betreuer;
 
     public Firma(int firmenId, String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, List<Student> studentenListe, Betreuer betreuer) {
@@ -69,5 +72,48 @@ public class Firma {
 
         return change;
 
+    }
+
+    public void firmennameAendern(String newName){
+        this.firmenname = newName;
+    }
+
+    public void adresseAendern(String strasse, String hausnummer, String postleitzahl, String stadt){
+        this.strasse = strasse;
+        this.hausnummer = hausnummer;
+        this.postleitzahl = postleitzahl;
+        this.stadt = stadt;
+    }
+
+    public void betreuerAendern(String nachname, String vorname, String email, Date geburtstag, String telefonnummer){
+        this.betreuer = Application.studentenVerwaltung.betreuerAnlegen(nachname, vorname, email, geburtstag, telefonnummer);
+    }
+
+    public String getFirmenname(){
+        return firmenname;
+    }
+
+    public String getStrasse() {
+        return strasse;
+    }
+
+    public String getHausnummer() {
+        return hausnummer;
+    }
+
+    public String getPostleitzahl() {
+        return postleitzahl;
+    }
+
+    public String getStadt() {
+        return stadt;
+    }
+
+    public List<Student> getStudentenListe() {
+        return studentenListe;
+    }
+
+    public Betreuer getBetreuer() {
+        return betreuer;
     }
 }

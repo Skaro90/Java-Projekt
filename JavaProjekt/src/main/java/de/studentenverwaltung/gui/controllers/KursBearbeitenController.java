@@ -82,7 +82,7 @@ public class KursBearbeitenController implements Initializable {
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
         if(raumMenuItems.isEmpty()){
-            raumNameMenuButton.setText("Keine Räume vorhanden.");
+            //raumNameMenuButton.setText("Keine Räume vorhanden.");
             okButton.setDisable(true);
 
         } else {

@@ -10,16 +10,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.studentenverwaltung.gui.controllers.RaumeAnzeigenController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.studentenverwaltung.gui.controllers.FirmenAnzeigenController">
    <children>
       <AnchorPane prefHeight="82.0" prefWidth="402.0">
          <children>
-            <Label layoutX="6.0" layoutY="6.0" text="Räume">
+            <Label layoutX="6.0" layoutY="6.0" text="Firmen">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Button layoutX="168.0" layoutY="7.0" maxHeight="30.0" maxWidth="30.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#onRaumAnlegenButton" prefHeight="20.0" prefWidth="20.0" AnchorPane.rightAnchor="60.0">
+            <Button layoutX="168.0" layoutY="7.0" maxHeight="30.0" maxWidth="30.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#onFirmaAnlegenButton" prefHeight="20.0" prefWidth="20.0" AnchorPane.rightAnchor="60.0">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -28,7 +28,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="editButton" disable="true" layoutX="192.0" layoutY="7.0" maxHeight="30.0" maxWidth="30.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#onEditRaumButton" prefHeight="20.0" prefWidth="20.0" AnchorPane.rightAnchor="35.0">
+            <Button fx:id="editButton" disable="true" layoutX="192.0" layoutY="7.0" maxHeight="30.0" maxWidth="30.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#onEditFirmaButton" prefHeight="20.0" prefWidth="20.0" AnchorPane.rightAnchor="35.0">
                <graphic>
                   <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -37,7 +37,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="deleteButton" disable="true" layoutX="216.0" layoutY="7.0" maxHeight="30.0" maxWidth="30.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#onDeleteRaumButton" prefHeight="20.0" prefWidth="20.0" AnchorPane.rightAnchor="10.0">
+            <Button fx:id="deleteButton" disable="true" layoutX="216.0" layoutY="7.0" maxHeight="30.0" maxWidth="30.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#onDeleteFirmaButton" prefHeight="20.0" prefWidth="20.0" AnchorPane.rightAnchor="10.0">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -52,14 +52,14 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="100.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <ListView fx:id="raumNameList" layoutX="45.0" layoutY="19.0" onMouseClicked="#onRaumnameMouseClicked" prefHeight="178.0" prefWidth="198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="19.0" />
-                  <Label layoutX="3.0" layoutY="1.0" text="Raumname" />
+                  <ListView fx:id="firmaList" layoutX="45.0" layoutY="19.0" onMouseClicked="#onFirmaMouseClicked" prefHeight="178.0" prefWidth="198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="19.0" />
+                  <Label layoutX="3.0" layoutY="1.0" text="Firma" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="100.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Label layoutX="3.0" layoutY="1.0" text="Kapazität" />
-                  <ListView fx:id="raumKapazitaetList" layoutX="-6.0" layoutY="19.0" onMouseClicked="#onKapazitaetMouseClicked" prefHeight="178.0" prefWidth="198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="19.0" />
+                  <Label layoutX="3.0" layoutY="1.0" text="Studenten" />
+                  <ListView fx:id="studentenList" layoutX="-6.0" layoutY="19.0" onMouseClicked="#onStudentenMouseClicked" prefHeight="178.0" prefWidth="198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="19.0" />
                </children>
             </AnchorPane>
          </items>
