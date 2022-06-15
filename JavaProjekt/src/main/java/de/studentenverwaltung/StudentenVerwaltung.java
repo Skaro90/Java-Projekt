@@ -6,6 +6,7 @@ import javafx.css.StyleableProperty;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 
 public class StudentenVerwaltung{
     //    Foreign Keys
@@ -201,7 +202,28 @@ public class StudentenVerwaltung{
         return raumListe;
     }
 
+
     public ArrayList<Kurs> getKursListe() {
         return kursListe;
     }
+
+    public void raumUpdate(int rId, String rnm, int kapa) throws UserInputException {
+        Raum uraum = getRaumById(rId);
+        if (rnm!="")
+            uraum.changeRNm(rnm);
+        if (kapa<0)
+            uraum.changeKapa(kapa);
+    }
+
+    public Raum getRaumById(int rId) throws UserInputException{
+        for (int i = 0; i < raumListe.size(); i++){
+            if (raumListe.get(i).getRaumId()==rId){
+                return raumListe.get(i);
+            }
+        }
+        TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+        throw new UserInputException("Raum wurde nicht gefunden, RaumId inkorrekt", errorMessageWindow);
+    }
+
+
 }
