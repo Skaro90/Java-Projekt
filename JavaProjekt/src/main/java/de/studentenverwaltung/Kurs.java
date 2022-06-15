@@ -77,14 +77,20 @@ public class Kurs {
         }
         return null;*/
 
-        if(raum.getKurs() != null){
-            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
-            throw new UserInputException("Dem Raum ist bereits ein Kurs zugeordnet. Bitte wählen Sie einen anderen Raum.", errorMessageWindow);
+        if(raum != null){
+            if(raum.getKurs() != null){
+                ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
+                throw new UserInputException("Dem Raum ist bereits ein Kurs zugeordnet. Bitte wählen Sie einen anderen Raum.", errorMessageWindow);
+            }
+
+
+            //raum.raumBelegen(null);
+            this.raum = raum;
+            raum.kursHinzufuegen(this);
+        } else {
+            this.raum = null;
         }
 
-        //raum.raumBelegen(null);
-        this.raum = raum;
-        raum.kursHinzufuegen(this);
 
         //raum.raumBelegen(this);
     }

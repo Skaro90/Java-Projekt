@@ -99,7 +99,11 @@ public class MainViewController implements Initializable {
             if(kursList.getSelectionModel().getSelectedIndices().size() > 0) {
                 int selectedIndex = kursList.getSelectionModel().getSelectedIndices().get(0);
 
-                Application.studentenVerwaltung.kursLöschen(Application.studentenVerwaltung.findeKurs(kursListItems.get(selectedIndex)));
+                try {
+                    Application.studentenVerwaltung.kursLöschen(Application.studentenVerwaltung.findeKurs(kursListItems.get(selectedIndex)));
+                } catch (UserInputException e) {
+                    throw new RuntimeException(e);
+                }
                 removeKursFromList(kursListItems.get(selectedIndex));
             }
         }

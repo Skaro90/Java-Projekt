@@ -89,17 +89,24 @@ public class StudentenVerwaltung{
 
     }
 
-    public void kursLöschen(Kurs kurs){
-        kurs.getStudentenListe().forEach(x -> {
-            try {
-                x.exmatrikulieren();
-                kurs.raumWechseln(null);
-                kurs.getRaum().kursHinzufuegen(null);
-                this.kursListe.remove(kurs);
-            } catch (UserInputException e) {
-                throw new RuntimeException(e);
-            }
-        });
+    public void kursLöschen(Kurs kurs) throws UserInputException {
+        System.out.println("A");
+        if(kurs.getStudentenListe().isEmpty()){
+            kurs.getRaum().kursHinzufuegen(null);
+            kurs.raumWechseln(null);
+            this.kursListe.remove(kurs);
+        } else {
+            kurs.getStudentenListe().forEach(x -> {
+                try {
+                    x.exmatrikulieren();
+                    kurs.raumWechseln(null);
+                    kurs.getRaum().kursHinzufuegen(null);
+                    this.kursListe.remove(kurs);
+                } catch (UserInputException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
 
     }
 
