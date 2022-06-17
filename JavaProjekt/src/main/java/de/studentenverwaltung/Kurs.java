@@ -20,6 +20,8 @@ public class Kurs {
         this.kursId = kursId;
         this.kursName = kursName;
         this.raum = raum;
+
+        System.out.println(raum.getRaumNummer());
     }
     public String getKursName() {
         return kursName;

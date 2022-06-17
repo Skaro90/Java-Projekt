@@ -114,6 +114,7 @@ public class MainViewController implements Initializable {
                     throw new RuntimeException(e);
                 }
                 removeKursFromList(kursListItems.get(selectedIndex));
+                studentenList.getItems().clear();
             }
         }
     }

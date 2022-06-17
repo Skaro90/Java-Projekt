@@ -114,21 +114,23 @@ public class FirmenAnzeigenController implements Initializable {
         } else {
             editButton.setDisable(false);
             deleteButton.setDisable(false);
+
+            studentenListItems = Application.studentenVerwaltung.findeFirma(firmaListItems.get(firmaList.getSelectionModel().getSelectedIndices().get(0))).getStudentenListe().stream()
+                    .sorted(Comparator.comparing(Student::getNachname))
+                    .map(x -> x.getNachname() + " " + x.getVorname())
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+            studentenMatrikelnummerList = Application.studentenVerwaltung.findeFirma(firmaListItems.get(firmaList.getSelectionModel().getSelectedIndices().get(0))).getStudentenListe().stream()
+                    .sorted(Comparator.comparing(Student::getNachname))
+                    .map(x -> x.getMatrikelnummer())
+                    .collect(Collectors.toList());
+
+            this.studentenList.setItems(studentenListItems);
         }
 
 
 
-        studentenListItems = Application.studentenVerwaltung.findeFirma(firmaListItems.get(firmaList.getSelectionModel().getSelectedIndices().get(0))).getStudentenListe().stream()
-                .sorted(Comparator.comparing(Student::getNachname))
-                .map(x -> x.getNachname() + " " + x.getVorname())
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
-        studentenMatrikelnummerList = Application.studentenVerwaltung.findeFirma(firmaListItems.get(firmaList.getSelectionModel().getSelectedIndices().get(0))).getStudentenListe().stream()
-                .sorted(Comparator.comparing(Student::getNachname))
-                .map(x -> x.getMatrikelnummer())
-                .collect(Collectors.toList());
-
-        this.studentenList.setItems(studentenListItems);
 
         if(event.getClickCount() > 1){
             try {

@@ -78,6 +78,7 @@ public class StudentenVerwaltung{
                 }
             }
             Kurs k = new Kurs(kursRs.getInt("kid"),kursRs.getString("bezeichnung"),r);
+            r.kursHinzufuegen(k);
             kursListe.add(k);
         }
 
@@ -126,15 +127,15 @@ public class StudentenVerwaltung{
         return s;
     }
   
-  public void updateStudent(Student student, String nachname, String vorname, String email, Date geburtstag, Kurs kurs, Student.Vorkenntnisse vorkenntnisse) throws UserInputException {
+  public void updateStudent(Student student, String nachname, String vorname, String email, Date geburtstag, Kurs kurs) throws UserInputException {
         student.nachnameAendern(nachname);
         student.vornameAendern(vorname);
         student.emailAendern(email);
         student.geburtstagAendern(geburtstag);
         student.versetzen(kurs);
-        student.vorkenntnisseAendern(vorkenntnisse);
 
-        //dbfunc
+        datenbank.studentupdate(student, nachname, vorname, email, geburtstag);
+        datenbank.studentVersetzen(student, kurs);
 
     }
 
@@ -230,13 +231,17 @@ public class StudentenVerwaltung{
 
     public void kursLöschen(Kurs kurs) throws UserInputException {
         if(kurs.getStudentenListe().isEmpty()){
+            datenbank.kursloeschen(kurs);
             kurs.getRaum().kursHinzufuegen(null);
             kurs.raumWechseln(null);
             this.kursListe.remove(kurs);
-            datenbank.kursloeschen(kurs);
+
         } else {
+
             while (!kurs.getStudentenListe().isEmpty()){
+                datenbank.exmatrikulieren(kurs.getStudentenListe().get(0));
                 kurs.getStudentenListe().get(0).exmatrikulieren();
+
             }
             try {
                 datenbank.kursloeschen(kurs);
@@ -291,8 +296,8 @@ public class StudentenVerwaltung{
         }
 
         this.raumListe.remove(raum);
-        //dbfunc
-        raum = null;
+        datenbank.raumloeschen(raum);
+
     }
 
     public Betreuer findeBetreuer(String email){
@@ -345,16 +350,6 @@ public class StudentenVerwaltung{
         student.exmatrikulieren();
         studentenListe.remove(student);
         datenbank.exmatrikulieren(student);
-    }
-
-    public void raumZuweisen(Kurs kurs, Raum raum) throws UserInputException {
-        if(kurs.getKursGroesse()>=raum.getKapazitaet()){
-            kurs.raumWechseln(raum);
-            datenbank.raumZuweisen(kurs,raum);
-        }else{
-            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
-            throw new UserInputException("Der Raum besitzt nicht genügend Kapazität für den Kurs.", errorMessageWindow);
-        }
     }
 
     public void studentVersetzen(Student student, Kurs kurs) throws UserInputException {

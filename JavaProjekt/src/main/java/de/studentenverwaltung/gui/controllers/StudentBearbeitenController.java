@@ -58,33 +58,11 @@ public class StudentBearbeitenController implements Initializable {
     @FXML
     void confirmStudenBearbeitentInput(ActionEvent event) {
 
-        Student.Vorkenntnisse vorkenntnisse;
-        switch (studentVorkenntnisseButton.getText()){
-            case "Absoluter Anfänger":
-                vorkenntnisse = Student.Vorkenntnisse.Absoluter_Anfaenger;
-                break;
-            case "Anfänger":
-                vorkenntnisse = Student.Vorkenntnisse.Anfaenger;
-                break;
-            case "Laie":
-                vorkenntnisse = Student.Vorkenntnisse.Laie;
-                break;
-            case "Fortgeschrittener":
-                vorkenntnisse = Student.Vorkenntnisse.Fortgeschrittener;
-                break;
-            case "Experte":
-                vorkenntnisse = Student.Vorkenntnisse.Experte;
-                break;
-            default:
-                vorkenntnisse = Student.Vorkenntnisse.Absoluter_Anfaenger;
-                break;
-        }
-
         try {
             Kurs k = student.getKurs();
 
             Application.studentenVerwaltung.updateStudent(Application.studentenVerwaltung.findeStudent(student.getMatrikelnummer()), studentNachnameTextField.getText(), studentVornameTextField.getText(), studentEmailTextField.getText(), Date.from(Instant.from(studentGeburtstagField.getValue().atStartOfDay(ZoneId.systemDefault()))),
-                    Application.studentenVerwaltung.findeKurs(studentKursButton.getText()), vorkenntnisse);
+                    Application.studentenVerwaltung.findeKurs(studentKursButton.getText()));
 
             MainViewController.removeStudentFromList(student.getMatrikelnummer());
             if(Application.studentenVerwaltung.findeStudent(student.getMatrikelnummer()).getKurs() == k){
@@ -107,31 +85,6 @@ public class StudentBearbeitenController implements Initializable {
         studentKursButton.setText(student.getKurs().getKursName());
 
         this.student = student;
-
-        String vk;
-
-        switch (student.getVorkenntnisse()) {
-            case Absoluter_Anfaenger:
-                vk = "Absoluter Anfänger";
-                break;
-            case Anfaenger:
-                vk = "Anfänger";
-                break;
-            case Laie:
-                vk = "Laie";
-                break;
-            case Fortgeschrittener:
-                vk = "Fortgeschrittener";
-                break;
-            case Experte:
-                vk = "Experte";
-                break;
-            default:
-                vk = "Absoluter Anfänger";
-                break;
-
-        }
-            studentVorkenntnisseButton.setText(vk);
 
     }
 
