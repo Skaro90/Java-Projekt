@@ -52,6 +52,7 @@ public class FirmenAnzeigenController implements Initializable {
                 Application.studentenVerwaltung.firmaLoeschen(Application.studentenVerwaltung.findeFirma(firmaListItems.get(selectedIndex)));
 
                 removeItemFromFirmaList(firmaListItems.get(selectedIndex));
+                studentenList.getItems().clear();
             }
         }
     }

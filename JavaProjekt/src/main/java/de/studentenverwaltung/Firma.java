@@ -80,7 +80,7 @@ public class Firma {
         this.stadt = stadt;
     }
 
-    public void betreuerAendern(String nachname, String vorname, String email, Date geburtstag, String telefonnummer){
+    public void betreuerAendern(String nachname, String vorname, String email, Date geburtstag, String telefonnummer) throws UserInputException{
         this.betreuer = Application.studentenVerwaltung.betreuerAnlegen(nachname, vorname, email, geburtstag, telefonnummer);
     }
 

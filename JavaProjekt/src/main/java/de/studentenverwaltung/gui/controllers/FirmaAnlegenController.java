@@ -62,7 +62,7 @@ public class FirmaAnlegenController {
                 throw new UserInputException("Bitte Überprüfen Sie Ihre Eingaben.", errorMessageWindow);
             }
             Application.studentenVerwaltung.firmaAnlegen(firmaNameTextField.getText(), firmaStrasseTextField.getText(), firmaHausnummerTextField.getText(), firmaPlzTextField.getText(), firmaStadtTextField.getText(),
-                    Application.studentenVerwaltung.betreuerAnlegen(betreuerVornameTextField.getText(), betreuerNachnameTextField.getText(), betreuerEmailTextField.getText(), Date.from(Instant.from(betreuerGeburtstagField.getValue().atStartOfDay(ZoneId.systemDefault()))), betreuerTelefonnummerTextField.getText()));
+                    Application.studentenVerwaltung.betreuerAnlegen(betreuerNachnameTextField.getText(), betreuerVornameTextField.getText(), betreuerEmailTextField.getText(), Date.from(Instant.from(betreuerGeburtstagField.getValue().atStartOfDay(ZoneId.systemDefault()))), betreuerTelefonnummerTextField.getText()));
             FirmenAnzeigenController.addItemToFirmaList(firmaNameTextField.getText());
 
             ((Stage)firmaNameTextField.getScene().getWindow()).close();

@@ -83,20 +83,22 @@ public class StudentenVerwaltung{
 
         ResultSet studentRS = datenbank.ladeStudent();
         while(studentRS.next()){
-            Firma f = null;
+            Firma firma = null;
             for(Firma element: firmaListe){
                 if(element.getFirmenId() == studentRS.getInt("fid")){
-                    f=element;
+                    firma=element;
                 }
             }
-            Kurs k = null;
+            Kurs kurs = null;
             for(Kurs element: kursListe){
                 if(element.getKursId() == studentRS.getInt("kid")){
-                    k=element;
+                    kurs=element;
                 }
             }
-            Student s = new Student(studentRS.getString("name"),studentRS.getString("vorname"),studentRS.getString("email"),studentRS.getDate("geburtstag"),studentRS.getInt("sid"),studentRS.getString("matrikelnummer"), Student.Vorkenntnisse.values()[studentRS.getInt("Vorkenntnisse")],f,k);
+            Student s = new Student(studentRS.getString("name"),studentRS.getString("vorname"),studentRS.getString("email"),new java.util.Date(studentRS.getDate("geburtstag").getTime()),studentRS.getInt("sid"),studentRS.getString("matrikelnummer"), Student.Vorkenntnisse.values()[studentRS.getInt("Vorkenntnisse")],firma,kurs);
             studentenListe.add(s);
+            firma.neuerStudent(s);
+            kurs.studentHinzufuegen(s);
         }
 
         }catch(Exception e){
@@ -111,7 +113,7 @@ public class StudentenVerwaltung{
         }  
       for (Student element: studentenListe) {
             if (element.getMatrikelnummer().equals(matrikelNummer)){
-                TempErrorMessageWindow tmp = new TempErrorMessageWindow();
+                ErrorMessageWindow tmp = new ErrorMessageWindow();
                 throw new UserInputException("matrikelnummer exestiert bereits",tmp);
             }
         }
@@ -140,7 +142,7 @@ public class StudentenVerwaltung{
     public Firma firmaAnlegen(String firmenname,String strasse, String hausnummer, String postleitzahl, String stadt, Betreuer betreuer)throws UserInputException {
         for(Firma element: firmaListe){
             if(element.getFirmenname().equals(firmenname)){
-                TempErrorMessageWindow tmp = new TempErrorMessageWindow();
+                ErrorMessageWindow tmp = new ErrorMessageWindow();
                 throw new UserInputException("firmenname exestiert bereits",tmp);
             }
         }
@@ -164,18 +166,20 @@ public class StudentenVerwaltung{
 
   
   public void firmaLoeschen(Firma firma){ //DB FUNKTION
-        if(firma.getStudentenListe().isEmpty()){
-            this.firmaListe.remove(firma);
-        } else {
+        if(!firma.getStudentenListe().isEmpty()){
             while(!firma.getStudentenListe().isEmpty()){
                 try {
+                    datenbank.exmatrikulieren(firma.getStudentenListe().get(0));
                     firma.getStudentenListe().get(0).exmatrikulieren();
                 } catch (UserInputException e) {
                     throw new RuntimeException(e);
                 }
             }
-            this.firmaListe.remove(firma);
         }
+
+        this.firmaListe.remove(firma);
+        datenbank.firmaloeschen(firma);
+
 
     }
   
@@ -184,7 +188,7 @@ public class StudentenVerwaltung{
     public Betreuer betreuerAnlegen(String nachname, String vorname, String email, Date geburtstag, String telefonnummer) throws UserInputException{
         for(Betreuer element: betreuerListe){
             if(element.getEmail().equals(email)){
-                TempErrorMessageWindow tmp = new TempErrorMessageWindow();
+                ErrorMessageWindow tmp = new ErrorMessageWindow();
                 throw new UserInputException("email exestiert bereits",tmp);
             }
         }
@@ -209,23 +213,18 @@ public class StudentenVerwaltung{
         return k;
     }
 
-    public void updateKurs(Kurs kurs, String kursName, Raum raum) throws UserInputException {
+    public void updateKurs(Kurs kurs, String kursName, Raum raum) throws UserInputException {  //SPÄTER TESTEN
         if(findeKurs(kursName) != null && findeKurs(kursName) != kurs){
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Es existiert bereits ein Kurs mit diesem Namen.", errorMessageWindow);
         }
 
-        /*if(raum.getKurs() != null){
-            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
-            throw new UserInputException("Dem Raum ist bereits ein Kurs zugeordnet.", errorMessageWindow);
-        }*/
-
-        //DIE ABFRAGE IST BEREITS IN KURS.JAVA VORHANDEN
-
         kurs.getRaum().kursLoeschen();
 
         kurs.kursNameAendern(kursName);
         kurs.raumWechseln(raum);
+        datenbank.kursupdate(kurs, kursName);
+        datenbank.raumZuweisen(kurs, raum);
 
     }
 
@@ -234,17 +233,20 @@ public class StudentenVerwaltung{
             kurs.getRaum().kursHinzufuegen(null);
             kurs.raumWechseln(null);
             this.kursListe.remove(kurs);
+            datenbank.kursloeschen(kurs);
         } else {
-            kurs.getStudentenListe().forEach(x -> {
-                try {
-                    x.exmatrikulieren();
-                    kurs.raumWechseln(null);
-                    kurs.getRaum().kursHinzufuegen(null);
-                    this.kursListe.remove(kurs);
-                } catch (UserInputException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+            while (!kurs.getStudentenListe().isEmpty()){
+                kurs.getStudentenListe().get(0).exmatrikulieren();
+            }
+            try {
+                datenbank.kursloeschen(kurs);
+                kurs.getRaum().kursHinzufuegen(null);
+                kurs.raumWechseln(null);
+                this.kursListe.remove(kurs);
+            } catch (UserInputException e) {
+                throw new RuntimeException(e);
+            }
+
         }
 
     }
@@ -271,7 +273,7 @@ public class StudentenVerwaltung{
 
         for(Raum element: raumListe){
             if(element.getRaumNummer().equals(raumNummer)){
-                TempErrorMessageWindow tmp = new TempErrorMessageWindow();
+                ErrorMessageWindow tmp = new ErrorMessageWindow();
                 throw new UserInputException("Raumnummer exestiert bereits",tmp);
             }
         }
@@ -350,7 +352,7 @@ public class StudentenVerwaltung{
             kurs.raumWechseln(raum);
             datenbank.raumZuweisen(kurs,raum);
         }else{
-            TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Der Raum besitzt nicht genügend Kapazität für den Kurs.", errorMessageWindow);
         }
     }

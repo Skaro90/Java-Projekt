@@ -39,6 +39,7 @@ public class StudentAnzeigenController {
 
         geburtstagLabel.setText(format.format(student.getGeburtstag()));
         matrikelnummerLabel.setText(student.getMatrikelnummer());
+        firmaLabel.setText(student.getFirma().getFirmenname());
 
         String vk;
 

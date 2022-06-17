@@ -22,11 +22,6 @@ public class Raum {
         return raumNummer;
     }
 
-
-    public int getRaumId() {
-        return raumId;
-    }
-
     public Kurs getKurs(){
         return kurs;
     }
