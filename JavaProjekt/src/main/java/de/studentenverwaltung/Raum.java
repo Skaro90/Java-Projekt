@@ -17,14 +17,6 @@ public class Raum {
         this.kurs = kurs;
     }
 
-    public Raum(String raumNummer, int kapazitaet, Kurs kurs){
-        this.raumNummer = raumNummer;
-        this.kapazitaet = kapazitaet;
-        this.kurs = kurs;
-        this.raumId = zaehler;
-        zaehler++;
-    }
-
 
     public String getRaumNummer() {
         return raumNummer;
@@ -71,5 +63,8 @@ public class Raum {
         this.kurs = null;
     }
 
+    public int getRaumId() {
+        return raumId;
+    }
 }
 

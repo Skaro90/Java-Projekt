@@ -4,59 +4,127 @@ import de.studentenverwaltung.exceptions.UserInputException;
 import de.studentenverwaltung.gui.ErrorMessageWindow;
 import javafx.css.StyleableProperty;
 
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 
 public class StudentenVerwaltung{
     //    Foreign Keys
+
     private ArrayList<Betreuer> betreuerListe = new ArrayList<Betreuer>();
     private ArrayList<Firma> firmaListe = new ArrayList<Firma>();
-    public ArrayList<Student> studentenListe = new ArrayList<Student>();
+    private ArrayList<Student> studentenListe = new ArrayList<Student>();
     private ArrayList<Kurs> kursListe = new ArrayList<Kurs>();
     private ArrayList<Raum> raumListe = new ArrayList<Raum>();
+    private Datenbank datenbank;
 
     public StudentenVerwaltung() {
-        //this.datenLaden();
-        try {
-            Raum a = raumAnlegen("Raum 1", 2, null);
-            Raum b = raumAnlegen("Raum 2", 10, null);
-            Raum c = raumAnlegen("Raum 3", 12, null);
-            Raum d = raumAnlegen("Raum 4", 19, null);
+        this.datenLaden();
+        //betreuerAnlegen("Knappe", "Fabio", "fabio.knappe@mail.com", new Date(), "45");
+        //datenbank.firmaanlegen("testfirma","T6","20B","34281","Gberg",new Betreuer(1));
+        //datenbank.Studentanlegen("korl","karl",new Date(),"fabio@mail","5",new Firma(6),kursListe.get(0),Student.Vorkenntnisse.Experte);
+        //datenbank.kursanlegen("tinf2",null);
+        //datenbank.raumanlegen("5",30);
+        //datenbank.exmatrikulieren(studentenListe.get(1));
+        //datenbank.raumZuweisen(kursListe.get(3),raumListe.get(1));
+        //datenbank.studentVersetzen(studentenListe.get(0),kursListe.get(3));
+        //datenbank.betreuerWechseln(firmaListe.get(1),betreuerListe.get(1));
+        //datenbank.firmalöschen(firmaListe.get(1));
+        //datenbank.betreuerloeschen(betreuerListe.get(2));
+        //datenbank.kursloeschen(kursListe.get(1));
+        //datenbank.kursupdate(kursListe.get(1),"TIiiiiNF2");
+        //datenbank.studentupdate(studentenListe.get(0),"Müller","Thomas","esmüllert@mail.com",new Date());
+    }
 
-            Kurs k = kursAnlegen("Kurs 1", a);
+   
 
-            a.kursHinzufuegen(k);
-            b.kursHinzufuegen(kursAnlegen("Kurs 2", b));
-            c.kursHinzufuegen(kursAnlegen("Kurs 3", c));
-            d.kursHinzufuegen(kursAnlegen("Kurs 4", d));
+    private void datenLaden(){
+        datenbank = new Datenbank();
+        datenbank.zeigeStudenten();
+       try{
+        ResultSet betreuerRS = datenbank.ladeBetreuer();
+        while(betreuerRS.next()){
+            Betreuer b = new Betreuer(betreuerRS.getString("name"),betreuerRS.getString("vorname"),betreuerRS.getString("email"),betreuerRS.getDate("geburtstag"),betreuerRS.getInt("bid"),betreuerRS.getString("telefonnummer"));
+            betreuerListe.add(b);
+        }
 
-            Firma f = firmaAnlegen("DB", "Strasse", "1", "30165", "Hannover", betreuerAnlegen("Hartmann", "Fixi", "fixi.hartmann@in.de", new Date(System.currentTimeMillis()), "123456489"));
-            Firma g = firmaAnlegen("DB Cargo", "Strasse", "1", "68309", "Mannheim", betreuerAnlegen("Rainer", "Zufall", "a@b.d", new Date(System.currentTimeMillis()), "123456489"));
+        ResultSet firmaRS = datenbank.ladeFirma();
+        while(firmaRS.next()){
+            Betreuer b = null;
+            for(Betreuer element: betreuerListe){
+                if(element.getBetreuerId() == firmaRS.getInt("bid")){
+                    b = element;
+                }
+            }
+            Firma f = new Firma(firmaRS.getInt("fid"),firmaRS.getString("bezeichnung"),firmaRS.getString("strasse"),firmaRS.getString("hausnummer"),firmaRS.getString("plz"),firmaRS.getString("stadt"),b);
+            firmaListe.add(f);
+        }
 
-            Student s = studentAnlegen("Jauch", "Günther", new Date(System.currentTimeMillis()), "günther.jauch@rtl.de", "123456", f, k, Student.Vorkenntnisse.Experte);
-            Student ss = studentAnlegen("Gause", "Gundula", new Date(System.currentTimeMillis()), "gause.gundula@zdf.de", "654321", f, k, Student.Vorkenntnisse.Absoluter_Anfaenger);
-        } catch (UserInputException e) {
-            throw new RuntimeException(e);
+
+        ResultSet raumRS = datenbank.ladeRaum();
+        while(raumRS.next()){
+            Raum r = new Raum(raumRS.getInt("rid"),raumRS.getString("nummer"),raumRS.getInt("kapazität"),null);
+            raumListe.add(r);
+        }
+
+        ResultSet kursRs = datenbank.ladeKurs();
+        while(kursRs.next()){
+            Raum r = null;
+            for(Raum element: raumListe){
+                if(element.getRaumId() == kursRs.getInt("rid")){
+                    r = element;
+                }
+            }
+            Kurs k = new Kurs(kursRs.getInt("kid"),kursRs.getString("bezeichnung"),r);
+            kursListe.add(k);
+        }
+
+        ResultSet studentRS = datenbank.ladeStudent();
+        while(studentRS.next()){
+            Firma f = null;
+            for(Firma element: firmaListe){
+                if(element.getFirmenId() == studentRS.getInt("fid")){
+                    f=element;
+                }
+            }
+            Kurs k = null;
+            for(Kurs element: kursListe){
+                if(element.getKursId() == studentRS.getInt("kid")){
+                    k=element;
+                }
+            }
+            Student s = new Student(studentRS.getString("name"),studentRS.getString("vorname"),studentRS.getString("email"),studentRS.getDate("geburtstag"),studentRS.getInt("sid"),studentRS.getString("matrikelnummer"), Student.Vorkenntnisse.values()[studentRS.getInt("Vorkenntnisse")],f,k);
+            studentenListe.add(s);
+        }
+
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 
-    //private datenLaden(){ }
-
     public Student studentAnlegen(String name, String vorname, Date geburtsdatum, String email, String matrikelNummer, Firma firma, Kurs kurs, Student.Vorkenntnisse vk) throws UserInputException {
-        if(kurs.getRaum().getKapazitaet() <= kurs.getKursGroesse()){
+      if(kurs.getRaum().getKapazitaet() <= kurs.getKursGroesse()){
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Die Kapazität des Kursraums reicht nicht für einen weiteren Studenten aus. Bitte weisen Sie dem Kurs einen neuen Raum zu, bevor Sie den Studenten anlegen.", errorMessageWindow);
+        }  
+      for (Student element: studentenListe) {
+            if (element.getMatrikelnummer().equals(matrikelNummer)){
+                TempErrorMessageWindow tmp = new TempErrorMessageWindow();
+                throw new UserInputException("matrikelnummer exestiert bereits",tmp);
+            }
         }
-        Student s = new Student(name,vorname,geburtsdatum,email,matrikelNummer,firma,kurs,vk);
+        int tmp = datenbank.Studentanlegen(name, vorname, geburtsdatum, email, matrikelNummer, firma, kurs, vk);
+        
+        Student s = new Student(name,vorname, email, geburtsdatum, tmp,matrikelNummer, vk, firma,kurs);
         firma.neuerStudent(s);
         kurs.studentHinzufuegen(s);
         this.studentenListe.add(s);
-        //dbfunc aufrufen
         return s;
     }
-
-    public void updateStudent(Student student, String nachname, String vorname, String email, Date geburtstag, Kurs kurs, Student.Vorkenntnisse vorkenntnisse) throws UserInputException {
+  
+  public void updateStudent(Student student, String nachname, String vorname, String email, Date geburtstag, Kurs kurs, Student.Vorkenntnisse vorkenntnisse) throws UserInputException {
         student.nachnameAendern(nachname);
         student.vornameAendern(vorname);
         student.emailAendern(email);
@@ -68,14 +136,22 @@ public class StudentenVerwaltung{
 
     }
 
-    public Firma firmaAnlegen(String firmenname,String strasse, String hausnummer, String postleitzahl, String stadt, Betreuer betreuer){
-        Firma f = new Firma(firmenname,strasse,hausnummer,postleitzahl,stadt,betreuer);
+
+    public Firma firmaAnlegen(String firmenname,String strasse, String hausnummer, String postleitzahl, String stadt, Betreuer betreuer)throws UserInputException {
+        for(Firma element: firmaListe){
+            if(element.getFirmenname().equals(firmenname)){
+                TempErrorMessageWindow tmp = new TempErrorMessageWindow();
+                throw new UserInputException("firmenname exestiert bereits",tmp);
+            }
+        }
+        int fid = datenbank.firmaanlegen(firmenname,strasse,hausnummer,postleitzahl,stadt,betreuer);
+        Firma f = new Firma(fid,firmenname,strasse,hausnummer,postleitzahl,stadt,betreuer);
+
         this.firmaListe.add(f);
-        //dbfunc
         return f;
     }
-
-    public void updateFirma(Firma firma, String firmenname,String strasse, String hausnummer, String postleitzahl, String stadt, String betreuerNachname, String betreuerVorname, String betreuerEmail, Date betreuerGeburtstag, String betreuerTelefonnummer) throws UserInputException {
+  
+   public void updateFirma(Firma firma, String firmenname,String strasse, String hausnummer, String postleitzahl, String stadt, String betreuerNachname, String betreuerVorname, String betreuerEmail, Date betreuerGeburtstag, String betreuerTelefonnummer) throws UserInputException {
         if(findeFirma(firmenname) != null){
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Es existiert bereits eine Firma mit diesem Namen.", errorMessageWindow);
@@ -84,11 +160,10 @@ public class StudentenVerwaltung{
         firma.adresseAendern(strasse, hausnummer, postleitzahl, stadt);
         firma.betreuerAendern(betreuerNachname, betreuerVorname, betreuerEmail, betreuerGeburtstag, betreuerTelefonnummer);
 
-
-
     }
 
-    public void firmaLoeschen(Firma firma){
+  
+  public void firmaLoeschen(Firma firma){ //DB FUNKTION
         if(firma.getStudentenListe().isEmpty()){
             this.firmaListe.remove(firma);
         } else {
@@ -103,24 +178,34 @@ public class StudentenVerwaltung{
         }
 
     }
+  
+  
 
-    public Betreuer betreuerAnlegen(String nachname, String vorname, String email, Date geburtstag, String telefonnummer){
-        Betreuer b = new Betreuer(nachname,vorname,email,geburtstag,telefonnummer);
+    public Betreuer betreuerAnlegen(String nachname, String vorname, String email, Date geburtstag, String telefonnummer) throws UserInputException{
+        for(Betreuer element: betreuerListe){
+            if(element.getEmail().equals(email)){
+                TempErrorMessageWindow tmp = new TempErrorMessageWindow();
+                throw new UserInputException("email exestiert bereits",tmp);
+            }
+        }
+        int tmp= datenbank.betreueranlegen(nachname, vorname, email, geburtstag, telefonnummer);
+        Betreuer b = new Betreuer(nachname,vorname,email,geburtstag,tmp,telefonnummer);
+
         this.betreuerListe.add(b);
-        //dbfunc
         return b;
     }
 
-    public Kurs kursAnlegen(String kursName, Raum raum) throws UserInputException {
+
+    public Kurs kursAnlegen(String kursName, Raum raum) throws UserInputException{
         if(findeKurs(kursName) != null){
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Es existiert bereits ein Kurs mit diesem Namen.", errorMessageWindow);
         }
+        int tmp = datenbank.kursanlegen(kursName,raum);
+        Kurs k = new Kurs(tmp,kursName,raum);
 
-        Kurs k = new Kurs(kursName,raum);
         raum.kursHinzufuegen(k);
         this.kursListe.add(k);
-        //dbfunc
         return k;
     }
 
@@ -184,9 +269,16 @@ public class StudentenVerwaltung{
             throw new UserInputException("Es existiert bereits ein Raum mit diesem Namen.", errorMessageWindow);
         }
 
-        Raum r = new Raum(raumNummer,kapazitaet,kurs);
+        for(Raum element: raumListe){
+            if(element.getRaumNummer().equals(raumNummer)){
+                TempErrorMessageWindow tmp = new TempErrorMessageWindow();
+                throw new UserInputException("Raumnummer exestiert bereits",tmp);
+            }
+        }
+        int tmp = datenbank.raumanlegen(raumNummer,kapazitaet);
+        Raum r = new Raum(tmp,raumNummer,kapazitaet,kurs);
+
         this.raumListe.add(r);
-        //dbfunc
         return r;
     }
 
@@ -250,22 +342,27 @@ public class StudentenVerwaltung{
         //firma/kurs löschen (neue func in student) -- DONE?
         student.exmatrikulieren();
         studentenListe.remove(student);
-        //dbfunc
+        datenbank.exmatrikulieren(student);
     }
 
     public void raumZuweisen(Kurs kurs, Raum raum) throws UserInputException {
-        kurs.raumWechseln(raum);
-        //dbfunc
+        if(kurs.getKursGroesse()>=raum.getKapazitaet()){
+            kurs.raumWechseln(raum);
+            datenbank.raumZuweisen(kurs,raum);
+        }else{
+            TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+            throw new UserInputException("Der Raum besitzt nicht genügend Kapazität für den Kurs.", errorMessageWindow);
+        }
     }
 
     public void studentVersetzen(Student student, Kurs kurs) throws UserInputException {
         student.versetzen(kurs);
-        //dbfunc
+        datenbank.studentVersetzen(student,kurs);
     }
 
     public void betreuerWechseln(Firma firma, Betreuer betreuer){
         firma.betreuerWechsel(betreuer);
-        //dbfunc
+        datenbank.betreuerWechseln(firma,betreuer);
     }
 
     public ArrayList<Raum> getRaumListe(){

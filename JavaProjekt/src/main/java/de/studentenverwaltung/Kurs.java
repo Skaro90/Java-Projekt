@@ -21,14 +21,6 @@ public class Kurs {
         this.kursName = kursName;
         this.raum = raum;
     }
-
-    public Kurs(String kursName, Raum raum){
-        this.kursName = kursName;
-        this.raum = raum;
-        this.kursId = zaehler;
-        zaehler++;
-    }
-
     public String getKursName() {
         return kursName;
     }
@@ -101,5 +93,9 @@ public class Kurs {
 
     public int getKursGroesse(){
         return this.studentenListe.size();
+    }
+
+    public int getKursId() {
+        return kursId;
     }
 }
