@@ -1,7 +1,8 @@
 package de.studentenverwaltung;
 
 import de.studentenverwaltung.exceptions.UserInputException;
-import de.studentenverwaltung.gui.TempErrorMessageWindow;
+import de.studentenverwaltung.gui.Application;
+import de.studentenverwaltung.gui.ErrorMessageWindow;
 
 import java.util.Date;
 
@@ -45,6 +46,14 @@ public class Student extends Person{
         return matrikelnummer;
     }
 
+    public Kurs getKurs(){
+        return kurs;
+    }
+
+    public Vorkenntnisse getVorkenntnisse(){
+        return vorkenntnisse;
+    }
+
     public void versetzen(Kurs kurs) throws UserInputException {
         /*try {
             this.kurs.studentLoeschen(this);
@@ -58,7 +67,7 @@ public class Student extends Person{
         return null;*/
 
         if(!(kurs.getRaum().getKapazitaet() > kurs.getKursGroesse())){
-            TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Der Kurs-Raum besitzt nicht die Kapazität für einen weiteren Studenten. Bitte ordnen Sie dem Kurs einen neuen Raum zu, bevor Sie den Studenten dem Kurs hinzufügen.", errorMessageWindow);
         }
 
@@ -84,6 +93,7 @@ public class Student extends Person{
 
         this.firma.studentLoeschen(this);
         this.kurs.studentLoeschen(this);
+        Application.studentenVerwaltung.studentenListe.remove(this);
 
 
     }
@@ -106,5 +116,8 @@ public class Student extends Person{
 
     public Kurs getKurs() {
         return kurs;
+
+    public void vorkenntnisseAendern(Vorkenntnisse vorkenntnisse){
+        this.vorkenntnisse = vorkenntnisse;
     }
 }

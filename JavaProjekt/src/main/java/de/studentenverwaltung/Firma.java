@@ -1,10 +1,12 @@
 package de.studentenverwaltung;
 
 import de.studentenverwaltung.exceptions.UserInputException;
-import de.studentenverwaltung.gui.TempErrorMessageWindow;
+import de.studentenverwaltung.gui.Application;
+import de.studentenverwaltung.gui.ErrorMessageWindow;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 public class Firma {
     private int firmenId;
@@ -17,7 +19,7 @@ public class Firma {
     private String stadt;
 
     //    Foreign Keys
-    private List<Student> studentenListe;
+    private List<Student> studentenListe = new ArrayList<Student>();
     private Betreuer betreuer;
 
     public Firma(int firmenId, String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, Betreuer betreuer) {
@@ -29,14 +31,11 @@ public class Firma {
         this.stadt = stadt;
         this.betreuer = betreuer;
     }
-    //denk dran die zu löschen
-    public Firma(int firmenId){
-        this.firmenId = firmenId;
-    }
+ 
 
     public void neuerStudent(Student student) throws UserInputException {
             if (studentenListe.contains(student)){
-                TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+                ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
                 throw new UserInputException("Der Student ist bereits in der Firma.", errorMessageWindow);
             }
         studentenListe.add(student);
@@ -56,7 +55,7 @@ public class Firma {
             }
         }*/
         if(!studentenListe.remove(student)){
-            TempErrorMessageWindow errorMessageWindow = new TempErrorMessageWindow();
+            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Der zu löschende Nutzer ist nicht in der Liste vorhanden.", errorMessageWindow);
         }
 
@@ -65,16 +64,29 @@ public class Firma {
 
     }
 
+
     public int getFirmenId() {
         return firmenId;
     }
-
-    public String getFirmenname() {
-        return firmenname;
+  
+    public void firmennameAendern(String newName){
+        this.firmenname = newName;
     }
 
-    public static int getZaehler() {
-        return zaehler;
+    public void adresseAendern(String strasse, String hausnummer, String postleitzahl, String stadt){
+        this.strasse = strasse;
+        this.hausnummer = hausnummer;
+        this.postleitzahl = postleitzahl;
+        this.stadt = stadt;
+    }
+
+    public void betreuerAendern(String nachname, String vorname, String email, Date geburtstag, String telefonnummer){
+        this.betreuer = Application.studentenVerwaltung.betreuerAnlegen(nachname, vorname, email, geburtstag, telefonnummer);
+    }
+
+    public String getFirmenname(){
+        return firmenname;
+
     }
 
     public String getStrasse() {

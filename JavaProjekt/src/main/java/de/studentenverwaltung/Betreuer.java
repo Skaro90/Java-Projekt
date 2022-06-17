@@ -14,13 +14,14 @@ public class Betreuer extends Person{
         this.telefonnummer = telefonnummer;
     }
 
-    //noch löschen
-    public Betreuer(int id){
-        super();
-        this.betreuerId = id;
-    }
+
 
     public int getBetreuerId() {
         return betreuerId;
     }
+
+    public String getTelefonnummer() {
+        return telefonnummer;
+    }
+
 }

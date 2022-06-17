@@ -2,13 +2,11 @@ package de.studentenverwaltung.gui.controllers;
 
 import de.studentenverwaltung.Kurs;
 import de.studentenverwaltung.Raum;
-import de.studentenverwaltung.StudentenVerwaltung;
 import de.studentenverwaltung.exceptions.UserInputException;
 import de.studentenverwaltung.gui.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,43 +14,78 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class KursAnlegenController implements Initializable {
+public class KursBearbeitenController implements Initializable {
+
+    private String oldName;
+    private Raum raum;
+    private Kurs kurs;
 
     @FXML
     private TextField kursNameTextField;
-    @FXML
-    private MenuButton raumNameMenuButton;
 
     @FXML
     private Button okButton;
 
+    @FXML
+    private MenuButton raumNameMenuButton;
     private static ObservableList<MenuItem> raumMenuItems = FXCollections.observableArrayList();
+
     @FXML
     void abortInput(ActionEvent event) {
-        ((Stage)raumNameMenuButton.getScene().getWindow()).close();
+        ((Stage)kursNameTextField.getScene().getWindow()).close();
     }
 
     @FXML
     void confirmInput(ActionEvent event) {
         try {
-            Application.studentenVerwaltung.kursAnlegen(kursNameTextField.getText(), Application.studentenVerwaltung.findeRaum(raumNameMenuButton.getText()));
+            Application.studentenVerwaltung.updateKurs(kurs, kursNameTextField.getText(), Application.studentenVerwaltung.findeRaum(raumNameMenuButton.getText()));
+            MainViewController.removeKursFromList(oldName);
             MainViewController.addKursToList(kursNameTextField.getText());
+
+            ((Stage)kursNameTextField.getScene().getWindow()).close();
         } catch (UserInputException e) {
             throw new RuntimeException(e);
         }
+    }
 
 
-        ((Stage)raumNameMenuButton.getScene().getWindow()).close();
+    void initData(String kursName){
+
+        oldName = kursName;
+
+        kurs = Application.studentenVerwaltung.findeKurs(kursName);
+        raum = kurs.getRaum();
+
+        kursNameTextField.setText(kursName);
+        if(raum != null){
+            raumNameMenuButton.setText(raum.getRaumNummer());
+
+            MenuItem currentRaumMenuItem = new MenuItem(raum.getRaumNummer());
+            raumMenuItems.add(0, currentRaumMenuItem);
+            raumNameMenuButton.getItems().add(0, currentRaumMenuItem);
+        } else {
+            raumNameMenuButton.setText("Kein Raum zugeordnet");
+        }
+
+        if(raumNameMenuButton.getItems().isEmpty()){
+            //raumNameMenuButton.setText("Keine Räume vorhanden.");
+            okButton.setDisable(true);
+
+        } else {
+            raumNameMenuButton.getItems().addAll(raumMenuItems);
+
+            okButton.setDisable(false);
+        }
+
+
     }
 
     @Override
@@ -63,16 +96,15 @@ public class KursAnlegenController implements Initializable {
                 .map(x -> new MenuItem(x.getRaumNummer()))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
-        if(raumMenuItems.isEmpty()){
-            raumNameMenuButton.setText("Keine Räume vorhanden.");
-            okButton.setDisable(true);
+        /*if(kurs.getRaum() != null){
+            MenuItem currentRaumMenuItem = new MenuItem(kurs.getRaum().getRaumNummer());
 
-        } else {
-            raumNameMenuButton.getItems().setAll(raumMenuItems);
-            raumNameMenuButton.setText(raumMenuItems.get(0).getText());
+            raumMenuItems.add(currentRaumMenuItem);
+            raumMenuItems = raumMenuItems.stream().sorted(Comparator.comparing(MenuItem::getText)).collect(Collectors.toCollection(FXCollections::observableArrayList));
 
-            okButton.setDisable(false);
-        }
+            int index = raumMenuItems.indexOf(currentRaumMenuItem);
+        }*/
+
 
 
 
@@ -82,6 +114,7 @@ public class KursAnlegenController implements Initializable {
                 raumNameMenuButton.setText(x.getText());
             }
         }));
+
 
     }
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.studentenverwaltung.gui.controllers.StudentAnzeigenController">
+   <children>
+      <AnchorPane layoutX="43.0" layoutY="39.0" prefHeight="223.0" prefWidth="298.0">
+         <children>
+            <Label layoutX="1.0" layoutY="2.0" prefHeight="22.0" prefWidth="91.0" text="Vorname">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="1.0" layoutY="32.0" prefHeight="22.0" prefWidth="91.0" text="Nachname">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="1.0" layoutY="63.0" prefHeight="22.0" prefWidth="91.0" text="E-Mail">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="1.0" layoutY="94.0" prefHeight="22.0" prefWidth="91.0" text="Geburtstag">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="1.0" layoutY="123.0" prefHeight="22.0" prefWidth="91.0" text="Matrikelnummer">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="1.0" layoutY="153.0" prefHeight="22.0" prefWidth="91.0" text="Firma">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="1.0" layoutY="182.0" prefHeight="22.0" prefWidth="91.0" text="Vorkenntnisse">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label fx:id="vornameLabel" layoutX="107.0" layoutY="6.0" text="Vorname" />
+            <Label fx:id="nachnameLabel" layoutX="107.0" layoutY="35.0" text="Nachname" />
+            <Label fx:id="emailLabel" layoutX="107.0" layoutY="66.0" text="E-Mail" />
+            <Label fx:id="geburtstagLabel" layoutX="107.0" layoutY="97.0" text="Geburtstag" />
+            <Label fx:id="matrikelnummerLabel" layoutX="107.0" layoutY="126.0" text="Matrikelnummer" />
+            <Label fx:id="firmaLabel" layoutX="107.0" layoutY="156.0" text="Firma" />
+            <Label fx:id="vorkenntnisseLabel" layoutX="107.0" layoutY="185.0" text="Vorkenntnisse" />
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

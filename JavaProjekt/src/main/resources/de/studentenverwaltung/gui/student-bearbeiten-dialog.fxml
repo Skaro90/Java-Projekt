@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.studentenverwaltung.gui.controllers.StudentAnlegenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.studentenverwaltung.gui.controllers.StudentBearbeitenController">
    <children>
       <AnchorPane layoutX="43.0" layoutY="39.0" prefHeight="280.0" prefWidth="298.0">
          <children>
@@ -34,21 +34,16 @@
             <TextField fx:id="studentNachnameTextField" layoutX="123.0" layoutY="30.0" />
             <TextField fx:id="studentEmailTextField" layoutX="123.0" layoutY="61.0" />
             <DatePicker fx:id="studentGeburtstagField" layoutX="123.0" layoutY="92.0" />
-            <Label layoutX="1.0" layoutY="123.0" prefHeight="22.0" prefWidth="91.0" text="Matrikelnummer">
+            <Label layoutX="1.0" layoutY="127.0" prefHeight="22.0" prefWidth="91.0" text="Kurs">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
-            <TextField fx:id="studentMatrikelnummerTextField" layoutX="123.0" layoutY="121.0" />
-            <Label layoutX="1.0" layoutY="153.0" prefHeight="22.0" prefWidth="91.0" text="Firma">
+            <MenuButton fx:id="studentKursButton" layoutX="123.0" layoutY="125.0" mnemonicParsing="false" />
+            <Label layoutX="1.0" layoutY="159.0" prefHeight="22.0" prefWidth="91.0" text="Vorkenntnisse">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
-            <MenuButton fx:id="studentFirmaButton" layoutX="123.0" layoutY="152.0" mnemonicParsing="false" />
-            <Label layoutX="1.0" layoutY="182.0" prefHeight="22.0" prefWidth="91.0" text="Vorkenntnisse">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Label>
-            <MenuButton fx:id="studentVorkenntnisseButton" layoutX="122.0" layoutY="181.0" mnemonicParsing="false" text="Absoluter Anfänger">
+            <MenuButton fx:id="studentVorkenntnisseButton" layoutX="123.0" layoutY="157.0" mnemonicParsing="false" text="Absoluter Anfänger">
                <items>
                   <MenuItem mnemonicParsing="false" text="Absoluter Anfänger" />
                   <MenuItem mnemonicParsing="false" text="Anfänger" />
@@ -57,7 +52,7 @@
                   <MenuItem mnemonicParsing="false" text="Experte" />
                </items>
             </MenuButton>
-            <Button fx:id="confirmStudentButton" layoutX="-3.0" layoutY="253.0" mnemonicParsing="false" onAction="#confirmStudentInput" text="OK">
+            <Button fx:id="confirmStudentButton" layoutX="-3.0" layoutY="253.0" mnemonicParsing="false" onAction="#confirmStudenBearbeitentInput" text="OK">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
