@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.studentenverwaltung.gui.controllers.FirmaAnzeigenController">
+   <children>
+      <AnchorPane layoutX="43.0" layoutY="39.0" prefHeight="369.0" prefWidth="298.0">
+         <children>
+            <Label layoutX="1.0" layoutY="2.0" prefHeight="22.0" prefWidth="91.0" text="Firma">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="1.0" layoutY="32.0" prefHeight="22.0" prefWidth="91.0" text="Straße">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="1.0" layoutY="63.0" prefHeight="22.0" prefWidth="91.0" text="Hausnummer">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="1.0" layoutY="94.0" prefHeight="22.0" prefWidth="91.0" text="PLZ">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="1.0" layoutY="123.0" prefHeight="22.0" prefWidth="91.0" text="Stadt">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="1.0" layoutY="177.0" prefHeight="22.0" prefWidth="91.0" text="Betreuer:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label fx:id="firmaLabel" layoutX="107.0" layoutY="6.0" text="Firma" />
+            <Label fx:id="strasseLabel" layoutX="107.0" layoutY="35.0" text="Straße" />
+            <Label fx:id="hausnummerLabel" layoutX="107.0" layoutY="66.0" text="E-Mail" />
+            <Label fx:id="plzLabel" layoutX="107.0" layoutY="97.0" text="PLZ" />
+            <Label fx:id="stadtLabel" layoutX="107.0" layoutY="126.0" text="Stadt" />
+            <Label layoutX="1.0" layoutY="211.0" prefHeight="22.0" prefWidth="91.0" text="Vorname">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="1.0" layoutY="241.0" prefHeight="22.0" prefWidth="91.0" text="Nachname">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="1.0" layoutY="272.0" prefHeight="22.0" prefWidth="91.0" text="E-Mail">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="1.0" layoutY="303.0" prefHeight="22.0" prefWidth="91.0" text="Geburtstag">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="1.0" layoutY="332.0" prefHeight="22.0" prefWidth="91.0" text="Telefonnummer">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="vornameLabel" layoutX="109.0" layoutY="214.0" text="Vorname" />
+            <Label fx:id="nachnameLabel" layoutX="109.0" layoutY="244.0" text="Nachname" />
+            <Label fx:id="emailLabel" layoutX="109.0" layoutY="275.0" text="E-Mail" />
+            <Label fx:id="geburtstagLabel" layoutX="109.0" layoutY="306.0" text="Geburtstag" />
+            <Label fx:id="telefonnummerLabel" layoutX="109.0" layoutY="335.0" text="Telefonnummer" />
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

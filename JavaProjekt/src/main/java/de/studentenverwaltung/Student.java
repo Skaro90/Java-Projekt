@@ -46,6 +46,14 @@ public class Student extends Person{
         return matrikelnummer;
     }
 
+    public Kurs getKurs(){
+        return kurs;
+    }
+
+    public Vorkenntnisse getVorkenntnisse(){
+        return vorkenntnisse;
+    }
+
     public void versetzen(Kurs kurs) throws UserInputException {
         /*try {
             this.kurs.studentLoeschen(this);
@@ -88,5 +96,9 @@ public class Student extends Person{
         Application.studentenVerwaltung.studentenListe.remove(this);
 
 
+    }
+
+    public void vorkenntnisseAendern(Vorkenntnisse vorkenntnisse){
+        this.vorkenntnisse = vorkenntnisse;
     }
 }

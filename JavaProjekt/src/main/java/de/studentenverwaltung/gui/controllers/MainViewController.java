@@ -2,6 +2,7 @@ package de.studentenverwaltung.gui.controllers;
 
 import de.studentenverwaltung.Kurs;
 import de.studentenverwaltung.Raum;
+import de.studentenverwaltung.Student;
 import de.studentenverwaltung.StudentenVerwaltung;
 import de.studentenverwaltung.exceptions.UserInputException;
 import de.studentenverwaltung.gui.Application;
@@ -23,15 +24,14 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MainViewController implements Initializable {
 
     private static ObservableList<String> kursListItems = FXCollections.observableArrayList();
     private static ObservableList<String> studentenListItems = FXCollections.observableArrayList();
+    private static List<String> studentenMatrikelnummerList = new ArrayList<String>();
 
     @FXML
     private ListView<String> kursList;
@@ -48,6 +48,15 @@ public class MainViewController implements Initializable {
 
     @FXML
     private Button kursEntfernenButton;
+
+    @FXML
+    private Button studentAnlegenButton;
+
+    @FXML
+    private Button studentBearbeitenButton;
+
+    @FXML
+    private Button studentEntfernenButton;
 
 
     @FXML
@@ -111,38 +120,137 @@ public class MainViewController implements Initializable {
 
     @FXML
     void onKursListClicked(MouseEvent event) {
+
+        studentenList.getSelectionModel().clearSelection();
+
         if(kursList.getSelectionModel().getSelectedItems().isEmpty()){
             kursBearbeitenButton.setDisable(true);
             kursEntfernenButton.setDisable(true);
+            studentAnlegenButton.setDisable(true);
+            studentBearbeitenButton.setDisable(true);
+            studentEntfernenButton.setDisable(true);
         } else {
             kursBearbeitenButton.setDisable(false);
             kursEntfernenButton.setDisable(false);
+            studentAnlegenButton.setDisable(false);
+            studentBearbeitenButton.setDisable(true);
+            studentEntfernenButton.setDisable(true);
+
+
+
+            studentenListItems = Application.studentenVerwaltung.findeKurs(kursListItems.get(kursList.getSelectionModel().getSelectedIndices().get(0))).getStudentenListe().stream()
+                    .sorted(Comparator.comparing(Student::getNachname))
+                    .map(x -> x.getNachname() + " " + x.getVorname())
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+            studentenMatrikelnummerList = Application.studentenVerwaltung.findeKurs(kursListItems.get(kursList.getSelectionModel().getSelectedIndices().get(0))).getStudentenListe().stream()
+                    .sorted(Comparator.comparing(Student::getNachname))
+                    .map(x -> x.getMatrikelnummer())
+                    .collect(Collectors.toList());
+
+            this.studentenList.setItems(studentenListItems);
+
         }
+
+
     }
 
     @FXML
     void onStudentAnlegenButton(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/student-anlegen-dialog.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            //stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setTitle("Student anlegen");
+            stage.setScene(new Scene(root1));
+            stage.setResizable(false);
 
+            StudentAnlegenController controller = fxmlLoader.getController();
+
+            controller.initData(kursListItems.get(kursList.getSelectionModel().getSelectedIndices().get(0)));
+
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     void onStudentBearbeitenButton(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/student-bearbeiten-dialog.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            //stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setTitle("Student bearbeiten");
+            stage.setScene(new Scene(root1));
+            stage.setResizable(false);
 
+            StudentBearbeitenController controller = fxmlLoader.getController();
+
+            Student student = Application.studentenVerwaltung.findeStudent(studentenMatrikelnummerList.get(studentenList.getSelectionModel().getSelectedIndices().get(0)));
+
+            controller.initData(student);
+
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     void onStudentEntfernenButton(ActionEvent event) {
+        if(!studentenList.getSelectionModel().getSelectedItems().isEmpty()){
+            if(studentenList.getSelectionModel().getSelectedIndices().size() > 0) {
+                int selectedIndex = studentenList.getSelectionModel().getSelectedIndices().get(0);
 
+                try {
+                    Student student = Application.studentenVerwaltung.findeStudent(studentenMatrikelnummerList.get(selectedIndex));
+                    String matrikelnummer = student.getMatrikelnummer();
+                    Application.studentenVerwaltung.exmatrikulieren(student);
+                    removeStudentFromList(matrikelnummer);
+                } catch (UserInputException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        }
     }
 
     @FXML
     void onStudentenListClicked(MouseEvent event) {
         if(studentenList.getSelectionModel().getSelectedItems().isEmpty()){
-            kursBearbeitenButton.setDisable(true);
-            kursEntfernenButton.setDisable(true);
+            studentBearbeitenButton.setDisable(true);
+            studentEntfernenButton.setDisable(true);
         } else {
-            kursBearbeitenButton.setDisable(false);
-            kursEntfernenButton.setDisable(false);
+            studentBearbeitenButton.setDisable(false);
+            studentEntfernenButton.setDisable(false);
+
+            if(event.getClickCount() > 1){
+                try {
+
+                    Student student = Application.studentenVerwaltung.findeStudent(studentenMatrikelnummerList.get(studentenList.getSelectionModel().getSelectedIndices().get(0)));
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/student-anzeigen-dialog.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setTitle(student.getVorname() + " " + student.getNachname());
+                    stage.setScene(new Scene(root1));
+                    stage.setResizable(false);
+
+                    StudentAnzeigenController controller = fxmlLoader.getController();
+                    controller.initData(student);
+
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
     @FXML
@@ -187,12 +295,28 @@ public class MainViewController implements Initializable {
 
     }
 
+    public static void addStudentToList(String student, String matrikelnummer){
+        int index = Collections.binarySearch(studentenListItems, student);
+        if(index < 0) index = ~index;
+
+        studentenListItems.add(index, student);
+        studentenMatrikelnummerList.add(index, matrikelnummer);
+    }
+
     public static void removeKursFromList(String kursName){
 
         int index = kursListItems.indexOf(kursName);
         if(index >= 0) {
 
             kursListItems.remove(index);
+        }
+    }
+
+    public static void removeStudentFromList(String matrikelnummer){
+        int index = studentenMatrikelnummerList.indexOf(matrikelnummer);
+        if(index >= 0){
+            studentenListItems.remove(index);
+            studentenMatrikelnummerList.remove(index);
         }
     }
     @Override
