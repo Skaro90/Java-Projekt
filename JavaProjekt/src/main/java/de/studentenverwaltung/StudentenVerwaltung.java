@@ -180,8 +180,7 @@ public class StudentenVerwaltung{
 
         this.firmaListe.remove(firma);
         datenbank.firmaloeschen(firma);
-
-
+        datenbank.betreuerloeschen(firma.getBetreuer());
     }
   
   
@@ -396,6 +395,7 @@ public class StudentenVerwaltung{
         }
         raum.nummerAendern(rnm);
         raum.kapazitaetAendern(kapa);
+        datenbank.raumupdate(raum,rnm,kapa);
     }
 
     public Raum getRaumById(int rId) throws UserInputException{
