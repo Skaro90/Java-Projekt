@@ -449,7 +449,7 @@ public class Datenbank {
             query = "UPDATE `javaprojekt`.`firma`\n" +
                     "SET\n" +
                     "`bezeichnung` = ?,\n" +
-                    "`aid` = ?,\n" +
+                    "`aid` = ?\n" +
                     "WHERE `fid` = ?;";
             pstmt = connection.prepareStatement(query);
             pstmt.setString(1,firmenname);
