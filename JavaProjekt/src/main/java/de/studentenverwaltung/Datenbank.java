@@ -101,6 +101,31 @@ public class Datenbank {
         return 0;
     }
 
+    public int adresseanlegen(String strasse, String hausnummer, String postleitzahl, String stadt){
+        try{
+            String query ="INSERT INTO `javaprojekt`.`adresse`\n" +
+                    "(`strasse`,\n" +
+                    "`hausnummer`,\n" +
+                    "`plz`,\n" +
+                    "`stadt`)" +"VALUES(?,?,?,?)";
+            System.out.println();
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1,strasse);
+            pstmt.setString(2,hausnummer);
+            pstmt.setString(3,postleitzahl);
+            pstmt.setString(4,stadt);
+            pstmt.execute();
+
+            resultSet = statement.executeQuery("SELECT aid FROM adresse WHERE strasse = '"+ strasse+"' AND hausnummer = '"+hausnummer+"' AND plz = '"+postleitzahl+"' AND stadt= '"+stadt+"'");
+            while(resultSet.next()){
+                return resultSet.getInt("aid");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public int firmaanlegen(String firmenname,String strasse, String hausnummer, String postleitzahl, String stadt, Betreuer betreuer){
 
         try{
@@ -111,24 +136,7 @@ public class Datenbank {
                 aid=resultSet.getInt("aid");
             }
             if(aid == 0){
-
-                String query ="INSERT INTO `javaprojekt`.`adresse`\n" +
-                    "(`strasse`,\n" +
-                    "`hausnummer`,\n" +
-                    "`plz`,\n" +
-                    "`stadt`)" +"VALUES(?,?,?,?)";
-                System.out.println();
-                PreparedStatement pstmt = connection.prepareStatement(query);
-                pstmt.setString(1,strasse);
-                pstmt.setString(2,hausnummer);
-                pstmt.setString(3,postleitzahl);
-                pstmt.setString(4,stadt);
-                pstmt.execute();
-
-                resultSet = statement.executeQuery("SELECT aid FROM adresse WHERE strasse = '"+ strasse+"' AND hausnummer = '"+hausnummer+"' AND plz = '"+postleitzahl+"' AND stadt= '"+stadt+"'");
-                while(resultSet.next()){
-                    aid= resultSet.getInt("aid");
-                }
+                aid = adresseanlegen(strasse,hausnummer,postleitzahl,stadt);
             }
             String query = "INSERT INTO `javaprojekt`.`firma`\n" +
                     "(`bezeichnung`,\n" +
@@ -384,6 +392,71 @@ public class Datenbank {
             pstmt.setInt(5,student.getStudentId());
             int val = pstmt.executeUpdate();
             return val;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    public int raumupdate(Raum raum,String raumname, int kapazitaet){
+        try{
+            String query = "UPDATE `javaprojekt`.`raum`\n" +
+                    "SET\n" +
+                    "`nummer` = ?,\n" +
+                    "`kapazität` = ?\n" +
+                    "WHERE `rid` = ?;";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1,raumname);
+            pstmt.setInt(2,kapazitaet);
+            pstmt.setInt(3,raum.getRaumId());
+            int val = pstmt.executeUpdate();
+            return val;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    public int firmenupdate(Firma firma, String firmenname,String strasse, String hausnummer, String postleitzahl, String stadt, String betreuerNachname, String betreuerVorname, String betreuerEmail, Date betreuerGeburtstag, String betreuerTelefonnummer){
+        boolean mehrfach = false;
+        int aid_neu = 0;
+        try{
+            String query = "UPDATE `javaprojekt`.`betreuer`\n" +
+                    "SET\n" +
+                    "`name` = ?,\n" +
+                    "`vorname` = ?,\n" +
+                    "`email` = ?,\n" +
+                    "`geburtstag` = ?,\n" +
+                    "`telefonnummer` = ?\n" +
+                    "WHERE `bid` = ?;";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1,betreuerNachname);
+            pstmt.setString(2,betreuerVorname);
+            pstmt.setString(3,betreuerEmail);
+            pstmt.setDate(4,new java.sql.Date(betreuerGeburtstag.getTime()));
+            pstmt.setString(5,betreuerTelefonnummer);
+            pstmt.setInt(6,firma.getBetreuer().getBetreuerId());
+            pstmt.executeUpdate();
+            resultSet = statement.executeQuery("SELECT fid,aid FROM firma WHERE aid = (SELECT aid FROM firma WHERE bezeichnung = '" + firma.getFirmenname()+"')");
+            aid_neu = resultSet.getInt("aid");
+            while(resultSet.next()){
+                if(resultSet.getInt("fid") != firma.getFirmenId()){
+                    mehrfach = true;
+                }
+            }
+            if(mehrfach){
+                aid_neu = adresseanlegen(strasse, hausnummer, postleitzahl, stadt);
+            }
+
+            query = "UPDATE `javaprojekt`.`firma`\n" +
+                    "SET\n" +
+                    "`bezeichnung` = ?,\n" +
+                    "`aid` = ?\n" +
+                    "WHERE `fid` = ?;";
+            pstmt = connection.prepareStatement(query);
+            pstmt.setString(1,firmenname);
+            pstmt.setInt(2,aid_neu);
+            pstmt.setInt(3,firma.getFirmenId());
+            return pstmt.executeUpdate();
+
         }catch(Exception e){
             e.printStackTrace();
         }
