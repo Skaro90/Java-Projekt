@@ -69,6 +69,7 @@ public class MainViewController implements Initializable {
             //stage.initStyle(StageStyle.TRANSPARENT);
             stage.setTitle("Kurs anlegen");
             stage.setScene(new Scene(root1));
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -87,6 +88,7 @@ public class MainViewController implements Initializable {
                 //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setTitle("Kurs bearbeiten");
                 stage.setScene(new Scene(root1));
+                stage.setResizable(false);
 
                 KursBearbeitenController controller = fxmlLoader.getController();
 
@@ -95,7 +97,6 @@ public class MainViewController implements Initializable {
 
                 stage.show();
             }
-
 
         } catch (IOException e) {
             throw new RuntimeException(e);

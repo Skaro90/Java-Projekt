@@ -355,7 +355,7 @@ public class Datenbank {
         try{
             String query = "UPDATE `javaprojekt`.`kurs`\n" +
                 "SET\n" +
-                "`bezeichnung` = ?,\n" +
+                "`bezeichnung` = ?\n" +
                 "WHERE `kid` = ?;";
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1,nameneu);
