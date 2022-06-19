@@ -24,4 +24,8 @@ public class Betreuer extends Person{
         return telefonnummer;
     }
 
+    public void telefonnummerAendern(String telefonnummer){
+        this.telefonnummer = telefonnummer;
+    }
+
 }

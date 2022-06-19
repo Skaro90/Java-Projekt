@@ -80,8 +80,12 @@ public class Firma {
         this.stadt = stadt;
     }
 
-    public void betreuerAendern(String nachname, String vorname, String email, Date geburtstag, String telefonnummer) throws UserInputException{
-        this.betreuer = Application.studentenVerwaltung.betreuerAnlegen(nachname, vorname, email, geburtstag, telefonnummer);
+    public void betreuerAendern(Betreuer betreuer, String nachname, String vorname, String email, Date geburtstag, String telefonnummer) throws UserInputException{
+        betreuer.nachnameAendern(nachname);
+        betreuer.vornameAendern(vorname);
+        betreuer.emailAendern(email);
+        betreuer.geburtstagAendern(geburtstag);
+        betreuer.telefonnummerAendern(telefonnummer);
     }
 
     public String getFirmenname(){

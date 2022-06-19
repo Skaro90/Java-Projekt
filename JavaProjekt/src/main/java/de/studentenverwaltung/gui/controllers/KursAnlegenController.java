@@ -64,7 +64,11 @@ public class KursAnlegenController implements Initializable {
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
         if(raumMenuItems.isEmpty()){
-            raumNameMenuButton.setText("Keine Räume vorhanden.");
+            if(Application.studentenVerwaltung.getRaumListe().isEmpty())
+                raumNameMenuButton.setText("Keine Räume vorhanden.");
+            else
+                raumNameMenuButton.setText("Keine leeren Räume vorhanden.");
+
             okButton.setDisable(true);
 
         } else {

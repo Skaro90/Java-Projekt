@@ -436,14 +436,32 @@ public class Datenbank {
             pstmt.setInt(6,firma.getBetreuer().getBetreuerId());
             pstmt.executeUpdate();
             resultSet = statement.executeQuery("SELECT fid,aid FROM firma WHERE aid = (SELECT aid FROM firma WHERE bezeichnung = '" + firma.getFirmenname()+"')");
-            aid_neu = resultSet.getInt("aid");
+            //aid_neu = resultSet.getInt("aid");
             while(resultSet.next()){
                 if(resultSet.getInt("fid") != firma.getFirmenId()){
                     mehrfach = true;
                 }
+                aid_neu = resultSet.getInt("aid");
+
             }
+            System.out.println(aid_neu);
             if(mehrfach){
                 aid_neu = adresseanlegen(strasse, hausnummer, postleitzahl, stadt);
+            }else{
+                query = "UPDATE javaprojekt.adresse\n" +
+                        "SET\n" +
+                        "strasse = ?,\n" +
+                        "hausnummer = ?,\n" +
+                        "plz = ?,\n" +
+                        "stadt = ?\n" +
+                        "WHERE aid = ?;";
+                pstmt = connection.prepareStatement(query);
+                pstmt.setString(1,strasse);
+                pstmt.setString(2,hausnummer);
+                pstmt.setString(3,postleitzahl);
+                pstmt.setString(4,stadt);
+                pstmt.setInt(5,aid_neu);
+                return pstmt.executeUpdate();
             }
 
             query = "UPDATE `javaprojekt`.`firma`\n" +

@@ -107,17 +107,38 @@ public class MainViewController implements Initializable {
     void onKursEntfernenButton(ActionEvent event) {
         if(!kursList.getSelectionModel().getSelectedItems().isEmpty()){
             if(kursList.getSelectionModel().getSelectedIndices().size() > 0) {
-                int selectedIndex = kursList.getSelectionModel().getSelectedIndices().get(0);
-
                 try {
-                    Application.studentenVerwaltung.kursLöschen(Application.studentenVerwaltung.findeKurs(kursListItems.get(selectedIndex)));
-                } catch (UserInputException e) {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/kurs-entfernen-dialog.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setTitle("Kurs entfernen");
+                    stage.setScene(new Scene(root1));
+                    stage.setResizable(false);
+
+                    KursEntfernenController controller = fxmlLoader.getController();
+
+                    controller.initData(this);
+
+                    stage.show();
+                } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                removeKursFromList(kursListItems.get(selectedIndex));
-                studentenList.getItems().clear();
             }
         }
+    }
+
+    public void kursEntfernen(){
+        int selectedIndex = kursList.getSelectionModel().getSelectedIndices().get(0);
+
+        try {
+            Application.studentenVerwaltung.kursLöschen(Application.studentenVerwaltung.findeKurs(kursListItems.get(selectedIndex)));
+        } catch (UserInputException e) {
+            throw new RuntimeException(e);
+        }
+        removeKursFromList(kursListItems.get(selectedIndex));
+        studentenList.getItems().clear();
     }
 
     @FXML
@@ -207,18 +228,39 @@ public class MainViewController implements Initializable {
     void onStudentEntfernenButton(ActionEvent event) {
         if(!studentenList.getSelectionModel().getSelectedItems().isEmpty()){
             if(studentenList.getSelectionModel().getSelectedIndices().size() > 0) {
-                int selectedIndex = studentenList.getSelectionModel().getSelectedIndices().get(0);
 
                 try {
-                    Student student = Application.studentenVerwaltung.findeStudent(studentenMatrikelnummerList.get(selectedIndex));
-                    String matrikelnummer = student.getMatrikelnummer();
-                    Application.studentenVerwaltung.exmatrikulieren(student);
-                    removeStudentFromList(matrikelnummer);
-                } catch (UserInputException e) {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/student-entfernen-dialog.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setTitle("Student entfernen");
+                    stage.setScene(new Scene(root1));
+                    stage.setResizable(false);
+
+                    StudentEntfernenController controller = fxmlLoader.getController();
+
+                    controller.initData(this);
+
+                    stage.show();
+                } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-
             }
+        }
+    }
+
+    public void studentEntfernen(){
+        int selectedIndex = studentenList.getSelectionModel().getSelectedIndices().get(0);
+
+        try {
+            Student student = Application.studentenVerwaltung.findeStudent(studentenMatrikelnummerList.get(selectedIndex));
+            String matrikelnummer = student.getMatrikelnummer();
+            Application.studentenVerwaltung.exmatrikulieren(student);
+            removeStudentFromList(matrikelnummer);
+        } catch (UserInputException e) {
+            throw new RuntimeException(e);
         }
     }
 

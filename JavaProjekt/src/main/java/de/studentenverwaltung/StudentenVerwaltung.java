@@ -46,7 +46,7 @@ public class StudentenVerwaltung{
        try{
         ResultSet betreuerRS = datenbank.ladeBetreuer();
         while(betreuerRS.next()){
-            Betreuer b = new Betreuer(betreuerRS.getString("name"),betreuerRS.getString("vorname"),betreuerRS.getString("email"),betreuerRS.getDate("geburtstag"),betreuerRS.getInt("bid"),betreuerRS.getString("telefonnummer"));
+            Betreuer b = new Betreuer(betreuerRS.getString("name"),betreuerRS.getString("vorname"),betreuerRS.getString("email"),new java.util.Date(betreuerRS.getDate("geburtstag").getTime()),betreuerRS.getInt("bid"),betreuerRS.getString("telefonnummer"));
             betreuerListe.add(b);
         }
 
@@ -155,13 +155,15 @@ public class StudentenVerwaltung{
     }
   
    public void updateFirma(Firma firma, String firmenname,String strasse, String hausnummer, String postleitzahl, String stadt, String betreuerNachname, String betreuerVorname, String betreuerEmail, Date betreuerGeburtstag, String betreuerTelefonnummer) throws UserInputException {
-        if(findeFirma(firmenname) != null){
+        if(findeFirma(firmenname) != null && !firma.getFirmenname().equals(firmenname)){
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Es existiert bereits eine Firma mit diesem Namen.", errorMessageWindow);
         }
+        datenbank.firmenupdate(firma, firmenname, strasse, hausnummer, postleitzahl, stadt, betreuerNachname, betreuerVorname, betreuerEmail, betreuerGeburtstag, betreuerTelefonnummer);
         firma.firmennameAendern(firmenname);
         firma.adresseAendern(strasse, hausnummer, postleitzahl, stadt);
-        firma.betreuerAendern(betreuerNachname, betreuerVorname, betreuerEmail, betreuerGeburtstag, betreuerTelefonnummer);
+        firma.betreuerAendern(firma.getBetreuer(), betreuerNachname, betreuerVorname, betreuerEmail, betreuerGeburtstag, betreuerTelefonnummer);
+
 
     }
 
@@ -177,10 +179,10 @@ public class StudentenVerwaltung{
                 }
             }
         }
-
+      datenbank.firmaloeschen(firma);
+      datenbank.betreuerloeschen(firma.getBetreuer());
         this.firmaListe.remove(firma);
-        datenbank.firmaloeschen(firma);
-        datenbank.betreuerloeschen(firma.getBetreuer());
+
     }
   
   
@@ -291,7 +293,7 @@ public class StudentenVerwaltung{
     public void raumLöschen(Raum raum) throws UserInputException{
         if(raum.getKurs() != null){
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
-            throw new UserInputException("Dieser Raum ist bereits einem Kurs zugeordnet. Bitte ordne dem Kurs " + raum.getKurs().getKursName() + " einen anderen Raum zu.", errorMessageWindow);
+            throw new UserInputException("Dieser Raum ist bereits einem Kurs zugeordnet. Bitte ordnen Sie dem Kurs " + raum.getKurs().getKursName() + " einen anderen Raum zu, bevor Sie ihn löschen.", errorMessageWindow);
         }
 
         this.raumListe.remove(raum);
@@ -389,10 +391,13 @@ public class StudentenVerwaltung{
             throw new UserInputException("Ungültige Kapazität", errorMessageWindow);
         }
 
-        if(raum.getKurs().getKursGroesse() > kapa){
-            ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
-            throw new UserInputException("Die neue Kapazität ist nicht ausreichend für den dem Raum zugeordneten Kurs.", errorMessageWindow);
+        if(raum.getKurs() != null){
+            if(raum.getKurs().getKursGroesse() > kapa){
+                ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
+                throw new UserInputException("Die neue Kapazität ist nicht ausreichend für den dem Raum zugeordneten Kurs.", errorMessageWindow);
+            }
         }
+
         raum.nummerAendern(rnm);
         raum.kapazitaetAendern(kapa);
         datenbank.raumupdate(raum,rnm,kapa);

@@ -47,14 +47,35 @@ public class FirmenAnzeigenController implements Initializable {
     void onDeleteFirmaButton(ActionEvent event) {
         if(!firmaList.getSelectionModel().getSelectedItems().isEmpty()){
             if(firmaList.getSelectionModel().getSelectedIndices().size() > 0) {
-                int selectedIndex = firmaList.getSelectionModel().getSelectedIndices().get(0);
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/firma-entfernen-dialog.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setTitle("Firma entfernen");
+                    stage.setScene(new Scene(root1));
+                    stage.setResizable(false);
 
-                Application.studentenVerwaltung.firmaLoeschen(Application.studentenVerwaltung.findeFirma(firmaListItems.get(selectedIndex)));
+                    FirmaEntfernenController controller = fxmlLoader.getController();
 
-                removeItemFromFirmaList(firmaListItems.get(selectedIndex));
-                studentenList.getItems().clear();
+                    controller.initData(this);
+
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
+    }
+
+    public void firmaEntfernen(){
+        int selectedIndex = firmaList.getSelectionModel().getSelectedIndices().get(0);
+
+        Application.studentenVerwaltung.firmaLoeschen(Application.studentenVerwaltung.findeFirma(firmaListItems.get(selectedIndex)));
+
+        removeItemFromFirmaList(firmaListItems.get(selectedIndex));
+        studentenList.getItems().clear();
     }
 
     @FXML

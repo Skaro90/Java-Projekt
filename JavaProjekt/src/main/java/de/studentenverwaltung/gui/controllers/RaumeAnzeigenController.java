@@ -94,6 +94,7 @@ public class RaumeAnzeigenController implements Initializable {
             //stage.initStyle(StageStyle.TRANSPARENT);
             stage.setTitle("Raum anlegen");
             stage.setScene(new Scene(root1));
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -112,6 +113,7 @@ public class RaumeAnzeigenController implements Initializable {
                 //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setTitle("Raum bearbeiten");
                 stage.setScene(new Scene(root1));
+                stage.setResizable(false);
 
                 RaumBearbeitenController controller = fxmlLoader.getController();
 
@@ -130,6 +132,7 @@ public class RaumeAnzeigenController implements Initializable {
                 //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setTitle("Raum bearbeiten");
                 stage.setScene(new Scene(root1));
+                stage.setResizable(false);
 
                 RaumBearbeitenController controller = fxmlLoader.getController();
 
@@ -148,6 +151,58 @@ public class RaumeAnzeigenController implements Initializable {
     @FXML
     void onDeleteRaumButton(ActionEvent event){
 
+        if(!raumNameList.getSelectionModel().getSelectedItems().isEmpty()){
+
+            if(raumNameList.getSelectionModel().getSelectedIndices().size() > 0) {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/raum-entfernen-dialog.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setTitle("Raum entfernen");
+                    stage.setScene(new Scene(root1));
+                    stage.setResizable(false);
+
+                    RaumEntfernenController controller = fxmlLoader.getController();
+
+                    controller.initData(this);
+
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        }
+
+        if(!raumKapazitaetList.getSelectionModel().getSelectedItems().isEmpty()){
+
+            if(raumKapazitaetList.getSelectionModel().getSelectedIndices().size() > 0) {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/raum-entfernen-dialog.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setTitle("Raum entfernen");
+                    stage.setScene(new Scene(root1));
+                    stage.setResizable(false);
+
+                    RaumEntfernenController controller = fxmlLoader.getController();
+
+                    controller.initData(this);
+
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        }
+    }
+
+    public void raumEntfernen(){
         if(!raumNameList.getSelectionModel().getSelectedItems().isEmpty()){
 
             try {
