@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -64,34 +65,35 @@ public class KursBearbeitenController implements Initializable {
         raum = kurs.getRaum();
 
         kursNameTextField.setText(kursName);
-        if(raum != null){
-            raumNameMenuButton.setText(raum.getRaumNummer());
-            raumNameMenuButton.getItems().add(0, new MenuItem(raum.getRaumNummer()));
-        } else {
-            raumNameMenuButton.setText("Kein Raum zugeordnet");
-        }
 
-    }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
         raumMenuItems = Application.studentenVerwaltung.getRaumListe().stream()
                 .sorted(Comparator.comparing(Raum::getRaumNummer))
                 .filter(x -> x.getKurs() == null)
                 .map(x -> new MenuItem(x.getRaumNummer()))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
-        if(raumMenuItems.isEmpty()){
-            raumNameMenuButton.setText("Keine Räume vorhanden.");
+        if(raum != null){
+            raumNameMenuButton.setText(raum.getRaumNummer());
+
+            MenuItem currentRaumMenuItem = new MenuItem(raum.getRaumNummer());
+
+            raumMenuItems.add(0, currentRaumMenuItem);
+            //raumNameMenuButton.getItems().add(0, currentRaumMenuItem);
+        } else {
+            raumNameMenuButton.setText("Kein Raum zugeordnet");
+        }
+
+        raumNameMenuButton.getItems().addAll(raumMenuItems);
+
+        if(raumNameMenuButton.getItems().isEmpty()){
+            //raumNameMenuButton.setText("Keine Räume vorhanden.");
             okButton.setDisable(true);
 
         } else {
-            raumNameMenuButton.getItems().addAll(raumMenuItems);
 
             okButton.setDisable(false);
         }
-
-
 
         raumNameMenuButton.getItems().forEach(x -> x.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -99,5 +101,27 @@ public class KursBearbeitenController implements Initializable {
                 raumNameMenuButton.setText(x.getText());
             }
         }));
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+
+        /*if(kurs.getRaum() != null){
+            MenuItem currentRaumMenuItem = new MenuItem(kurs.getRaum().getRaumNummer());
+
+            raumMenuItems.add(currentRaumMenuItem);
+            raumMenuItems = raumMenuItems.stream().sorted(Comparator.comparing(MenuItem::getText)).collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+            int index = raumMenuItems.indexOf(currentRaumMenuItem);
+        }*/
+
+
+
+
+
+
     }
 }

@@ -14,6 +14,7 @@ public abstract class Person {
         this.email = email;
         this.geburtstag = geburtstag;
     }
+    public Person(){}
 
     public String getNachname() {
         return nachname;
@@ -29,5 +30,21 @@ public abstract class Person {
 
     public Date getGeburtstag() {
         return geburtstag;
+    }
+
+    public void nachnameAendern(String nachname){
+        this.nachname = nachname;
+    }
+
+    public void vornameAendern(String vorname){
+        this.vorname = vorname;
+    }
+
+    public void emailAendern(String email){
+        this.email = email;
+    }
+
+    public void geburtstagAendern(Date geburtstag){
+        this.geburtstag = geburtstag;
     }
 }

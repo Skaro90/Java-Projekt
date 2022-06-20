@@ -49,20 +49,6 @@
   <children>
     <MenuBar prefWidth="718.0" VBox.vgrow="NEVER">
       <menus>
-            <Menu mnemonicParsing="false" text="Kurse">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Kurs anlegen" />
-                  <MenuItem mnemonicParsing="false" text="Kurs bearbeiten" />
-                  <MenuItem mnemonicParsing="false" text="Kurs löschen" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Studenten">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Student anlegen" />
-                  <MenuItem mnemonicParsing="false" text="Student bearbeiten" />
-                  <MenuItem mnemonicParsing="false" text="Student exmatrikulieren" />
-               </items>
-            </Menu>
             <Menu mnemonicParsing="false" text="Räume">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#buttonRaumeAnzeigenClicked" text="Räume anzeigen" />
@@ -124,7 +110,7 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Button fx:id="studentAnlegenButton" layoutY="7.0" maxHeight="30.0" maxWidth="30.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#onStudentAnlegenButton" prefHeight="20.0" prefWidth="20.0" AnchorPane.rightAnchor="60.0">
+                        <Button fx:id="studentAnlegenButton" disable="true" layoutY="7.0" maxHeight="30.0" maxWidth="30.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#onStudentAnlegenButton" prefHeight="20.0" prefWidth="20.0" AnchorPane.rightAnchor="60.0">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -133,7 +119,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="studentBearbeitenButton" layoutY="7.0" maxHeight="30.0" maxWidth="30.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#onStudentBearbeitenButton" prefHeight="20.0" prefWidth="20.0" AnchorPane.rightAnchor="35.0">
+                        <Button fx:id="studentBearbeitenButton" disable="true" layoutY="7.0" maxHeight="30.0" maxWidth="30.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#onStudentBearbeitenButton" prefHeight="20.0" prefWidth="20.0" AnchorPane.rightAnchor="35.0">
                            <graphic>
                               <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -142,7 +128,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="studentEntfernenButton" layoutY="7.0" maxHeight="30.0" maxWidth="30.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#onStudentEntfernenButton" prefHeight="20.0" prefWidth="20.0" AnchorPane.rightAnchor="10.0">
+                        <Button fx:id="studentEntfernenButton" disable="true" layoutY="7.0" maxHeight="30.0" maxWidth="30.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#onStudentEntfernenButton" prefHeight="20.0" prefWidth="20.0" AnchorPane.rightAnchor="10.0">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

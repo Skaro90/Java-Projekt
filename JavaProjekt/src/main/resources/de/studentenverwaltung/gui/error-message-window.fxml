@@ -38,17 +38,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.studentenverwaltung.gui.controllers.ErrorMessageWindowController">
+<VBox prefHeight="209.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.studentenverwaltung.gui.controllers.ErrorMessageWindowController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="328.0" prefWidth="522.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="297.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="191.0" layoutY="29.0" text="Fehler bei der Eingabe:">
+            <Label layoutX="191.0" layoutY="28.0" text="Fehler bei der Eingabe:">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="errorMessage" layoutX="283.0" layoutY="82.0" text="ErrorMessage" />
-            <Button fx:id="confirmButton" layoutX="293.0" layoutY="313.0" mnemonicParsing="false" onAction="#confirmInput" text="OK" />
+            <Label fx:id="errorMessage" layoutX="127.0" layoutY="91.0" maxHeight="50.0" maxWidth="470.0" text="ErrorMessage" wrapText="true" />
+            <Button fx:id="confirmButton" layoutX="304.0" layoutY="158.0" mnemonicParsing="false" onAction="#confirmInput" text="OK" />
+            <Label layoutX="74.0" layoutY="91.0" text="Fehler:" />
       </children>
     </AnchorPane>
   </children>

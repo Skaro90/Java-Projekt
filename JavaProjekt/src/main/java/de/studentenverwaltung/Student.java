@@ -10,7 +10,6 @@ public class Student extends Person{
     private int studentId;
     private String matrikelnummer;
     private Vorkenntnisse vorkenntnisse;
-    private static int zaehler = 0; //max setzten in datenLaden()
 
     private Firma firma;
     private Kurs kurs;
@@ -32,19 +31,7 @@ public class Student extends Person{
         this.kurs = kurs;
     }
 
-    public Student(String nachname, String vorname, Date geburtsdatum,String email,String matrikelnummer, Firma firma,Kurs kurs,Vorkenntnisse vorkenntnisse){
-        super(nachname, vorname, email, geburtsdatum);
-        this.matrikelnummer = matrikelnummer;
-        this.vorkenntnisse = vorkenntnisse;
-        this.firma = firma;
-        this.kurs = kurs;
-        this.studentId = zaehler;
-        zaehler++;
-    }
 
-    public String getMatrikelnummer() {
-        return matrikelnummer;
-    }
 
     public void versetzen(Kurs kurs) throws UserInputException {
         /*try {
@@ -85,8 +72,32 @@ public class Student extends Person{
 
         this.firma.studentLoeschen(this);
         this.kurs.studentLoeschen(this);
-        Application.studentenVerwaltung.studentenListe.remove(this);
+        Application.studentenVerwaltung.getStudentenListe().remove(this);
 
 
+    }
+
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public Vorkenntnisse getVorkenntnisse() {
+        return vorkenntnisse;
+    }
+
+    public String getMatrikelnummer() {
+        return matrikelnummer;
+    }
+
+    public Firma getFirma() {
+        return firma;
+    }
+
+    public Kurs getKurs() {
+        return kurs;
+    }
+
+    public void vorkenntnisseAendern(Vorkenntnisse vorkenntnisse){
+        this.vorkenntnisse = vorkenntnisse;
     }
 }
