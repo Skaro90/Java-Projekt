@@ -2,6 +2,7 @@ package de.studentenverwaltung;
 
 import de.studentenverwaltung.exceptions.UserInputException;
 import de.studentenverwaltung.gui.ErrorMessageWindow;
+import de.studentenverwaltung.gui.controllers.MainViewController;
 import javafx.css.StyleableProperty;
 
 import java.sql.ResultSet;
@@ -41,9 +42,10 @@ public class StudentenVerwaltung{
    
 
     private void datenLaden(){
+        try{
         datenbank = new Datenbank();
         datenbank.zeigeStudenten();
-       try{
+
         ResultSet betreuerRS = datenbank.ladeBetreuer();
         while(betreuerRS.next()){
             Betreuer b = new Betreuer(betreuerRS.getString("name"),betreuerRS.getString("vorname"),betreuerRS.getString("email"),new java.util.Date(betreuerRS.getDate("geburtstag").getTime()),betreuerRS.getInt("bid"),betreuerRS.getString("telefonnummer"));
@@ -412,6 +414,8 @@ public class StudentenVerwaltung{
         ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
         throw new UserInputException("Raum wurde nicht gefunden, RaumId inkorrekt", errorMessageWindow);
     }
+
+
 
 
 }

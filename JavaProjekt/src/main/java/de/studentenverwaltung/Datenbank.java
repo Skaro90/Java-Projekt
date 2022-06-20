@@ -1,20 +1,67 @@
 package de.studentenverwaltung;
 
+import de.studentenverwaltung.exceptions.UserInputException;
+import de.studentenverwaltung.gui.Application;
+import de.studentenverwaltung.gui.ErrorMessageWindow;
+import de.studentenverwaltung.gui.controllers.MainViewController;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+
+import java.io.*;
 import java.sql.*;
 import java.util.Date;
+import java.util.Optional;
+import java.util.Properties;
 
 public class Datenbank {
+
+    public static boolean error = false;
     Connection connection;
     Statement statement;
     ResultSet resultSet;
-    Datenbank(){
-        try{
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaprojekt", "root", "test");
-            statement = connection.createStatement();
+    Datenbank() throws UserInputException {
+        try {
+            File propertiesFile = new File("config.properties");
+            if(!propertiesFile.exists()){
+                Properties newFileProperties = new Properties();
+
+                newFileProperties.setProperty("PASSWORD", "test");
+                newFileProperties.setProperty("USER", "root");
+                newFileProperties.setProperty("URL", "jdbc:mysql://localhost:3306/javaprojekt");
+
+
+                FileOutputStream outputStream = new FileOutputStream("config.properties");
+                newFileProperties.store(outputStream, null);
+            }
+            FileInputStream configFileStream = new FileInputStream("config.properties");
+            Properties properties = new Properties();
+            properties.load(configFileStream);
+
+            try{
+                connection = DriverManager.getConnection(properties.getProperty("URL"), properties.getProperty("USER"), properties.getProperty("PASSWORD"));
+                statement = connection.createStatement();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+
+
+                error = true;
+
+            }
+
+            System.out.println(properties.getProperty("URL"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+
+
+
     }
 
     public void zeigeStudenten(){

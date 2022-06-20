@@ -21,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
@@ -316,6 +317,7 @@ public class MainViewController implements Initializable {
     @FXML
     void buttonFirmenAnzeigenClicked(ActionEvent event) {
         try {
+            System.out.println(Window.getWindows());
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/firmen-anzeigen-dialog.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
@@ -371,5 +373,9 @@ public class MainViewController implements Initializable {
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
         this.kursList.setItems(kursListItems);
+    }
+
+    public static void close(){
+        Platform.exit();
     }
 }
