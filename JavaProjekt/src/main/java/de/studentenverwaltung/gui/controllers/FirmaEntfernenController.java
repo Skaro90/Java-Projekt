@@ -13,16 +13,16 @@ public class FirmaEntfernenController {
 
     @FXML
     void abortInput(ActionEvent event) {
-        ((Stage)okButton.getScene().getWindow()).close();
+        ((Stage) okButton.getScene().getWindow()).close();
     }
 
     @FXML
     void confirmDeleteFirmaInput(ActionEvent event) {
         firmenAnzeigenController.firmaEntfernen();
-        ((Stage)okButton.getScene().getWindow()).close();
+        ((Stage) okButton.getScene().getWindow()).close();
     }
 
-    public void initData(FirmenAnzeigenController firmenAnzeigenController){
+    public void initData(FirmenAnzeigenController firmenAnzeigenController) {
         this.firmenAnzeigenController = firmenAnzeigenController;
     }
 

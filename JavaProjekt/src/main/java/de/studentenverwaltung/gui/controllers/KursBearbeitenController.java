@@ -40,7 +40,7 @@ public class KursBearbeitenController implements Initializable {
 
     @FXML
     void abortInput(ActionEvent event) {
-        ((Stage)kursNameTextField.getScene().getWindow()).close();
+        ((Stage) kursNameTextField.getScene().getWindow()).close();
     }
 
     @FXML
@@ -50,14 +50,14 @@ public class KursBearbeitenController implements Initializable {
             MainViewController.removeKursFromList(oldName);
             MainViewController.addKursToList(kursNameTextField.getText());
 
-            ((Stage)kursNameTextField.getScene().getWindow()).close();
+            ((Stage) kursNameTextField.getScene().getWindow()).close();
         } catch (UserInputException e) {
             throw new RuntimeException(e);
         }
     }
 
 
-    void initData(String kursName){
+    void initData(String kursName) {
 
         oldName = kursName;
 
@@ -73,7 +73,7 @@ public class KursBearbeitenController implements Initializable {
                 .map(x -> new MenuItem(x.getRaumNummer()))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
-        if(raum != null){
+        if (raum != null) {
             raumNameMenuButton.setText(raum.getRaumNummer());
 
             MenuItem currentRaumMenuItem = new MenuItem(raum.getRaumNummer());
@@ -86,14 +86,8 @@ public class KursBearbeitenController implements Initializable {
 
         raumNameMenuButton.getItems().addAll(raumMenuItems);
 
-        if(raumNameMenuButton.getItems().isEmpty()){
-            //raumNameMenuButton.setText("Keine Räume vorhanden.");
-            okButton.setDisable(true);
-
-        } else {
-
-            okButton.setDisable(false);
-        }
+        //raumNameMenuButton.setText("Keine Räume vorhanden.");
+        okButton.setDisable(raumNameMenuButton.getItems().isEmpty());
 
         raumNameMenuButton.getItems().forEach(x -> x.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -117,10 +111,6 @@ public class KursBearbeitenController implements Initializable {
 
             int index = raumMenuItems.indexOf(currentRaumMenuItem);
         }*/
-
-
-
-
 
 
     }

@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -45,12 +46,13 @@ public class FirmenAnzeigenController implements Initializable {
 
     @FXML
     void onDeleteFirmaButton(ActionEvent event) {
-        if(!firmaList.getSelectionModel().getSelectedItems().isEmpty()){
-            if(firmaList.getSelectionModel().getSelectedIndices().size() > 0) {
+        if (!firmaList.getSelectionModel().getSelectedItems().isEmpty()) {
+            if (firmaList.getSelectionModel().getSelectedIndices().size() > 0) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/firma-entfernen-dialog.fxml"));
-                    Parent root1 = (Parent) fxmlLoader.load();
+                    Parent root1 = fxmlLoader.load();
                     Stage stage = new Stage();
+                    stage.getIcons().add(new Image(getClass().getResource("DHBW-logo.png").toString()));
                     stage.initModality(Modality.APPLICATION_MODAL);
                     //stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setTitle("Firma entfernen");
@@ -69,7 +71,7 @@ public class FirmenAnzeigenController implements Initializable {
         }
     }
 
-    public void firmaEntfernen(){
+    public void firmaEntfernen() {
         int selectedIndex = firmaList.getSelectionModel().getSelectedIndices().get(0);
 
         Application.studentenVerwaltung.firmaLoeschen(Application.studentenVerwaltung.findeFirma(firmaListItems.get(selectedIndex)));
@@ -81,11 +83,12 @@ public class FirmenAnzeigenController implements Initializable {
     @FXML
     void onEditFirmaButton(ActionEvent event) {
         try {
-            if(!firmaList.getSelectionModel().getSelectedItems().isEmpty()){
+            if (!firmaList.getSelectionModel().getSelectedItems().isEmpty()) {
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/firma-bearbeiten-dialog.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
+                Parent root1 = fxmlLoader.load();
                 Stage stage = new Stage();
+                stage.getIcons().add(new Image(getClass().getResource("DHBW-logo.png").toString()));
                 stage.initModality(Modality.APPLICATION_MODAL);
                 //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setTitle("Firma bearbeiten");
@@ -111,8 +114,9 @@ public class FirmenAnzeigenController implements Initializable {
     void onFirmaAnlegenButton(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/firma-anlegen-dialog.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
+            stage.getIcons().add(new Image(getClass().getResource("DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
             //stage.initStyle(StageStyle.TRANSPARENT);
             stage.setTitle("Firma anlegen");
@@ -128,7 +132,7 @@ public class FirmenAnzeigenController implements Initializable {
     void onFirmaMouseClicked(MouseEvent event) {
         studentenList.getSelectionModel().clearSelection();
 
-        if(firmaList.getSelectionModel().getSelectedItems().isEmpty()){
+        if (firmaList.getSelectionModel().getSelectedItems().isEmpty()) {
             editButton.setDisable(true);
             deleteButton.setDisable(true);
 
@@ -150,17 +154,15 @@ public class FirmenAnzeigenController implements Initializable {
         }
 
 
-
-
-
-        if(event.getClickCount() > 1){
+        if (event.getClickCount() > 1) {
             try {
 
                 Firma firma = Application.studentenVerwaltung.findeFirma(firmaListItems.get(firmaList.getSelectionModel().getSelectedIndices().get(0)));
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/firma-anzeigen-dialog.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
+                Parent root1 = fxmlLoader.load();
                 Stage stage = new Stage();
+                stage.getIcons().add(new Image(getClass().getResource("DHBW-logo.png").toString()));
                 stage.initModality(Modality.APPLICATION_MODAL);
                 //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setTitle(firma.getFirmenname());
@@ -184,14 +186,15 @@ public class FirmenAnzeigenController implements Initializable {
         editButton.setDisable(true);
         deleteButton.setDisable(true);
 
-        if(event.getClickCount() > 1){
+        if (event.getClickCount() > 1) {
             try {
 
                 Student student = Application.studentenVerwaltung.findeStudent(studentenMatrikelnummerList.get(studentenList.getSelectionModel().getSelectedIndices().get(0)));
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/student-anzeigen-dialog.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
+                Parent root1 = fxmlLoader.load();
                 Stage stage = new Stage();
+                stage.getIcons().add(new Image(getClass().getResource("DHBW-logo.png").toString()));
                 stage.initModality(Modality.APPLICATION_MODAL);
                 //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setTitle(student.getVorname() + " " + student.getNachname());
@@ -209,16 +212,16 @@ public class FirmenAnzeigenController implements Initializable {
 
     }
 
-    public static void addItemToFirmaList(String firma){
+    public static void addItemToFirmaList(String firma) {
         int index = Collections.binarySearch(firmaListItems, firma);
-        if(index < 0) index = ~index;
+        if (index < 0) index = ~index;
 
         firmaListItems.add(index, firma);
     }
 
-    public static void removeItemFromFirmaList(String firma){
+    public static void removeItemFromFirmaList(String firma) {
         int index = firmaListItems.indexOf(firma);
-        if(index >= 0){
+        if (index >= 0) {
             firmaListItems.remove(index);
         }
     }
@@ -229,7 +232,6 @@ public class FirmenAnzeigenController implements Initializable {
                 .sorted(Comparator.comparing(Firma::getFirmenname))
                 .map(x -> x.getFirmenname())
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
-
 
 
         this.firmaList.setItems(firmaListItems);

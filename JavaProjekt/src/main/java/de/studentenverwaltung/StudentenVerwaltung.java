@@ -14,11 +14,11 @@ import java.util.Optional;
 public class StudentenVerwaltung{
     //    Foreign Keys
 
-    private ArrayList<Betreuer> betreuerListe = new ArrayList<Betreuer>();
-    private ArrayList<Firma> firmaListe = new ArrayList<Firma>();
-    private ArrayList<Student> studentenListe = new ArrayList<Student>();
-    private ArrayList<Kurs> kursListe = new ArrayList<Kurs>();
-    private ArrayList<Raum> raumListe = new ArrayList<Raum>();
+    private final ArrayList<Betreuer> betreuerListe = new ArrayList<Betreuer>();
+    private final ArrayList<Firma> firmaListe = new ArrayList<Firma>();
+    private final ArrayList<Student> studentenListe = new ArrayList<Student>();
+    private final ArrayList<Kurs> kursListe = new ArrayList<Kurs>();
+    private final ArrayList<Raum> raumListe = new ArrayList<Raum>();
     private Datenbank datenbank;
 
     public StudentenVerwaltung() {
@@ -117,7 +117,7 @@ public class StudentenVerwaltung{
       for (Student element: studentenListe) {
             if (element.getMatrikelnummer().equals(matrikelNummer)){
                 ErrorMessageWindow tmp = new ErrorMessageWindow();
-                throw new UserInputException("matrikelnummer exestiert bereits",tmp);
+                throw new UserInputException("Die Matrikelnummer ist bereits einem anderen Studenten zugeordnet.",tmp);
             }
         }
         int tmp = datenbank.Studentanlegen(name, vorname, geburtsdatum, email, matrikelNummer, firma, kurs, vk);
@@ -128,8 +128,8 @@ public class StudentenVerwaltung{
         this.studentenListe.add(s);
         return s;
     }
-  
-  public void updateStudent(Student student, String nachname, String vorname, String email, Date geburtstag, Kurs kurs) throws UserInputException {
+
+    public void updateStudent(Student student, String nachname, String vorname, String email, Date geburtstag, Kurs kurs) throws UserInputException {
         student.nachnameAendern(nachname);
         student.vornameAendern(vorname);
         student.emailAendern(email);
@@ -141,12 +141,11 @@ public class StudentenVerwaltung{
 
     }
 
-
     public Firma firmaAnlegen(String firmenname,String strasse, String hausnummer, String postleitzahl, String stadt, Betreuer betreuer)throws UserInputException {
         for(Firma element: firmaListe){
             if(element.getFirmenname().equals(firmenname)){
                 ErrorMessageWindow tmp = new ErrorMessageWindow();
-                throw new UserInputException("firmenname exestiert bereits",tmp);
+                throw new UserInputException("Es existiert bereits eine Firma mit diesem Namen.",tmp);
             }
         }
         int fid = datenbank.firmaanlegen(firmenname,strasse,hausnummer,postleitzahl,stadt,betreuer);
@@ -155,8 +154,8 @@ public class StudentenVerwaltung{
         this.firmaListe.add(f);
         return f;
     }
-  
-   public void updateFirma(Firma firma, String firmenname,String strasse, String hausnummer, String postleitzahl, String stadt, String betreuerNachname, String betreuerVorname, String betreuerEmail, Date betreuerGeburtstag, String betreuerTelefonnummer) throws UserInputException {
+
+    public void updateFirma(Firma firma, String firmenname,String strasse, String hausnummer, String postleitzahl, String stadt, String betreuerNachname, String betreuerVorname, String betreuerEmail, Date betreuerGeburtstag, String betreuerTelefonnummer) throws UserInputException {
         if(findeFirma(firmenname) != null && !firma.getFirmenname().equals(firmenname)){
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Es existiert bereits eine Firma mit diesem Namen.", errorMessageWindow);
@@ -183,7 +182,9 @@ public class StudentenVerwaltung{
         }
       datenbank.firmaloeschen(firma);
       datenbank.betreuerloeschen(firma.getBetreuer());
-        this.firmaListe.remove(firma);
+      this.betreuerListe.remove(firma.getBetreuer());
+      this.firmaListe.remove(firma);
+
 
     }
   
@@ -193,7 +194,7 @@ public class StudentenVerwaltung{
         for(Betreuer element: betreuerListe){
             if(element.getEmail().equals(email)){
                 ErrorMessageWindow tmp = new ErrorMessageWindow();
-                throw new UserInputException("email exestiert bereits",tmp);
+                throw new UserInputException("Es existiert bereits ein Betreuer mit dieser E-Mail-Adresse.",tmp);
             }
         }
         int tmp= datenbank.betreueranlegen(nachname, vorname, email, geburtstag, telefonnummer);
@@ -279,12 +280,6 @@ public class StudentenVerwaltung{
             throw new UserInputException("Es existiert bereits ein Raum mit diesem Namen.", errorMessageWindow);
         }
 
-        for(Raum element: raumListe){
-            if(element.getRaumNummer().equals(raumNummer)){
-                ErrorMessageWindow tmp = new ErrorMessageWindow();
-                throw new UserInputException("Raumnummer exestiert bereits",tmp);
-            }
-        }
         int tmp = datenbank.raumanlegen(raumNummer,kapazitaet);
         Raum r = new Raum(tmp,raumNummer,kapazitaet,kurs);
 
@@ -403,16 +398,6 @@ public class StudentenVerwaltung{
         raum.nummerAendern(rnm);
         raum.kapazitaetAendern(kapa);
         datenbank.raumupdate(raum,rnm,kapa);
-    }
-
-    public Raum getRaumById(int rId) throws UserInputException{
-        for (int i = 0; i < raumListe.size(); i++){
-            if (raumListe.get(i).getRaumId()==rId){
-                return raumListe.get(i);
-            }
-        }
-        ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
-        throw new UserInputException("Raum wurde nicht gefunden, RaumId inkorrekt", errorMessageWindow);
     }
 
 

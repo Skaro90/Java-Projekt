@@ -51,13 +51,13 @@ public class FirmaAnlegenController {
 
     @FXML
     void abortInput(ActionEvent event) {
-        ((Stage)firmaNameTextField.getScene().getWindow()).close();
+        ((Stage) firmaNameTextField.getScene().getWindow()).close();
     }
 
     @FXML
     void confirmFirmaInput(ActionEvent event) throws UserInputException {
         try {
-            if(firmaNameTextField.getText().isEmpty() || firmaStrasseTextField.getText().isEmpty() || firmaHausnummerTextField.getText().isEmpty() || firmaPlzTextField.getText().isEmpty() || firmaStadtTextField.getText().isEmpty() || betreuerVornameTextField.getText().isEmpty() || betreuerNachnameTextField.getText().isEmpty() || betreuerEmailTextField.getText().isEmpty() || betreuerTelefonnummerTextField.getText().isEmpty()){
+            if (firmaNameTextField.getText().isEmpty() || firmaStrasseTextField.getText().isEmpty() || firmaHausnummerTextField.getText().isEmpty() || firmaPlzTextField.getText().isEmpty() || firmaStadtTextField.getText().isEmpty() || betreuerVornameTextField.getText().isEmpty() || betreuerNachnameTextField.getText().isEmpty() || betreuerEmailTextField.getText().isEmpty() || betreuerTelefonnummerTextField.getText().isEmpty()) {
                 ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
                 throw new UserInputException("Bitte Überprüfen Sie Ihre Eingaben.", errorMessageWindow);
             }
@@ -65,8 +65,8 @@ public class FirmaAnlegenController {
                     Application.studentenVerwaltung.betreuerAnlegen(betreuerNachnameTextField.getText(), betreuerVornameTextField.getText(), betreuerEmailTextField.getText(), Date.from(Instant.from(betreuerGeburtstagField.getValue().atStartOfDay(ZoneId.systemDefault()))), betreuerTelefonnummerTextField.getText()));
             FirmenAnzeigenController.addItemToFirmaList(firmaNameTextField.getText());
 
-            ((Stage)firmaNameTextField.getScene().getWindow()).close();
-        } catch(NullPointerException e){
+            ((Stage) firmaNameTextField.getScene().getWindow()).close();
+        } catch (NullPointerException e) {
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Bitte Überprüfen Sie das Geburtsdatum des Betreuers.", errorMessageWindow);
         }

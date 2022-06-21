@@ -37,9 +37,10 @@ public class KursAnlegenController implements Initializable {
     private Button okButton;
 
     private static ObservableList<MenuItem> raumMenuItems = FXCollections.observableArrayList();
+
     @FXML
     void abortInput(ActionEvent event) {
-        ((Stage)raumNameMenuButton.getScene().getWindow()).close();
+        ((Stage) raumNameMenuButton.getScene().getWindow()).close();
     }
 
     @FXML
@@ -52,7 +53,7 @@ public class KursAnlegenController implements Initializable {
         }
 
 
-        ((Stage)raumNameMenuButton.getScene().getWindow()).close();
+        ((Stage) raumNameMenuButton.getScene().getWindow()).close();
     }
 
     @Override
@@ -63,8 +64,8 @@ public class KursAnlegenController implements Initializable {
                 .map(x -> new MenuItem(x.getRaumNummer()))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
-        if(raumMenuItems.isEmpty()){
-            if(Application.studentenVerwaltung.getRaumListe().isEmpty())
+        if (raumMenuItems.isEmpty()) {
+            if (Application.studentenVerwaltung.getRaumListe().isEmpty())
                 raumNameMenuButton.setText("Keine Räume vorhanden.");
             else
                 raumNameMenuButton.setText("Keine leeren Räume vorhanden.");
@@ -77,7 +78,6 @@ public class KursAnlegenController implements Initializable {
 
             okButton.setDisable(false);
         }
-
 
 
         raumNameMenuButton.getItems().forEach(x -> x.setOnAction(new EventHandler<ActionEvent>() {

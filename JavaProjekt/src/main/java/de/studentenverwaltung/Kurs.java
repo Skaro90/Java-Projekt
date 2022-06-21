@@ -8,13 +8,13 @@ import de.studentenverwaltung.gui.ErrorMessageWindow;
 import java.util.ArrayList;
 
 public class Kurs {
-    private int kursId;
+    private final int kursId;
     private String kursName;
-    private static int zaehler = 0;
+    private static final int zaehler = 0;
 
     //    Foreign Keys
     private Raum raum;
-    private ArrayList<Student> studentenListe = new ArrayList<Student>();
+    private final ArrayList<Student> studentenListe = new ArrayList<Student>();
 
     public Kurs(int kursId, String kursName, Raum raum) {
         this.kursId = kursId;

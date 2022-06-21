@@ -13,16 +13,16 @@ public class RaumEntfernenController {
 
     @FXML
     void abortInput(ActionEvent event) {
-        ((Stage)okButton.getScene().getWindow()).close();
+        ((Stage) okButton.getScene().getWindow()).close();
     }
 
     @FXML
     void confirmDeleteRaumInput(ActionEvent event) {
         raumeAnzeigenController.raumEntfernen();
-        ((Stage)okButton.getScene().getWindow()).close();
+        ((Stage) okButton.getScene().getWindow()).close();
     }
 
-    public void initData(RaumeAnzeigenController raumeAnzeigenController){
+    public void initData(RaumeAnzeigenController raumeAnzeigenController) {
         this.raumeAnzeigenController = raumeAnzeigenController;
     }
 
