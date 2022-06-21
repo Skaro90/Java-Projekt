@@ -52,7 +52,7 @@ public class FirmenAnzeigenController implements Initializable {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/firma-entfernen-dialog.fxml"));
                     Parent root1 = fxmlLoader.load();
                     Stage stage = new Stage();
-                    stage.getIcons().add(new Image(getClass().getResource("DHBW-logo.png").toString()));
+                    stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                     stage.initModality(Modality.APPLICATION_MODAL);
                     //stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setTitle("Firma entfernen");
@@ -88,7 +88,7 @@ public class FirmenAnzeigenController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/firma-bearbeiten-dialog.fxml"));
                 Parent root1 = fxmlLoader.load();
                 Stage stage = new Stage();
-                stage.getIcons().add(new Image(getClass().getResource("DHBW-logo.png").toString()));
+                stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                 stage.initModality(Modality.APPLICATION_MODAL);
                 //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setTitle("Firma bearbeiten");
@@ -116,7 +116,7 @@ public class FirmenAnzeigenController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/firma-anlegen-dialog.fxml"));
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
-            stage.getIcons().add(new Image(getClass().getResource("DHBW-logo.png").toString()));
+            stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
             //stage.initStyle(StageStyle.TRANSPARENT);
             stage.setTitle("Firma anlegen");
@@ -162,7 +162,7 @@ public class FirmenAnzeigenController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/firma-anzeigen-dialog.fxml"));
                 Parent root1 = fxmlLoader.load();
                 Stage stage = new Stage();
-                stage.getIcons().add(new Image(getClass().getResource("DHBW-logo.png").toString()));
+                stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                 stage.initModality(Modality.APPLICATION_MODAL);
                 //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setTitle(firma.getFirmenname());
@@ -194,7 +194,7 @@ public class FirmenAnzeigenController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/student-anzeigen-dialog.fxml"));
                 Parent root1 = fxmlLoader.load();
                 Stage stage = new Stage();
-                stage.getIcons().add(new Image(getClass().getResource("DHBW-logo.png").toString()));
+                stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                 stage.initModality(Modality.APPLICATION_MODAL);
                 //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setTitle(student.getVorname() + " " + student.getNachname());
