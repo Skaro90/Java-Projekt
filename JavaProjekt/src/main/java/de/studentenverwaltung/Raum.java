@@ -2,10 +2,10 @@ package de.studentenverwaltung;
 
 
 public class Raum {
-    private int raumId;
+    private final int raumId;
     private String raumNummer;
     private int kapazitaet;
-    private static int zaehler=0;
+    private static final int zaehler=0;
 
     //    Foreign Keys
     private Kurs kurs;

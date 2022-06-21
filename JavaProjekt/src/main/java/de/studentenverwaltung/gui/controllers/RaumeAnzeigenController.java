@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -40,27 +41,28 @@ public class RaumeAnzeigenController implements Initializable {
     @FXML
     private Button editButton;
 
-    public static void addItemToList(String raumName, int raumKapazitaet){
+    public static void addItemToList(String raumName, int raumKapazitaet) {
         int index = Collections.binarySearch(raumNameItems, raumName);
-        if(index < 0) index = ~index;
+        if (index < 0) index = ~index;
 
         raumNameItems.add(index, raumName);
         raumKapazitaetItems.add(index, raumKapazitaet);
 
     }
 
-    public static void removeItemFromList(String raumName){
+    public static void removeItemFromList(String raumName) {
 
         int index = raumNameItems.indexOf(raumName);
-        if(index >= 0) {
+        if (index >= 0) {
 
             raumNameItems.remove(index);
             raumKapazitaetItems.remove(index);
         }
     }
+
     @FXML
     void onKapazitaetMouseClicked(MouseEvent event) {
-        if(raumKapazitaetList.getSelectionModel().getSelectedItems().isEmpty() && raumNameList.getSelectionModel().getSelectedItems().isEmpty()){
+        if (raumKapazitaetList.getSelectionModel().getSelectedItems().isEmpty() && raumNameList.getSelectionModel().getSelectedItems().isEmpty()) {
             editButton.setDisable(true);
             deleteButton.setDisable(true);
         } else {
@@ -73,7 +75,7 @@ public class RaumeAnzeigenController implements Initializable {
 
     @FXML
     void onRaumnameMouseClicked(MouseEvent event) {
-        if(raumKapazitaetList.getSelectionModel().getSelectedItems().isEmpty() && raumNameList.getSelectionModel().getSelectedItems().isEmpty()){
+        if (raumKapazitaetList.getSelectionModel().getSelectedItems().isEmpty() && raumNameList.getSelectionModel().getSelectedItems().isEmpty()) {
             editButton.setDisable(true);
             deleteButton.setDisable(true);
         } else {
@@ -88,8 +90,9 @@ public class RaumeAnzeigenController implements Initializable {
     void onRaumAnlegenButton(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/raum-anlegen-dialog.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
+            stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
             //stage.initStyle(StageStyle.TRANSPARENT);
             stage.setTitle("Raum anlegen");
@@ -104,11 +107,12 @@ public class RaumeAnzeigenController implements Initializable {
     @FXML
     void onEditRaumButton(ActionEvent event) {
         try {
-            if(!raumNameList.getSelectionModel().getSelectedItems().isEmpty()){
+            if (!raumNameList.getSelectionModel().getSelectedItems().isEmpty()) {
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/raum-bearbeiten-dialog.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
+                Parent root1 = fxmlLoader.load();
                 Stage stage = new Stage();
+                stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                 stage.initModality(Modality.APPLICATION_MODAL);
                 //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setTitle("Raum bearbeiten");
@@ -123,11 +127,12 @@ public class RaumeAnzeigenController implements Initializable {
                 stage.show();
             }
 
-            if(!raumKapazitaetList.getSelectionModel().getSelectedItems().isEmpty()){
+            if (!raumKapazitaetList.getSelectionModel().getSelectedItems().isEmpty()) {
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/raum-bearbeiten-dialog.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
+                Parent root1 = fxmlLoader.load();
                 Stage stage = new Stage();
+                stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                 stage.initModality(Modality.APPLICATION_MODAL);
                 //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setTitle("Raum bearbeiten");
@@ -149,15 +154,16 @@ public class RaumeAnzeigenController implements Initializable {
     }
 
     @FXML
-    void onDeleteRaumButton(ActionEvent event){
+    void onDeleteRaumButton(ActionEvent event) {
 
-        if(!raumNameList.getSelectionModel().getSelectedItems().isEmpty()){
+        if (!raumNameList.getSelectionModel().getSelectedItems().isEmpty()) {
 
-            if(raumNameList.getSelectionModel().getSelectedIndices().size() > 0) {
+            if (raumNameList.getSelectionModel().getSelectedIndices().size() > 0) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/raum-entfernen-dialog.fxml"));
-                    Parent root1 = (Parent) fxmlLoader.load();
+                    Parent root1 = fxmlLoader.load();
                     Stage stage = new Stage();
+                    stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                     stage.initModality(Modality.APPLICATION_MODAL);
                     //stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setTitle("Raum entfernen");
@@ -176,13 +182,14 @@ public class RaumeAnzeigenController implements Initializable {
 
         }
 
-        if(!raumKapazitaetList.getSelectionModel().getSelectedItems().isEmpty()){
+        if (!raumKapazitaetList.getSelectionModel().getSelectedItems().isEmpty()) {
 
-            if(raumKapazitaetList.getSelectionModel().getSelectedIndices().size() > 0) {
+            if (raumKapazitaetList.getSelectionModel().getSelectedIndices().size() > 0) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/raum-entfernen-dialog.fxml"));
-                    Parent root1 = (Parent) fxmlLoader.load();
+                    Parent root1 = fxmlLoader.load();
                     Stage stage = new Stage();
+                    stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                     stage.initModality(Modality.APPLICATION_MODAL);
                     //stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setTitle("Raum entfernen");
@@ -202,11 +209,11 @@ public class RaumeAnzeigenController implements Initializable {
         }
     }
 
-    public void raumEntfernen(){
-        if(!raumNameList.getSelectionModel().getSelectedItems().isEmpty()){
+    public void raumEntfernen() {
+        if (!raumNameList.getSelectionModel().getSelectedItems().isEmpty()) {
 
             try {
-                if(raumNameList.getSelectionModel().getSelectedIndices().size() > 0) {
+                if (raumNameList.getSelectionModel().getSelectedIndices().size() > 0) {
                     int selectedIndex = raumNameList.getSelectionModel().getSelectedIndices().get(0);
 
                     Application.studentenVerwaltung.raumLöschen(Application.studentenVerwaltung.findeRaum(raumNameItems.get(selectedIndex)));
@@ -218,10 +225,10 @@ public class RaumeAnzeigenController implements Initializable {
 
         }
 
-        if(!raumKapazitaetList.getSelectionModel().getSelectedItems().isEmpty()){
+        if (!raumKapazitaetList.getSelectionModel().getSelectedItems().isEmpty()) {
 
-            try{
-                if(raumKapazitaetList.getSelectionModel().getSelectedIndices().size() > 0) {
+            try {
+                if (raumKapazitaetList.getSelectionModel().getSelectedIndices().size() > 0) {
                     int selectedIndex = raumKapazitaetList.getSelectionModel().getSelectedIndices().get(0);
 
                     Application.studentenVerwaltung.raumLöschen(Application.studentenVerwaltung.findeRaum(raumNameItems.get(selectedIndex)));

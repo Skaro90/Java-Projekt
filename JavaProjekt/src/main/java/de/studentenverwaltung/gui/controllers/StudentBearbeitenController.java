@@ -52,7 +52,7 @@ public class StudentBearbeitenController implements Initializable {
 
     @FXML
     void abortInput(ActionEvent event) {
-        ((Stage)confirmStudentButton.getScene().getWindow()).close();
+        ((Stage) confirmStudentButton.getScene().getWindow()).close();
     }
 
     @FXML
@@ -65,37 +65,36 @@ public class StudentBearbeitenController implements Initializable {
                     Application.studentenVerwaltung.findeKurs(studentKursButton.getText()));
 
             MainViewController.removeStudentFromList(student.getMatrikelnummer());
-            if(Application.studentenVerwaltung.findeStudent(student.getMatrikelnummer()).getKurs() == k){
+            if (Application.studentenVerwaltung.findeStudent(student.getMatrikelnummer()).getKurs() == k) {
                 MainViewController.addStudentToList(studentNachnameTextField.getText() + " " + studentVornameTextField.getText(), student.getMatrikelnummer());
             }
 
 
-
-            ((Stage)confirmStudentButton.getScene().getWindow()).close();
+            ((Stage) confirmStudentButton.getScene().getWindow()).close();
         } catch (UserInputException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void initData(Student student){
+    public void initData(Student student) {
         studentNachnameTextField.setText(student.getNachname());
         studentVornameTextField.setText(student.getVorname());
         studentEmailTextField.setText(student.getEmail());
         studentGeburtstagField.setValue(student.getGeburtstag().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         studentKursButton.setText(student.getKurs().getKursName());
 
-        this.student = student;
+        StudentBearbeitenController.student = student;
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-         kursMenuItems = Application.studentenVerwaltung.getKursListe().stream()
+        kursMenuItems = Application.studentenVerwaltung.getKursListe().stream()
                 .sorted(Comparator.comparing(Kurs::getKursName))
                 .map(x -> new MenuItem(x.getKursName()))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
-        if(kursMenuItems.isEmpty()){
+        if (kursMenuItems.isEmpty()) {
             studentKursButton.setText("Keine Kurse vorhanden");
             confirmStudentButton.setDisable(true);
         } else {

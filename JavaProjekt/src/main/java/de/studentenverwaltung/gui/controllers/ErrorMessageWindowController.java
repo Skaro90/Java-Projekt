@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ErrorMessageWindowController implements Initializable{
+public class ErrorMessageWindowController implements Initializable {
 
     public static String errorExceptionMessage = "ErrorMessage";
 
@@ -23,11 +23,11 @@ public class ErrorMessageWindowController implements Initializable{
     @FXML
     void confirmInput(ActionEvent event) {
         System.out.println(confirmButton.getText());
-        ((Stage)errorMessage.getScene().getWindow()).close();
+        ((Stage) errorMessage.getScene().getWindow()).close();
     }
 
 
-    public void setErrorMessage(String message){
+    public void setErrorMessage(String message) {
         System.out.println(message);
         System.out.println(confirmButton.getText());
         errorMessage.setText(message);

@@ -18,7 +18,7 @@ public class RaumAnlegenController {
 
     @FXML
     void abortInput(ActionEvent event) {
-        ((Stage)raumKapazitaetTextField.getScene().getWindow()).close();
+        ((Stage) raumKapazitaetTextField.getScene().getWindow()).close();
     }
 
     @FXML
@@ -27,14 +27,14 @@ public class RaumAnlegenController {
             Application.studentenVerwaltung.raumAnlegen(raumNameTextField.getText(), Integer.parseInt(raumKapazitaetTextField.getText()), null);
             RaumeAnzeigenController.addItemToList(raumNameTextField.getText(), Integer.parseInt(raumKapazitaetTextField.getText()));
 
-            ((Stage)raumNameTextField.getScene().getWindow()).close();
+            ((Stage) raumNameTextField.getScene().getWindow()).close();
         } catch (UserInputException e) {
             throw new RuntimeException(e);
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
-            throw new UserInputException("Bitte Überprüfen Sie die Kapazität.", errorMessageWindow);
+            throw new UserInputException("Bitte überprüfen Sie die Kapazität.", errorMessageWindow);
         }
-        ((Stage)raumNameTextField.getScene().getWindow()).close();
+        ((Stage) raumNameTextField.getScene().getWindow()).close();
 
 
     }

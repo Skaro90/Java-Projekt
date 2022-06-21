@@ -16,16 +16,16 @@ public class KursEntfernenController {
 
     @FXML
     void abortInput(ActionEvent event) {
-        ((Stage)okButton.getScene().getWindow()).close();
+        ((Stage) okButton.getScene().getWindow()).close();
     }
 
     @FXML
     void confirmDeleteKursInput(ActionEvent event) {
         mainViewController.kursEntfernen();
-        ((Stage)okButton.getScene().getWindow()).close();
+        ((Stage) okButton.getScene().getWindow()).close();
     }
 
-    public void initData(MainViewController mainViewController){
+    public void initData(MainViewController mainViewController) {
         this.mainViewController = mainViewController;
     }
 

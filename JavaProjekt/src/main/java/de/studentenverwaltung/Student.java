@@ -7,11 +7,11 @@ import de.studentenverwaltung.gui.ErrorMessageWindow;
 import java.util.Date;
 
 public class Student extends Person{
-    private int studentId;
-    private String matrikelnummer;
+    private final int studentId;
+    private final String matrikelnummer;
     private Vorkenntnisse vorkenntnisse;
 
-    private Firma firma;
+    private final Firma firma;
     private Kurs kurs;
 
     public enum Vorkenntnisse{

@@ -54,13 +54,13 @@ public class StudentAnlegenController implements Initializable {
 
     @FXML
     void abortInput(ActionEvent event) {
-        ((Stage)confirmStudentButton.getScene().getWindow()).close();
+        ((Stage) confirmStudentButton.getScene().getWindow()).close();
     }
 
     @FXML
     void confirmStudentInput(ActionEvent event) throws UserInputException {
         Student.Vorkenntnisse vorkenntnisse;
-        switch (studentVorkenntnisseButton.getText()){
+        switch (studentVorkenntnisseButton.getText()) {
             case "Absoluter Anfänger":
                 vorkenntnisse = Student.Vorkenntnisse.Absoluter_Anfaenger;
                 break;
@@ -81,7 +81,7 @@ public class StudentAnlegenController implements Initializable {
                 break;
         }
 
-        if(studentGeburtstagField.getValue() == null){
+        if (studentGeburtstagField.getValue() == null) {
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Bitte überprüfen Sie das Geburtsdatum.", errorMessageWindow);
         }
@@ -91,13 +91,13 @@ public class StudentAnlegenController implements Initializable {
                     Application.studentenVerwaltung.findeFirma(studentFirmaButton.getText()), Application.studentenVerwaltung.findeKurs(kursName), vorkenntnisse);
             MainViewController.addStudentToList(studentNachnameTextField.getText() + " " + studentVornameTextField.getText(), studentMatrikelnummerTextField.getText());
 
-            ((Stage)confirmStudentButton.getScene().getWindow()).close();
+            ((Stage) confirmStudentButton.getScene().getWindow()).close();
         } catch (UserInputException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void initData(String kurs){
+    public void initData(String kurs) {
         kursName = kurs;
     }
 
@@ -108,7 +108,7 @@ public class StudentAnlegenController implements Initializable {
                 .map(x -> new MenuItem(x.getFirmenname()))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
-        if(firmaMenuItems.isEmpty()){
+        if (firmaMenuItems.isEmpty()) {
             studentFirmaButton.setText("Keine Firmen vorhanden");
             confirmStudentButton.setDisable(true);
         } else {

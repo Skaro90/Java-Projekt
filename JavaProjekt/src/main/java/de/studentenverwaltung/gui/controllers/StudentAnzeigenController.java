@@ -30,7 +30,7 @@ public class StudentAnzeigenController {
     @FXML
     private Label vornameLabel;
 
-    public void initData(Student student){
+    public void initData(Student student) {
         vornameLabel.setText(student.getVorname());
         nachnameLabel.setText(student.getNachname());
         emailLabel.setText(student.getEmail());

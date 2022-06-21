@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -64,8 +65,9 @@ public class MainViewController implements Initializable {
     void onKursAnlegenButton(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/kurs-anlegen-dialog.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
+            stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
             //stage.initStyle(StageStyle.TRANSPARENT);
             stage.setTitle("Kurs anlegen");
@@ -80,11 +82,12 @@ public class MainViewController implements Initializable {
     @FXML
     void onKursBearbeitenButton(ActionEvent event) {
         try {
-            if(!kursList.getSelectionModel().getSelectedItems().isEmpty()){
+            if (!kursList.getSelectionModel().getSelectedItems().isEmpty()) {
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/kurs-bearbeiten-dialog.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
+                Parent root1 = fxmlLoader.load();
                 Stage stage = new Stage();
+                stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                 stage.initModality(Modality.APPLICATION_MODAL);
                 //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setTitle("Kurs bearbeiten");
@@ -106,12 +109,13 @@ public class MainViewController implements Initializable {
 
     @FXML
     void onKursEntfernenButton(ActionEvent event) {
-        if(!kursList.getSelectionModel().getSelectedItems().isEmpty()){
-            if(kursList.getSelectionModel().getSelectedIndices().size() > 0) {
+        if (!kursList.getSelectionModel().getSelectedItems().isEmpty()) {
+            if (kursList.getSelectionModel().getSelectedIndices().size() > 0) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/kurs-entfernen-dialog.fxml"));
-                    Parent root1 = (Parent) fxmlLoader.load();
+                    Parent root1 = fxmlLoader.load();
                     Stage stage = new Stage();
+                    stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                     stage.initModality(Modality.APPLICATION_MODAL);
                     //stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setTitle("Kurs entfernen");
@@ -130,7 +134,7 @@ public class MainViewController implements Initializable {
         }
     }
 
-    public void kursEntfernen(){
+    public void kursEntfernen() {
         int selectedIndex = kursList.getSelectionModel().getSelectedIndices().get(0);
 
         try {
@@ -147,7 +151,7 @@ public class MainViewController implements Initializable {
 
         studentenList.getSelectionModel().clearSelection();
 
-        if(kursList.getSelectionModel().getSelectedItems().isEmpty()){
+        if (kursList.getSelectionModel().getSelectedItems().isEmpty()) {
             kursBearbeitenButton.setDisable(true);
             kursEntfernenButton.setDisable(true);
             studentAnlegenButton.setDisable(true);
@@ -159,7 +163,6 @@ public class MainViewController implements Initializable {
             studentAnlegenButton.setDisable(false);
             studentBearbeitenButton.setDisable(true);
             studentEntfernenButton.setDisable(true);
-
 
 
             studentenListItems = Application.studentenVerwaltung.findeKurs(kursListItems.get(kursList.getSelectionModel().getSelectedIndices().get(0))).getStudentenListe().stream()
@@ -183,8 +186,9 @@ public class MainViewController implements Initializable {
     void onStudentAnlegenButton(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/student-anlegen-dialog.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
+            stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
             //stage.initStyle(StageStyle.TRANSPARENT);
             stage.setTitle("Student anlegen");
@@ -205,8 +209,9 @@ public class MainViewController implements Initializable {
     void onStudentBearbeitenButton(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/student-bearbeiten-dialog.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
+            stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
             //stage.initStyle(StageStyle.TRANSPARENT);
             stage.setTitle("Student bearbeiten");
@@ -227,13 +232,14 @@ public class MainViewController implements Initializable {
 
     @FXML
     void onStudentEntfernenButton(ActionEvent event) {
-        if(!studentenList.getSelectionModel().getSelectedItems().isEmpty()){
-            if(studentenList.getSelectionModel().getSelectedIndices().size() > 0) {
+        if (!studentenList.getSelectionModel().getSelectedItems().isEmpty()) {
+            if (studentenList.getSelectionModel().getSelectedIndices().size() > 0) {
 
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/student-entfernen-dialog.fxml"));
-                    Parent root1 = (Parent) fxmlLoader.load();
+                    Parent root1 = fxmlLoader.load();
                     Stage stage = new Stage();
+                    stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                     stage.initModality(Modality.APPLICATION_MODAL);
                     //stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setTitle("Student entfernen");
@@ -252,7 +258,7 @@ public class MainViewController implements Initializable {
         }
     }
 
-    public void studentEntfernen(){
+    public void studentEntfernen() {
         int selectedIndex = studentenList.getSelectionModel().getSelectedIndices().get(0);
 
         try {
@@ -267,21 +273,22 @@ public class MainViewController implements Initializable {
 
     @FXML
     void onStudentenListClicked(MouseEvent event) {
-        if(studentenList.getSelectionModel().getSelectedItems().isEmpty()){
+        if (studentenList.getSelectionModel().getSelectedItems().isEmpty()) {
             studentBearbeitenButton.setDisable(true);
             studentEntfernenButton.setDisable(true);
         } else {
             studentBearbeitenButton.setDisable(false);
             studentEntfernenButton.setDisable(false);
 
-            if(event.getClickCount() > 1){
+            if (event.getClickCount() > 1) {
                 try {
 
                     Student student = Application.studentenVerwaltung.findeStudent(studentenMatrikelnummerList.get(studentenList.getSelectionModel().getSelectedIndices().get(0)));
 
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/student-anzeigen-dialog.fxml"));
-                    Parent root1 = (Parent) fxmlLoader.load();
+                    Parent root1 = fxmlLoader.load();
                     Stage stage = new Stage();
+                    stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                     stage.initModality(Modality.APPLICATION_MODAL);
                     //stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setTitle(student.getVorname() + " " + student.getNachname());
@@ -298,12 +305,14 @@ public class MainViewController implements Initializable {
             }
         }
     }
+
     @FXML
     void buttonRaumeAnzeigenClicked(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/raume-anzeigen-dialog.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
+            stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
             //stage.initStyle(StageStyle.TRANSPARENT);
             stage.setTitle("Räume anzeigen");
@@ -319,8 +328,9 @@ public class MainViewController implements Initializable {
         try {
             System.out.println(Window.getWindows());
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/firmen-anzeigen-dialog.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
+            stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
             //stage.initStyle(StageStyle.TRANSPARENT);
             stage.setTitle("Firmen anzeigen");
@@ -332,39 +342,39 @@ public class MainViewController implements Initializable {
     }
 
 
-
-    public static void addKursToList(String kursName){
+    public static void addKursToList(String kursName) {
         int index = Collections.binarySearch(kursListItems, kursName);
-        if(index < 0) index = ~index;
+        if (index < 0) index = ~index;
 
         kursListItems.add(index, kursName);
 
     }
 
-    public static void addStudentToList(String student, String matrikelnummer){
+    public static void addStudentToList(String student, String matrikelnummer) {
         int index = Collections.binarySearch(studentenListItems, student);
-        if(index < 0) index = ~index;
+        if (index < 0) index = ~index;
 
         studentenListItems.add(index, student);
         studentenMatrikelnummerList.add(index, matrikelnummer);
     }
 
-    public static void removeKursFromList(String kursName){
+    public static void removeKursFromList(String kursName) {
 
         int index = kursListItems.indexOf(kursName);
-        if(index >= 0) {
+        if (index >= 0) {
 
             kursListItems.remove(index);
         }
     }
 
-    public static void removeStudentFromList(String matrikelnummer){
+    public static void removeStudentFromList(String matrikelnummer) {
         int index = studentenMatrikelnummerList.indexOf(matrikelnummer);
-        if(index >= 0){
+        if (index >= 0) {
             studentenListItems.remove(index);
             studentenMatrikelnummerList.remove(index);
         }
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         kursListItems = Application.studentenVerwaltung.getKursListe().stream()
@@ -375,7 +385,7 @@ public class MainViewController implements Initializable {
         this.kursList.setItems(kursListItems);
     }
 
-    public static void close(){
+    public static void close() {
         Platform.exit();
     }
 }

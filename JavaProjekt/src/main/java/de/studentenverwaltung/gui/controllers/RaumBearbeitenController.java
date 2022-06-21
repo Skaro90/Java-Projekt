@@ -26,11 +26,11 @@ public class RaumBearbeitenController {
 
     @FXML
     void abortInput(ActionEvent event) {
-        ((Stage)raumKapazitaetTextField.getScene().getWindow()).close();
+        ((Stage) raumKapazitaetTextField.getScene().getWindow()).close();
     }
 
     @FXML
-    void confirmInput(ActionEvent event) throws UserInputException{
+    void confirmInput(ActionEvent event) throws UserInputException {
         try {
 
             Application.studentenVerwaltung.raumUpdate(Application.studentenVerwaltung.findeRaum(oldName), raumNameTextField.getText(), Integer.parseInt(raumKapazitaetTextField.getText()));
@@ -38,7 +38,7 @@ public class RaumBearbeitenController {
             RaumeAnzeigenController.removeItemFromList(oldName);
             RaumeAnzeigenController.addItemToList(raumNameTextField.getText(), Integer.parseInt(raumKapazitaetTextField.getText()));
 
-            ((Stage)raumNameTextField.getScene().getWindow()).close();
+            ((Stage) raumNameTextField.getScene().getWindow()).close();
         } catch (NumberFormatException e) {
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Bitte überprüfen Sie die Kapazität.", errorMessageWindow);
@@ -46,7 +46,7 @@ public class RaumBearbeitenController {
 
     }
 
-    void initData(String raumNummer, int kapazitaet){
+    void initData(String raumNummer, int kapazitaet) {
 
         oldName = raumNummer;
 

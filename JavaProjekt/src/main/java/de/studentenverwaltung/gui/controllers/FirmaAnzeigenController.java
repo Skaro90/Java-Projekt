@@ -39,7 +39,7 @@ public class FirmaAnzeigenController {
     @FXML
     private Label vornameLabel;
 
-    public void initData(Firma firma){
+    public void initData(Firma firma) {
         firmaLabel.setText(firma.getFirmenname());
         strasseLabel.setText(firma.getStrasse());
         hausnummerLabel.setText(firma.getHausnummer());

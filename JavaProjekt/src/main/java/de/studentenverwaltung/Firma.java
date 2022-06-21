@@ -9,9 +9,9 @@ import java.util.Date;
 import java.util.List;
 
 public class Firma {
-    private int firmenId;
+    private final int firmenId;
     private String firmenname;
-    private static int zaehler = 0; //max setzten in datenLaden()
+    private static final int zaehler = 0; //max setzten in datenLaden()
     //    Adresse
     private String strasse;
     private String hausnummer;
@@ -19,7 +19,7 @@ public class Firma {
     private String stadt;
 
     //    Foreign Keys
-    private List<Student> studentenListe = new ArrayList<Student>();
+    private final List<Student> studentenListe = new ArrayList<Student>();
     private Betreuer betreuer;
 
     public Firma(int firmenId, String firmenname, String strasse, String hausnummer, String postleitzahl, String stadt, Betreuer betreuer) {
@@ -56,7 +56,7 @@ public class Firma {
         }*/
         if(!studentenListe.remove(student)){
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
-            throw new UserInputException("Der zu löschende Nutzer ist nicht in der Liste vorhanden.", errorMessageWindow);
+            throw new UserInputException("Der zu löschende Nutzer wurde nicht gefunden.", errorMessageWindow);
         }
 
 
