@@ -4,7 +4,6 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -39,19 +38,6 @@
                   <Font name="System Bold" size="12.0" />
                </font></Label>
             <MenuButton fx:id="studentKursButton" layoutX="123.0" layoutY="125.0" mnemonicParsing="false" />
-            <Label layoutX="1.0" layoutY="159.0" prefHeight="22.0" prefWidth="91.0" text="Vorkenntnisse">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Label>
-            <MenuButton fx:id="studentVorkenntnisseButton" layoutX="123.0" layoutY="157.0" mnemonicParsing="false" text="Absoluter Anfänger">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Absoluter Anfänger" />
-                  <MenuItem mnemonicParsing="false" text="Anfänger" />
-                  <MenuItem mnemonicParsing="false" text="Laie" />
-                  <MenuItem mnemonicParsing="false" text="Fortgeschrittener" />
-                  <MenuItem mnemonicParsing="false" text="Experte" />
-               </items>
-            </MenuButton>
             <Button fx:id="confirmStudentButton" layoutX="-3.0" layoutY="253.0" mnemonicParsing="false" onAction="#confirmStudenBearbeitentInput" text="OK">
                <font>
                   <Font name="System Bold" size="12.0" />

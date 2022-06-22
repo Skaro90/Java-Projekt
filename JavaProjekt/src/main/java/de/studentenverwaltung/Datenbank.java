@@ -53,7 +53,6 @@ public class Datenbank {
 
             }
 
-            System.out.println(properties.getProperty("URL"));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -67,9 +66,6 @@ public class Datenbank {
     public void zeigeStudenten(){
         try{
             resultSet = statement.executeQuery("SELECT * FROM student");
-            while(resultSet.next()){
-                System.out.println((resultSet.getString("name")));
-            }
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -155,7 +151,6 @@ public class Datenbank {
                     "`hausnummer`,\n" +
                     "`plz`,\n" +
                     "`stadt`)" +"VALUES(?,?,?,?)";
-            System.out.println();
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1,strasse);
             pstmt.setString(2,hausnummer);
@@ -483,7 +478,6 @@ public class Datenbank {
             pstmt.setInt(6,firma.getBetreuer().getBetreuerId());
             pstmt.executeUpdate();
             resultSet = statement.executeQuery("SELECT fid,aid FROM firma WHERE aid = (SELECT aid FROM firma WHERE bezeichnung = '" + firma.getFirmenname()+"')");
-            //aid_neu = resultSet.getInt("aid");
             while(resultSet.next()){
                 if(resultSet.getInt("fid") != firma.getFirmenId()){
                     mehrfach = true;
@@ -491,7 +485,6 @@ public class Datenbank {
                 aid_neu = resultSet.getInt("aid");
 
             }
-            System.out.println(aid_neu);
             if(mehrfach){
                 aid_neu = adresseanlegen(strasse, hausnummer, postleitzahl, stadt);
             }else{

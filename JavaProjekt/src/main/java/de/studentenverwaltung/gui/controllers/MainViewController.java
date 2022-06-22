@@ -69,7 +69,7 @@ public class MainViewController implements Initializable {
             Stage stage = new Stage();
             stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.initStyle(StageStyle.TRANSPARENT);
+            
             stage.setTitle("Kurs anlegen");
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
@@ -89,7 +89,7 @@ public class MainViewController implements Initializable {
                 Stage stage = new Stage();
                 stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                 stage.initModality(Modality.APPLICATION_MODAL);
-                //stage.initStyle(StageStyle.TRANSPARENT);
+                
                 stage.setTitle("Kurs bearbeiten");
                 stage.setScene(new Scene(root1));
                 stage.setResizable(false);
@@ -117,7 +117,7 @@ public class MainViewController implements Initializable {
                     Stage stage = new Stage();
                     stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                     stage.initModality(Modality.APPLICATION_MODAL);
-                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    
                     stage.setTitle("Kurs entfernen");
                     stage.setScene(new Scene(root1));
                     stage.setResizable(false);
@@ -190,7 +190,7 @@ public class MainViewController implements Initializable {
             Stage stage = new Stage();
             stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.initStyle(StageStyle.TRANSPARENT);
+            
             stage.setTitle("Student anlegen");
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
@@ -213,7 +213,7 @@ public class MainViewController implements Initializable {
             Stage stage = new Stage();
             stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.initStyle(StageStyle.TRANSPARENT);
+            
             stage.setTitle("Student bearbeiten");
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
@@ -241,7 +241,7 @@ public class MainViewController implements Initializable {
                     Stage stage = new Stage();
                     stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                     stage.initModality(Modality.APPLICATION_MODAL);
-                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    
                     stage.setTitle("Student entfernen");
                     stage.setScene(new Scene(root1));
                     stage.setResizable(false);
@@ -290,7 +290,7 @@ public class MainViewController implements Initializable {
                     Stage stage = new Stage();
                     stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                     stage.initModality(Modality.APPLICATION_MODAL);
-                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    
                     stage.setTitle(student.getVorname() + " " + student.getNachname());
                     stage.setScene(new Scene(root1));
                     stage.setResizable(false);
@@ -314,7 +314,7 @@ public class MainViewController implements Initializable {
             Stage stage = new Stage();
             stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.initStyle(StageStyle.TRANSPARENT);
+            
             stage.setTitle("Räume anzeigen");
             stage.setScene(new Scene(root1));
             stage.show();
@@ -326,13 +326,12 @@ public class MainViewController implements Initializable {
     @FXML
     void buttonFirmenAnzeigenClicked(ActionEvent event) {
         try {
-            System.out.println(Window.getWindows());
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/studentenverwaltung/gui/firmen-anzeigen-dialog.fxml"));
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.initStyle(StageStyle.TRANSPARENT);
+            
             stage.setTitle("Firmen anzeigen");
             stage.setScene(new Scene(root1));
             stage.show();
@@ -385,7 +384,4 @@ public class MainViewController implements Initializable {
         this.kursList.setItems(kursListItems);
     }
 
-    public static void close() {
-        Platform.exit();
-    }
 }

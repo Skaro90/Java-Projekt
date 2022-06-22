@@ -34,41 +34,20 @@ public class Student extends Person{
 
 
     public void versetzen(Kurs kurs) throws UserInputException {
-        /*try {
-            this.kurs.studentLoeschen(this);
-            this.kurs = kurs;
-            this.kurs.studentHinzufuegen(this);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return e.getCause();
-        }
-        return null;*/
 
         if(!(kurs.getRaum().getKapazitaet() > kurs.getKursGroesse())){
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Der Kurs-Raum besitzt nicht die Kapazität für einen weiteren Studenten. Bitte ordnen Sie dem Kurs einen neuen Raum zu, bevor Sie den Studenten dem Kurs hinzufügen.", errorMessageWindow);
         }
 
-        //try{
             this.kurs.studentLoeschen(this);
             this.kurs = kurs;
             this.kurs.studentHinzufuegen(this);
-        /*} catch (Exception e){
-            e.printStackTrace();
-        }*/
 
 
     }
 
     public void exmatrikulieren() throws UserInputException {
-        /*try {
-            this.firma.studentLoeschen(this);
-            this.kurs.studentLoeschen(this);
-        } catch (Exception e){
-            return e.getCause();
-        }
-        return null;*/
 
         this.firma.studentLoeschen(this);
         this.kurs.studentLoeschen(this);
@@ -97,7 +76,4 @@ public class Student extends Person{
         return kurs;
     }
 
-    public void vorkenntnisseAendern(Vorkenntnisse vorkenntnisse){
-        this.vorkenntnisse = vorkenntnisse;
-    }
 }

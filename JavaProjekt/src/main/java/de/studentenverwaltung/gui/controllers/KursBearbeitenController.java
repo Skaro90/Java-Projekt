@@ -22,7 +22,7 @@ import java.util.Comparator;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class KursBearbeitenController implements Initializable {
+public class KursBearbeitenController {
 
     private String oldName;
     private Raum raum;
@@ -79,14 +79,12 @@ public class KursBearbeitenController implements Initializable {
             MenuItem currentRaumMenuItem = new MenuItem(raum.getRaumNummer());
 
             raumMenuItems.add(0, currentRaumMenuItem);
-            //raumNameMenuButton.getItems().add(0, currentRaumMenuItem);
         } else {
             raumNameMenuButton.setText("Kein Raum zugeordnet");
         }
 
         raumNameMenuButton.getItems().addAll(raumMenuItems);
 
-        //raumNameMenuButton.setText("Keine Räume vorhanden.");
         okButton.setDisable(raumNameMenuButton.getItems().isEmpty());
 
         raumNameMenuButton.getItems().forEach(x -> x.setOnAction(new EventHandler<ActionEvent>() {
@@ -95,23 +93,6 @@ public class KursBearbeitenController implements Initializable {
                 raumNameMenuButton.setText(x.getText());
             }
         }));
-
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-
-        /*if(kurs.getRaum() != null){
-            MenuItem currentRaumMenuItem = new MenuItem(kurs.getRaum().getRaumNummer());
-
-            raumMenuItems.add(currentRaumMenuItem);
-            raumMenuItems = raumMenuItems.stream().sorted(Comparator.comparing(MenuItem::getText)).collect(Collectors.toCollection(FXCollections::observableArrayList));
-
-            int index = raumMenuItems.indexOf(currentRaumMenuItem);
-        }*/
-
 
     }
 }

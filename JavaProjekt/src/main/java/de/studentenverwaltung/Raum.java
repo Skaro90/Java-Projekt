@@ -5,7 +5,6 @@ public class Raum {
     private final int raumId;
     private String raumNummer;
     private int kapazitaet;
-    private static final int zaehler=0;
 
     //    Foreign Keys
     private Kurs kurs;
@@ -28,16 +27,6 @@ public class Raum {
 
     public int getKapazitaet(){
         return kapazitaet;
-    }
-
-    private void genugPlatz(Kurs kurs){
-        int groesse = 0;
-        groesse = kurs.getKursGroesse();
-        if(groesse <= kapazitaet){
-            System.out.println("Kurs passt is den Raum.");
-        } else {
-            System.out.println("Kurs passt nicht in den Raum.");
-        }
     }
 
     public void nummerAendern(String RNm){

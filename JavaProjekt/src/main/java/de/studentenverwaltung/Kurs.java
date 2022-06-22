@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class Kurs {
     private final int kursId;
     private String kursName;
-    private static final int zaehler = 0;
 
     //    Foreign Keys
     private Raum raum;
@@ -21,7 +20,6 @@ public class Kurs {
         this.kursName = kursName;
         this.raum = raum;
 
-        System.out.println(raum.getRaumNummer());
     }
     public String getKursName() {
         return kursName;
@@ -35,20 +33,12 @@ public class Kurs {
         return studentenListe;
     }
 
-    public Boolean studentLoeschen(Student student) throws UserInputException { //void?
-        boolean change = false;
-        /*for (int i = 0; i < studentenListe.size(); i++){
-            if (student == studentenListe.get(i)){
-                studentenListe.remove(i);
-                change = true;
-            }
-        }*/
+    public void studentLoeschen(Student student) throws UserInputException {
+
         if(!studentenListe.remove(student)){
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Der zu löschende Student ist nicht in der Kursliste vorhanden.", errorMessageWindow);
         }
-        //return change;
-        return true;
     }
 
     public void studentHinzufuegen(Student student) throws UserInputException{
@@ -61,15 +51,6 @@ public class Kurs {
     }
 
     public void raumWechseln(Raum raum) throws UserInputException{
-       /* try {
-//            this.raum.kursLoeschen();
-            this.raum = raum;
-//            this.raum.kursHinzufuegen(this);
-        }
-        catch (Exception e){
-            return e;
-        }
-        return null;*/
 
         if(raum != null){
             if(raum.getKurs() != null){
@@ -77,16 +58,12 @@ public class Kurs {
                 throw new UserInputException("Dem Raum ist bereits ein Kurs zugeordnet. Bitte wählen Sie einen anderen Raum.", errorMessageWindow);
             }
 
-
-            //raum.raumBelegen(null);
             this.raum = raum;
             raum.kursHinzufuegen(this);
         } else {
             this.raum = null;
         }
 
-
-        //raum.raumBelegen(this);
     }
 
     public void kursNameAendern(String newName){

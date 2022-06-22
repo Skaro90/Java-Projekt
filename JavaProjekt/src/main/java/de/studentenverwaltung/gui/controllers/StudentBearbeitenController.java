@@ -45,9 +45,6 @@ public class StudentBearbeitenController implements Initializable {
     private TextField studentNachnameTextField;
 
     @FXML
-    private MenuButton studentVorkenntnisseButton;
-
-    @FXML
     private TextField studentVornameTextField;
 
     @FXML
@@ -103,14 +100,6 @@ public class StudentBearbeitenController implements Initializable {
 
             confirmStudentButton.setDisable(false);
         }
-
-
-        studentVorkenntnisseButton.getItems().forEach(x -> x.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                studentVorkenntnisseButton.setText(x.getText());
-            }
-        }));
 
         studentKursButton.getItems().forEach(x -> x.setOnAction(new EventHandler<ActionEvent>() {
             @Override

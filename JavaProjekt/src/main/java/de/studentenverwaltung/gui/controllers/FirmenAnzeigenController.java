@@ -54,7 +54,7 @@ public class FirmenAnzeigenController implements Initializable {
                     Stage stage = new Stage();
                     stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                     stage.initModality(Modality.APPLICATION_MODAL);
-                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    
                     stage.setTitle("Firma entfernen");
                     stage.setScene(new Scene(root1));
                     stage.setResizable(false);
@@ -90,7 +90,7 @@ public class FirmenAnzeigenController implements Initializable {
                 Stage stage = new Stage();
                 stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                 stage.initModality(Modality.APPLICATION_MODAL);
-                //stage.initStyle(StageStyle.TRANSPARENT);
+                
                 stage.setTitle("Firma bearbeiten");
                 stage.setScene(new Scene(root1));
                 stage.setResizable(false);
@@ -118,7 +118,7 @@ public class FirmenAnzeigenController implements Initializable {
             Stage stage = new Stage();
             stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.initStyle(StageStyle.TRANSPARENT);
+            
             stage.setTitle("Firma anlegen");
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
@@ -164,7 +164,7 @@ public class FirmenAnzeigenController implements Initializable {
                 Stage stage = new Stage();
                 stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                 stage.initModality(Modality.APPLICATION_MODAL);
-                //stage.initStyle(StageStyle.TRANSPARENT);
+                
                 stage.setTitle(firma.getFirmenname());
                 stage.setScene(new Scene(root1));
                 stage.setResizable(false);
@@ -196,7 +196,7 @@ public class FirmenAnzeigenController implements Initializable {
                 Stage stage = new Stage();
                 stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                 stage.initModality(Modality.APPLICATION_MODAL);
-                //stage.initStyle(StageStyle.TRANSPARENT);
+                
                 stage.setTitle(student.getVorname() + " " + student.getNachname());
                 stage.setScene(new Scene(root1));
                 stage.setResizable(false);

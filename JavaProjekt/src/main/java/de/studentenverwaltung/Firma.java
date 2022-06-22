@@ -11,7 +11,6 @@ import java.util.List;
 public class Firma {
     private final int firmenId;
     private String firmenname;
-    private static final int zaehler = 0; //max setzten in datenLaden()
     //    Adresse
     private String strasse;
     private String hausnummer;
@@ -46,21 +45,12 @@ public class Firma {
         this.betreuer = neuerBetreuer;
     }
 
-    public boolean studentLoeschen(Student student) throws UserInputException{ //void?
-        boolean change = false;
-        /*for (int i = 0; i < studentenListe.size(); i++){
-            if (student == studentenListe.get(i)){
-                studentenListe.remove(i);
-                change = true;
-            }
-        }*/
+    public void studentLoeschen(Student student) throws UserInputException{
+
         if(!studentenListe.remove(student)){
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Der zu löschende Nutzer wurde nicht gefunden.", errorMessageWindow);
         }
-
-
-        return change;
 
     }
 

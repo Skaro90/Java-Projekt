@@ -5,7 +5,6 @@ import java.util.Date;
 public class Betreuer extends Person{
     private final int betreuerId;
     private String telefonnummer;
-    private static final int zaehler=0;
 
 
     public Betreuer(String nachname, String vorname, String email, Date geburtstag, int betreuerId, String telefonnummer) {

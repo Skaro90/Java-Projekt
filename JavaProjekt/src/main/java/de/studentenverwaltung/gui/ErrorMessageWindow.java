@@ -20,7 +20,7 @@ public class ErrorMessageWindow implements ErrorCallback {
             Stage stage = new Stage();
             stage.getIcons().add(new Image(getClass().getResource("DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.initStyle(StageStyle.TRANSPARENT);
+            
             stage.setTitle("Error");
             stage.setScene(new Scene(root1));
 

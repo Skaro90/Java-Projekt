@@ -22,15 +22,7 @@ public class ErrorMessageWindowController implements Initializable {
 
     @FXML
     void confirmInput(ActionEvent event) {
-        System.out.println(confirmButton.getText());
         ((Stage) errorMessage.getScene().getWindow()).close();
-    }
-
-
-    public void setErrorMessage(String message) {
-        System.out.println(message);
-        System.out.println(confirmButton.getText());
-        errorMessage.setText(message);
     }
 
     @Override

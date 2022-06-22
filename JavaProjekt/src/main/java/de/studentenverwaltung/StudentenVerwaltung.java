@@ -23,20 +23,6 @@ public class StudentenVerwaltung{
 
     public StudentenVerwaltung() {
         this.datenLaden();
-        //betreuerAnlegen("Knappe", "Fabio", "fabio.knappe@mail.com", new Date(), "45");
-        //datenbank.firmaanlegen("testfirma","T6","20B","34281","Gberg",new Betreuer(1));
-        //datenbank.Studentanlegen("korl","karl",new Date(),"fabio@mail","5",new Firma(6),kursListe.get(0),Student.Vorkenntnisse.Experte);
-        //datenbank.kursanlegen("tinf2",null);
-        //datenbank.raumanlegen("5",30);
-        //datenbank.exmatrikulieren(studentenListe.get(1));
-        //datenbank.raumZuweisen(kursListe.get(3),raumListe.get(1));
-        //datenbank.studentVersetzen(studentenListe.get(0),kursListe.get(3));
-        //datenbank.betreuerWechseln(firmaListe.get(1),betreuerListe.get(1));
-        //datenbank.firmalöschen(firmaListe.get(1));
-        //datenbank.betreuerloeschen(betreuerListe.get(2));
-        //datenbank.kursloeschen(kursListe.get(1));
-        //datenbank.kursupdate(kursListe.get(1),"TIiiiiNF2");
-        //datenbank.studentupdate(studentenListe.get(0),"Müller","Thomas","esmüllert@mail.com",new Date());
     }
 
    
@@ -169,7 +155,7 @@ public class StudentenVerwaltung{
     }
 
   
-  public void firmaLoeschen(Firma firma){ //DB FUNKTION
+  public void firmaLoeschen(Firma firma){
         if(!firma.getStudentenListe().isEmpty()){
             while(!firma.getStudentenListe().isEmpty()){
                 try {
@@ -218,7 +204,7 @@ public class StudentenVerwaltung{
         return k;
     }
 
-    public void updateKurs(Kurs kurs, String kursName, Raum raum) throws UserInputException {  //SPÄTER TESTEN
+    public void updateKurs(Kurs kurs, String kursName, Raum raum) throws UserInputException {
         if(findeKurs(kursName) != null && findeKurs(kursName) != kurs){
             ErrorMessageWindow errorMessageWindow = new ErrorMessageWindow();
             throw new UserInputException("Es existiert bereits ein Kurs mit diesem Namen.", errorMessageWindow);
@@ -344,7 +330,6 @@ public class StudentenVerwaltung{
     }
 
     public void exmatrikulieren(Student student) throws UserInputException {
-        //firma/kurs löschen (neue func in student) -- DONE?
         student.exmatrikulieren();
         studentenListe.remove(student);
         datenbank.exmatrikulieren(student);

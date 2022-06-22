@@ -94,7 +94,7 @@ public class RaumeAnzeigenController implements Initializable {
             Stage stage = new Stage();
             stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
             stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.initStyle(StageStyle.TRANSPARENT);
+            
             stage.setTitle("Raum anlegen");
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
@@ -114,7 +114,7 @@ public class RaumeAnzeigenController implements Initializable {
                 Stage stage = new Stage();
                 stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                 stage.initModality(Modality.APPLICATION_MODAL);
-                //stage.initStyle(StageStyle.TRANSPARENT);
+                
                 stage.setTitle("Raum bearbeiten");
                 stage.setScene(new Scene(root1));
                 stage.setResizable(false);
@@ -134,7 +134,7 @@ public class RaumeAnzeigenController implements Initializable {
                 Stage stage = new Stage();
                 stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                 stage.initModality(Modality.APPLICATION_MODAL);
-                //stage.initStyle(StageStyle.TRANSPARENT);
+                
                 stage.setTitle("Raum bearbeiten");
                 stage.setScene(new Scene(root1));
                 stage.setResizable(false);
@@ -165,7 +165,7 @@ public class RaumeAnzeigenController implements Initializable {
                     Stage stage = new Stage();
                     stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                     stage.initModality(Modality.APPLICATION_MODAL);
-                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    
                     stage.setTitle("Raum entfernen");
                     stage.setScene(new Scene(root1));
                     stage.setResizable(false);
@@ -191,7 +191,7 @@ public class RaumeAnzeigenController implements Initializable {
                     Stage stage = new Stage();
                     stage.getIcons().add(new Image(getClass().getResource("/de/studentenverwaltung/gui/DHBW-logo.png").toString()));
                     stage.initModality(Modality.APPLICATION_MODAL);
-                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    
                     stage.setTitle("Raum entfernen");
                     stage.setScene(new Scene(root1));
                     stage.setResizable(false);

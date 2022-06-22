@@ -25,7 +25,6 @@ public class Application extends javafx.application.Application {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
 
-            //((Stage)alert.getDialogPane().getScene().getWindow()).setAlwaysOnTop(true);
 
             alert.setTitle("Datenbank Fehler");
             alert.setHeaderText(null);
